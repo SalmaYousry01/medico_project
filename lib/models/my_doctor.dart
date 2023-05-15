@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:grad_project/models/base_data.dart';
 
 class DoctorDataBase extends BaseData {

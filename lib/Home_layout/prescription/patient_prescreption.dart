@@ -15,17 +15,17 @@ class PatientPrescription extends StatefulWidget {
   State<PatientPrescription> createState() => _PatientPrescriptionState();
 }
 
-class _PatientPrescriptionState extends BaseView<PatientPrescription, PrescriptionViewModel>
+class _PatientPrescriptionState
+    extends BaseView<PatientPrescription, PrescriptionViewModel>
     implements PrescriptionNavigator {
-
   Stream<QuerySnapshot<Myprescription>>? myPrescriptionStream;
 
   @override
   void initState() {
     super.initState();
-    myPrescriptionStream = DatabaseUtilsMyPrescription.getPrescriptionCollection().snapshots();
+    myPrescriptionStream =
+        DatabaseUtilsMyPrescription.getPrescriptionCollection().snapshots();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +163,6 @@ class _PatientPrescriptionState extends BaseView<PatientPrescription, Prescripti
       ),
     );
   }
-
 
   @override
   PrescriptionViewModel initViewModel() {

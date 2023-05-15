@@ -7,6 +7,19 @@ import 'package:grad_project/models/my_medicine.dart';
 import 'Patient_Database.dart';
 
 class DatabaseUtilsmedicine {
+  //CollectionReference<Mymedicine> getNotesCollection() {
+  //return FirebaseFirestore.instance
+  //  .collection(Mymedicine.COLLECTION_NAME)
+  //.withConverter<Mymedicine>(
+  //fromFirestore: (snapshot, options) =>
+  //  Mymedicine.fromjson(snapshot.data()!),
+  //toFirestore: (value, options) => value.tojson(),
+  //);
+  //}
+
+  //Future<void> AddNotesToFirestore(Mymedicine medicine) {
+  //return getNotesCollection().doc(note.id).set(note);
+  //}
   static CollectionReference<Mymedicine> getUsersCollection() {
     return DatabaseUtilspatient.getUsersCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -48,12 +61,28 @@ class DatabaseUtilsmedicine {
     return getmedicineCollection().doc(medicine.id).update(medicine.tojson());
   }
 
-  static Future<Mymedicine?> readUserFromFiresore(String id) async {
+  static Future<Mymedicine?> readMedicineFromFiresore(String id) async {
     DocumentSnapshot<Mymedicine> user =
         await getmedicineCollection().doc(id).get();
     var medicineDataBase = user.data();
     return medicineDataBase;
   }
+
+  // static Future<Mymedicine?> getMedicineCollectionFromId(String id) async {
+  //   QuerySnapshot<Mymedicine> clinicCollction =
+  //       await DatabaseUtilspatient.getUsersCollection()
+  //           .doc(id)
+  //           .collection(Mymedicine.COLLECTION_NAME)
+  //           .withConverter<Mymedicine>(
+  //             fromFirestore: (snapshot, options) =>
+  //                 Mymedicine.fromjson(snapshot.data()!),
+  //             toFirestore: (Mymedicine, options) => Mymedicine.tojson(),
+  //           )
+  //           .get();
+  //
+  //   var medicineDataBase = clinicCollction.docs.first.data();
+  //   return medicineDataBase;
+  // }
 }
 
 CollectionReference<Mymedicine> getmedicineCollection() {

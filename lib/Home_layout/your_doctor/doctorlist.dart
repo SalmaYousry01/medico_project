@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grad_project/Home_layout/your_doctor/All_Doctor.dart';
+import 'All_Doctor.dart';
 import 'Your_doctor.dart';
-
 class lisett extends StatefulWidget {
   const lisett({Key? key}) : super(key: key);
   static const String routeName = 'lisett';

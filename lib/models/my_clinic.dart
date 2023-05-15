@@ -9,30 +9,37 @@ class MyClinic {
   String about;
   String image;
 
-
   MyClinic(
       {this.id,
-        required this.address,
-        required this.phoneNumber,
-        required this.startTime,
-        required this.endTime,
-        required this.fees,
-        required this.about,
+      required this.address,
+      required this.phoneNumber,
+      required this.startTime,
+      required this.endTime,
+      required this.fees,
+      required this.about,
       required this.image});
 
   MyClinic.fromJson(Map<String, dynamic> json)
       : this(
-    id: json["id"],
-    address: json["address"],
-    phoneNumber: json["phoneNumber"],
-    startTime: json["startTime"],
-    endTime: json["endTime"],
-    fees: json["fees"],
-    about: json["about"],
-    image: json["image"]
+            id: json["id"],
+            address: json["address"],
+            phoneNumber: json["phoneNumber"],
+            startTime: json["startTime"],
+            endTime: json["endTime"],
+            fees: json["fees"],
+            about: json["about"],
+            image: json["image"] ??  "NA");
 
-  );
-  MyClinic.notFound(): this(about: "",fees: "",endTime: "",startTime: "",phoneNumber: "",address: "",id: "",image: "");
+  MyClinic.notFound()
+      : this(
+            about: "",
+            fees: "",
+            endTime: "",
+            startTime: "",
+            phoneNumber: "",
+            address: "",
+            id: "",
+            image: "");
 
   Map<String, dynamic> tojson() {
     return {
@@ -43,7 +50,7 @@ class MyClinic {
       "endTime": endTime,
       "fees": fees,
       "about": about,
-      "image":image
+      "image": image
     };
   }
 }

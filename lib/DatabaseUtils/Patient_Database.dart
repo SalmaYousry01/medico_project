@@ -6,10 +6,10 @@ class DatabaseUtilspatient {
     return FirebaseFirestore.instance
         .collection(MyPatient.COLLECTION_NAME)
         .withConverter<MyPatient>(
-      fromFirestore: (snapshot, options) =>
-          MyPatient.fromjson(snapshot.data()!),
-      toFirestore: (value, options) => value.tojson(),
-    );
+          fromFirestore: (snapshot, options) =>
+              MyPatient.fromjson(snapshot.data()!),
+          toFirestore: (value, options) => value.tojson(),
+        );
   }
 
   static Future<void> AddUserToFirestore(MyPatient patient) {

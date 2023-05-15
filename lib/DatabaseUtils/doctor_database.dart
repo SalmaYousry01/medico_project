@@ -6,10 +6,10 @@ class DatabaseUtilsdoctor {
     return FirebaseFirestore.instance
         .collection(DoctorDataBase.COLLECTION_NAME)
         .withConverter<DoctorDataBase>(
-          fromFirestore: (snapshot, options) =>
-              DoctorDataBase.fromJson(snapshot.data()!),
-          toFirestore: (value, options) => value.tojson(),
-        );
+      fromFirestore: (snapshot, options) =>
+          DoctorDataBase.fromJson(snapshot.data()!),
+      toFirestore: (value, options) => value.tojson(),
+    );
   }
 
   static Future<void> AddUserToFirestore(DoctorDataBase doctorDataBase) {
@@ -18,8 +18,15 @@ class DatabaseUtilsdoctor {
 
   static Future<DoctorDataBase?> readUserFromFiresore(String id) async {
     DocumentSnapshot<DoctorDataBase> user =
-        await getUsersCollection().doc(id).get();
+    await getUsersCollection().doc(id).get();
     var doctorDataBase = user.data();
     return doctorDataBase;
   }
+
+
+  static Future<List<DoctorDataBase>> readDoctorFromFirestore() async {
+    var snapshot = await getUsersCollection().get();
+    return snapshot.docs.map((e) => e.data()).toList();
+  }
 }
+

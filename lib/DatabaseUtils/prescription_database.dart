@@ -22,22 +22,18 @@ class DatabaseUtilsMyPrescription {
     return getPrescriptionCollection().doc(docId).set(prescription);
   }
 
-  static Stream<QuerySnapshot<Myprescription>> getPrecscriotionsAsStream() {
-    return DatabaseUtilsMyPrescription.getPrescriptionCollection().snapshots();
-  }
-
-  static Future<void> UpdatePrescriptionToFirestore(
-      Myprescription prescription) {
-    log("updating.... id :${prescription.id}");
-    return getPrescriptionCollection()
-        .doc(prescription.id)
-        .update(prescription.tojson());
-  }
-
-  static Future<Myprescription?> readUserFromFiresore(String id) async {
-    DocumentSnapshot<Myprescription> user =
+  static Future<Myprescription?> readPrescriptionFromFiresore(String id) async {
+    DocumentSnapshot<Myprescription> prescriptionCollection =
         await getPrescriptionCollection().doc(id).get();
-    var PrescriptionDataBase = user.data();
+    var PrescriptionDataBase = prescriptionCollection.data();
     return PrescriptionDataBase;
+  }
+
+  static Future<Myprescription?> readPresFromFiresore() async {
+    QuerySnapshot<Myprescription> prescriptionCollection =
+        await getPrescriptionCollection().get();
+
+    var prescriptionDataBase = prescriptionCollection.docs.first.data();
+    return prescriptionDataBase;
   }
 }

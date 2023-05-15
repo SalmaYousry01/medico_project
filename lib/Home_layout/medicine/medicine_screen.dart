@@ -10,11 +10,11 @@ class MedicineScreen extends StatefulWidget {
   const MedicineScreen({Key? key}) : super(key: key);
 
   @override
-  State<MedicineScreen> createState() => _medicineState();
+  State<MedicineScreen> createState() => MedicineScreenState();
   static const String routeName = 'medicine';
 }
 
-class _medicineState extends State<MedicineScreen> {
+class MedicineScreenState extends State<MedicineScreen> {
   var _formKey = GlobalKey<FormState>();
 
   @override
@@ -38,13 +38,34 @@ class _medicineState extends State<MedicineScreen> {
               }
               var medicine =
                   snapshot.data?.docs.map((docs) => docs.data()).toList() ?? [];
-              return Expanded(
-                child: ListView.builder(
-                    itemCount: medicine.length,
-                    itemBuilder: (context, Index) {
-                      return MedicineItem(medicine[Index]);
-                    }),
-              );
+              return medicine.length > 0
+                  ? Expanded(
+                      child: ListView.builder(
+                          itemCount: medicine.length,
+                          itemBuilder: (context, Index) {
+                            return MedicineItem(medicine[Index]);
+                          }),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 95, top: 70),
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Text(
+                              "Add New Medicine..",
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.white),
+                            ),
+                            SizedBox(height: 20,),
+                            Container(
+                                height: 37,
+                                child: Image.asset(
+                                  'assets/images/medicinehome.png',
+                                ))
+                          ],
+                        ),
+                      ),
+                    );
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -59,9 +80,6 @@ class _medicineState extends State<MedicineScreen> {
   }
 
   Widget buildMedicine() {
-    TextEditingController nameController = TextEditingController();
-    TextEditingController dosageController = TextEditingController();
-
     return Padding(
       padding: const EdgeInsets.only(
         top: 10,
@@ -130,7 +148,7 @@ class _medicineState extends State<MedicineScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
         ),
-        height: 75,
+        height: 70,
         child: Center(
           child: Row(
             children: [
@@ -160,7 +178,7 @@ class _medicineState extends State<MedicineScreen> {
                           trailing: IconButton(
                               onPressed: () {},
                               icon: Image.asset(
-                                'icons/medicine.time2.png',
+                                'images/medicinehome.png',
                                 color: Color(
                                   0xFF2C698D,
                                 ),
@@ -260,7 +278,7 @@ class _medicineState extends State<MedicineScreen> {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10),
+                            padding: const EdgeInsets.only(top: 20),
                             child: TextFormField(
                               controller: nameController,
                               validator: (text) {
@@ -273,7 +291,7 @@ class _medicineState extends State<MedicineScreen> {
                                 suffixIcon: Container(
                                     height: 1,
                                     child: Image.asset(
-                                      'assets/icons/medicinename.svg',
+                                      'assets/images/pills.png',
                                     )),
                                 border: OutlineInputBorder(
                                     borderRadius: (BorderRadius.circular(20))),
@@ -290,6 +308,9 @@ class _medicineState extends State<MedicineScreen> {
                                     .requestFocus(textSecondFocusNode);
                               },
                             ),
+                          ),
+                          SizedBox(
+                            height: 17,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 15),
@@ -310,7 +331,7 @@ class _medicineState extends State<MedicineScreen> {
                                   suffixIcon: Container(
                                       height: 1,
                                       child: Image.asset(
-                                        'icons/dosage.png',
+                                        'assets/images/dosage2.png',
                                       )),
                                   border: OutlineInputBorder(
                                       borderRadius:

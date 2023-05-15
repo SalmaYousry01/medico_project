@@ -1,31 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-abstract class BaseNavigator {
-  
-}
+abstract class BaseNavigator {}
 
-
-
- 
-  class BaseViewModel<NAV extends BaseNavigator> extends ChangeNotifier {
+class BaseViewModel<NAV extends BaseNavigator> extends ChangeNotifier {
   NAV? navigator = null;
 }
 
-
-  abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
+abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     extends State<T> implements BaseNavigator {
   late VM viewModel;
 
-   VM initViewModel();
+  VM initViewModel();
 
-   @override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
     viewModel = initViewModel();
   }
-      @override
+
+  @override
   void hideDialog() {
     Navigator.pop(context);
   }
@@ -48,5 +43,4 @@ abstract class BaseNavigator {
       },
     );
   }
-
-    }
+}

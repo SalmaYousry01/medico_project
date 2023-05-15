@@ -1,11 +1,8 @@
 import 'dart:io';
 import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:grad_project/DatabaseUtils/prescription_database.dart';
-import 'package:grad_project/models/my_patient.dart';
 import 'package:grad_project/models/my_prescription.dart';
 import 'package:grad_project/Home_layout/prescription/prescription_navigator.dart';
 import '../../basenavigator.dart';
@@ -13,6 +10,7 @@ import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 
 class PrescriptionViewModel extends BaseViewModel<PrescriptionNavigator> {
   // var auth = FirebaseAuth.instance;
+  late Myprescription myprescription;
   String url = "";
   int? number;
 
@@ -74,4 +72,5 @@ class PrescriptionViewModel extends BaseViewModel<PrescriptionNavigator> {
       print("Prescription updated");
     }).catchError((error) {});
   }
+
 }

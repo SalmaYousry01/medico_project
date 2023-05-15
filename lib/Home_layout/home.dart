@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_project/Home_layout/measurements/measurments.dart';
+import 'package:grad_project/Home_layout/patient_profile/profile.dart';
 import 'package:grad_project/Home_layout/prescription/patient_prescreption.dart';
+import 'package:grad_project/Home_layout/prescription/prescription_navbar.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
 import '../login/patient_login.dart';
+import 'Allergies/chooose.dart';
 import 'medicine/medicine_screen.dart';
 
 class home extends StatefulWidget {
@@ -20,11 +24,11 @@ class _hometaskState extends State<home> {
     return Stack(children: [
       Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(138),
+          preferredSize: Size.fromHeight(152),
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            toolbarHeight: 185,
+            toolbarHeight: 180,
             leading: IconButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
@@ -55,16 +59,26 @@ class _hometaskState extends State<home> {
               Padding(
                 padding:
                     const EdgeInsets.only(right: 40.0, bottom: 50, top: 50),
-                child: Container(
-                  width: 90,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                      "assets/images/user.png",
-                    )),
-                    borderRadius: BorderRadius.all(Radius.circular(80)),
-                    color: Colors.white,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfileTab(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    width: 90,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                        "assets/images/user.png",
+                      )),
+                      borderRadius: BorderRadius.all(Radius.circular(80)),
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               )
@@ -73,7 +87,7 @@ class _hometaskState extends State<home> {
         ),
         body: Padding(
           padding:
-              const EdgeInsets.only(top: 30, right: 20, left: 30, bottom: 20),
+              const EdgeInsets.only(top: 30, right: 15, left: 15, bottom: 20),
           child: ListView(
             children: [
               Row(
@@ -227,7 +241,7 @@ class _hometaskState extends State<home> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PatientPrescription(),
+                                builder: (context) => Prescreption_navbar(),
                               ),
                             );
                           },
@@ -269,26 +283,38 @@ class _hometaskState extends State<home> {
                   ),
                   Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(4, 4), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(70)),
-                            color: Colors.white),
-                        width: 142,
-                        height: 142,
+                      GestureDetector(
+                        onTap: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        chooose())); // navigator byn2l l page tanya
+                          });
+                        }),
                         child: Container(
-                          decoration: new BoxDecoration(
-                            image: new DecorationImage(
-                              image:
-                                  new AssetImage("assets/images/allergies.png"),
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      4, 4), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(70)),
+                              color: Colors.white),
+                          width: 142,
+                          height: 142,
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                image: new AssetImage(
+                                    "assets/images/allergies.png"),
+                              ),
                             ),
                           ),
                         ),
@@ -312,35 +338,47 @@ class _hometaskState extends State<home> {
                 children: [
                   Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(4, 4), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(70)),
-                            color: Colors.white),
-                        width: 142,
-                        height: 142,
-                        child: InkWell(
-                          onTap: () {
+                      GestureDetector(
+                        onTap: (() {
+                          setState(() {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => MedicineScreen(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                    "assets/images/medicine.png"),
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MedicineScreen())); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      4, 4), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(70)),
+                              color: Colors.white),
+                          width: 142,
+                          height: 142,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MedicineScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                                  image: new AssetImage(
+                                      "assets/images/medicine.png"),
+                                ),
                               ),
                             ),
                           ),
@@ -382,18 +420,27 @@ class _hometaskState extends State<home> {
                                 spreadRadius: 3,
                                 blurRadius: 7,
                                 offset:
-                                    Offset(4, 4), // changes position of shadow
+                                Offset(4, 4), // changes position of shadow
                               ),
                             ],
                             borderRadius: BorderRadius.all(Radius.circular(70)),
                             color: Colors.white),
                         width: 142,
                         height: 142,
-                        child: Container(
-                          decoration: new BoxDecoration(
-                            image: new DecorationImage(
-                              image: new AssetImage(
-                                  "assets/images/medical info.png"),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Measurments(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                image: new AssetImage("assets/images/medical info.png"),
+                              ),
                             ),
                           ),
                         ),
@@ -401,13 +448,62 @@ class _hometaskState extends State<home> {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        "Measurments",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
-                      )
+                      TextButton(
+                        onPressed: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                       Measurments())); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Text(
+                          'Measurements',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2C698D)),
+                        ),
+                      ),
                     ],
-                  )
+                  ),
+                  // Column(
+                  //   children: [
+                  //     Container(
+                  //       decoration: BoxDecoration(
+                  //           boxShadow: [
+                  //             BoxShadow(
+                  //               color: Colors.grey.withOpacity(0.5),
+                  //               spreadRadius: 3,
+                  //               blurRadius: 7,
+                  //               offset:
+                  //                   Offset(4, 4), // changes position of shadow
+                  //             ),
+                  //           ],
+                  //           borderRadius: BorderRadius.all(Radius.circular(70)),
+                  //           color: Colors.white),
+                  //       width: 142,
+                  //       height: 142,
+                  //       child: Container(
+                  //         decoration: new BoxDecoration(
+                  //           image: new DecorationImage(
+                  //             image: new AssetImage(
+                  //                 "assets/images/medical info.png"),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //     Text(
+                  //       "Measurments",
+                  //       style: TextStyle(
+                  //           fontSize: 16, fontWeight: FontWeight.bold),
+                  //     )
+                  //   ],
+                  // )
                 ],
               ),
             ],

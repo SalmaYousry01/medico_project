@@ -222,7 +222,7 @@ class DoctorPrescriptionState extends State<DoctorPrescription> {
                           ),
                           Container(
                             height: 30,
-                            width: 131,
+                            width: 120,
                             decoration: BoxDecoration(
                                 border: Border.all(
                                     color: Colors.black.withOpacity(0.2))),

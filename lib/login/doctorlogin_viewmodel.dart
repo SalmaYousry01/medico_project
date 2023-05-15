@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:grad_project/DatabaseUtils/doctor_database.dart';
 import 'package:grad_project/basenavigator.dart';
 import 'package:grad_project/login/doctorlogin_navigator.dart';
@@ -16,8 +15,9 @@ class doctorloginViewModel extends BaseViewModel<DoctorLoginNavigator> {
         password: password,
       );
 
-      DoctorDataBase? doctorDataBase = await DatabaseUtilsdoctor.readUserFromFiresore(
-          credential.user?.uid ?? "");
+      DoctorDataBase? doctorDataBase =
+          await DatabaseUtilsdoctor.readUserFromFiresore(
+              credential.user?.uid ?? "");
       if (doctorDataBase != null) {
         //Go To profilePage
         navigator!.goToProfilePage(doctorDataBase);

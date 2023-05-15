@@ -12,14 +12,16 @@ import 'package:grad_project/models/my_clinic.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../DatabaseUtils/clinic_database.dart';
+import '../Home_layout/your_doctor/single_doctor_widget.dart';
 import '../models/my_doctor.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 
 class ClinicProfile extends StatefulWidget {
   static const String routeName = "ClinicProfile";
   bool isDoctor = true;
+  DoctorClinicModel? doctorClinicModel;
 
-  ClinicProfile(this.isDoctor);
+  ClinicProfile(this.isDoctor, {this.doctorClinicModel});
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
@@ -62,7 +64,7 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
   String? name = '';
   String? field = '';
   final imagepicker = ImagePicker();
-  String? image = "";
+  String? image;
   File? imageXFile;
   String? imageurl;
   var clinicData;
@@ -81,14 +83,15 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
 
   // Future _getDataFromDatabase() async {
   //   await FirebaseFirestore.instance
-  //       .collection(MyClinic.CLINIC_PROFILE)
+  //       .collection(DoctorDataBase.COLLECTION_NAME)
   //       .doc(FirebaseAuth.instance.currentUser!.uid)
   //       .get()
   //       .then((snapshot) async {
   //     //means if data exists
   //     if (snapshot.exists) {
   //       setState(() {
-  //         image = snapshot.data()!["image"];
+  //         name = snapshot.data()!["fullName"];
+  //         field = snapshot.data()!["Field"];
   //       });
   //     }
   //   });
@@ -190,7 +193,7 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
     String filename = DateTime.now().microsecondsSinceEpoch.toString();
     fstorage.Reference reference = fstorage.FirebaseStorage.instance
         .ref()
-        .child("doctor image")
+        .child("Doctors/doctor image")
         .child(filename);
 
     fstorage.UploadTask uploadTask = reference.putFile(File(imageXFile!.path));
@@ -200,7 +203,7 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
     });
 
     await FirebaseFirestore.instance
-        .collection(MyClinic.CLINIC_PROFILE)
+        .collection(DoctorDataBase.COLLECTION_NAME)
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({"image": imageurl});
     // image url will contain the downloaded pic
@@ -236,7 +239,7 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
                 child: Column(
                   children: [
                     Container(
-                      height: 290.0,
+                      height: 220.0,
                       child: Column(
                         children: [
                           Padding(
@@ -255,41 +258,36 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
                                         color: Colors.white.withOpacity(0.9),
                                         borderRadius:
                                             BorderRadius.circular(60)),
-                                    width: 80,
-                                    height: 80,
+                                    width: 120,
+                                    height: 120,
                                     child: GestureDetector(
                                       onTap: showimage,
                                       child: CircleAvatar(
-                                          child: Icon(Icons.camera_alt,
-                                              color: Colors.white),
-                                          backgroundColor:
-                                              Colors.white.withOpacity(0.9),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 70.0, top: 70),
+                                            child: CircleAvatar(
+                                              backgroundColor:
+                                                  Color(0xFF2C698D),
+                                              radius: 22.0,
+                                              child: Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                            ),
+                                          ),
+                                          backgroundColor: Colors.white,
                                           minRadius: 90,
                                           backgroundImage: imageXFile == null
                                               ? NetworkImage(
                                                   image!) //already used image
                                               : Image.file(imageXFile!)
                                                   .image //updated one,
-
                                           ),
                                     )),
                               ],
                             ),
-
-                            // Padding(
-                            //     padding: const EdgeInsets.only(
-                            //         top: 140.0, right: 100.0),
-                            //     child: Row(
-                            //       mainAxisAlignment: MainAxisAlignment.center,
-                            //       children: const [
-                            //         CircleAvatar(
-                            //           backgroundColor: Color(0xFF2C698D),
-                            //           radius: 25.0,
-                            //           child: Icon(Icons.camera_alt,
-                            //               color: Colors.white),
-                            //         )
-                            //       ],
-                            //     )),
                           ]),
                           Container(
                             width: 175,

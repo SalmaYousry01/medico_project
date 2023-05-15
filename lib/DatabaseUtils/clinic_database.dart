@@ -12,7 +12,7 @@ class DatabaseUtilsClinic {
         .withConverter<MyClinic>(
           fromFirestore: (snapshot, options) =>
               MyClinic.fromJson(snapshot.data()!),
-          toFirestore: (MyClinic, options) => MyClinic.tojson(),
+          toFirestore: (myClinic, options) => myClinic.tojson(),
         );
   }
 
@@ -29,10 +29,27 @@ class DatabaseUtilsClinic {
     return getClinicsCollection().doc(clinic.id).update(clinic.tojson());
   }
 
-  static Future<MyClinic?> readUserFromFiresore(String id) async {
-    DocumentSnapshot<MyClinic> user =
-        await getClinicsCollection().doc(id).get();
-    var clinicDataBase = user.data();
+  static Future<MyClinic?> readClinicFromFiresore() async {
+    QuerySnapshot<MyClinic> clinicCollction =
+        await getClinicsCollection().get();
+
+    var clinicDataBase = clinicCollction.docs.first.data();
+    return clinicDataBase;
+  }
+
+  static Future<MyClinic?> getDoctorClinicsCollectionFromId(String id) async {
+    QuerySnapshot<MyClinic> clinicCollction =
+        await DatabaseUtilsdoctor.getUsersCollection()
+            .doc(id)
+            .collection(MyClinic.CLINIC_PROFILE)
+            .withConverter<MyClinic>(
+              fromFirestore: (snapshot, options) =>
+                  MyClinic.fromJson(snapshot.data()!),
+              toFirestore: (MyClinic, options) => MyClinic.tojson(),
+            )
+            .get();
+
+    var clinicDataBase = clinicCollction.docs.first.data();
     return clinicDataBase;
   }
 }

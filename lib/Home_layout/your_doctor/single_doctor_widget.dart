@@ -1,68 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:grad_project/Home_layout/your_doctor/doctor_controller.dart';
-import 'package:grad_project/Home_layout/your_doctor/doctor_details.dart';
-import 'package:grad_project/Home_layout/your_doctor/modell.dart';
+import 'package:grad_project/Home_layout/your_doctor/single_doctor_clinic_profile.dart';
+import '../../DatabaseUtils/yourDoctor_database.dart';
+import '../../models/my_clinic.dart';
+import '../../models/my_doctor.dart';
+import 'package:grad_project/DatabaseUtils/clinic_database.dart';
+import 'doctor_controller.dart';
 
+class SingleDoctortWidget extends StatelessWidget {
+  final controller = Get.put(DoctorController());
+  DoctorDataBase doctor;
 
+  SingleDoctortWidget(this.doctor);
 
-class SingleDoctortWidget extends StatefulWidget {
-  final int index;
-  final doctorController = Get.put(DoctorController());
-  final Doctor doctor;
-
-  SingleDoctortWidget(
-      {super.key,
-      required this.doctor,
-      required this.index,
-      required DoctorController controller});
-
-  @override
-  State<SingleDoctortWidget> createState() => _SingleDoctortWidgetState();
-}
-
-class _SingleDoctortWidgetState extends State<SingleDoctortWidget> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(left: 15.00, right: 15.00),
-        child: ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => DoctorDetailsPage(
-                      doctor: widget.doctor,
-                    )));
+    return Container(
+      child: ListTile(
+        onTap: () {
+          DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(doctor.id).then(
+              (clinic) => Navigator.pushNamed(
+                  context, SingleDoctorClinicProfile.routeName,
+                  arguments:
+                      DoctorClinicModel(doctor: doctor, clinic: clinic!)));
+        },
+        leading: CircleAvatar(backgroundImage: NetworkImage(doctor.image)),
+        title: Text(doctor.fullName),
+        subtitle: Text(doctor.Field),
+        trailing: IconButton(
+          highlightColor: Colors.transparent,
+          splashColor: Color.fromARGB(0, 63, 36, 36),
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            // controller.addOrRemoveDoctor(doctor);
+            // controller.addDoctor(doctor);
+            DoctorDataBase yourdoctor = DoctorDataBase(
+                Field: doctor.Field,
+                email: doctor.email,
+                fullName: doctor.fullName,
+                image: doctor.image,
+                id: doctor.id,
+                nationalID: doctor.nationalID,
+                phoneNumber: doctor.phoneNumber);
+            DatabaseUtilsDoctorPatient.AddpatientdoctorToFirestore(yourdoctor);
+            // controller.addDoctor();
+            // widget.doctorController.addDoctor(widget.doctor);
+            // Get.to(() => YourDoctors());
           },
-          leading: Container(
-              width: 50, height: 150, child: Image.asset(widget.doctor.image)),
-          title: Text(
-            widget.doctor.name,
-            style: const TextStyle(color: Colors.black, fontSize: 18),
-          ),
-          subtitle: Text(
-            " ${(widget.doctor.use.toString())}",
-            style: const TextStyle(color: Colors.black87, fontSize: 14),
-          ),
-          trailing: IconButton(
-            highlightColor: Colors.transparent,
-            splashColor: Colors.transparent,
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              // doctorController.addDoctor(Doctor.items);
-              widget.doctorController.addDoctor(widget.doctor);
-              // Get.to(() => YourDoctors());
-            },
-            icon: CircleAvatar(
-              backgroundColor: Color(0xFF2C698D),
-              radius: 10.0,
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 20.0,
-              ),
+          icon: CircleAvatar(
+            backgroundColor: Color(0xFF2C698D),
+            radius: 10.0,
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 20.0,
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
+}
+
+class DoctorClinicModel {
+  final DoctorDataBase doctor;
+  final MyClinic clinic;
+
+  DoctorClinicModel({required this.doctor, required this.clinic});
 }
