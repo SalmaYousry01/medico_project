@@ -219,18 +219,20 @@ class ProfileScreenState extends BaseView<ClinicProfile, ClinicViewModel>
               child: AppBar(
                   elevation: 0.0,
                   bottomOpacity: 0.0,
-                  backgroundColor: Colors.white,
-                  leading: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                        Navigator.pushNamed(context, DoctortLogin.routeName);
-                      },
-                      icon: const Icon(Icons.arrow_back_outlined),
-                      color: Colors.black,
-                    ),
-                  ))),
+                  backgroundColor: Color(0xFF2C698D),
+                  // backgroundColor: Colors.white,
+                  // leading: Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: IconButton(
+                  //     onPressed: () {
+                  //       FirebaseAuth.instance.signOut();
+                  //       Navigator.pushNamed(context, DoctortLogin.routeName);
+                  //     },
+                  //     icon: const Icon(Icons.arrow_back_outlined),
+                  //     color: Colors.black,
+                  //   ),
+                  // )
+    )),
           body: Container(
             color: Colors.white,
             child: SingleChildScrollView(

@@ -44,6 +44,20 @@ class _PatientSignupState
 
   var qrcodecontroller = TextEditingController();
 
+  var agecontroller = TextEditingController();
+
+  var bloodsugarcontroller = TextEditingController();
+
+  var bloodpressurecontroller = TextEditingController();
+
+  var heartcontroller = TextEditingController();
+
+  var kidneycontroller = TextEditingController();
+
+  var livercontroller = TextEditingController();
+
+  var bloodtypecontroller = TextEditingController();
+
   patientsignupViewModel viewmodel = patientsignupViewModel();
 
   @override
@@ -189,6 +203,46 @@ class _PatientSignupState
                             hintText: 'Mobile Number',
                             prefixIcon:
                                 Icon(Icons.phone, color: Color(0xFF2C698D)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7.69),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF2C698D))),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7.69),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF2C698D))),
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'Age',
+                          style: TextStyle(
+                            color: Color(0xFF2C698D),
+                            fontSize: 13,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        TextFormField(
+                          onFieldSubmitted: (String value) {
+                            print(value);
+                          },
+                          controller: agecontroller,
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            hintText: 'Age',
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.all(6.0),
+                              child: ImageIcon(
+                                AssetImage('assets/images/agee.png'),
+                                size: 5,
+                                color: Color(0xFF2C698D),
+                              ),
+                            ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7.69),
                                 borderSide:
@@ -425,8 +479,15 @@ class _PatientSignupState
           fullnamecontroller.text,
           usernamecontroller.text,
           Mobilenumbercontroller.text,
+          agecontroller.text,
           imagecontroller.text,
-          qrcodecontroller.text);
+          qrcodecontroller.text,
+          bloodsugarcontroller.text,
+          bloodpressurecontroller.text,
+          heartcontroller.text,
+          kidneycontroller.text,
+          livercontroller.text,
+          bloodtypecontroller.text);
     }
   }
 

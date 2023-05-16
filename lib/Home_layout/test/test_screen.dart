@@ -40,17 +40,17 @@ implements TestNavigator {
         ),
         title: Text('Test'),
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (_) => home()));
-          },
-          child: Icon(
-            Icons.arrow_back,
-            size: 30,
-            color: Colors.black,
-          ),
-        ),
+        // leading: GestureDetector(
+        //   onTap: () {
+        //     Navigator.pushReplacement(
+        //         context, MaterialPageRoute(builder: (_) => home()));
+        //   },
+        //   child: Icon(
+        //     Icons.arrow_back,
+        //     size: 30,
+        //     color: Colors.black,
+        //   ),
+        // ),
       ),
       body: StreamBuilder(
         stream: myTestStream,

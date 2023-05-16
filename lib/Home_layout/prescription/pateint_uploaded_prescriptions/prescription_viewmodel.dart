@@ -4,8 +4,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:grad_project/DatabaseUtils/prescription_database.dart';
 import 'package:grad_project/models/my_prescription.dart';
-import 'package:grad_project/Home_layout/prescription/prescription_navigator.dart';
-import '../../basenavigator.dart';
+import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/prescription_navigator.dart';
+import '../../../basenavigator.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 
 class PrescriptionViewModel extends BaseViewModel<PrescriptionNavigator> {

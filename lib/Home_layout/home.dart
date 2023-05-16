@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/Home_layout/measurements/measurments.dart';
 import 'package:grad_project/Home_layout/patient_profile/profile.dart';
-import 'package:grad_project/Home_layout/prescription/patient_prescreption.dart';
+import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import 'package:grad_project/Home_layout/prescription/prescription_navbar.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
@@ -29,14 +28,14 @@ class _hometaskState extends State<home> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 180,
-            leading: IconButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, PatientLogin.routeName);
-              },
-              icon: Icon(Icons.arrow_back_outlined),
-              color: Colors.black,
-            ),
+            // leading: IconButton(
+            //   onPressed: () {
+            //     FirebaseAuth.instance.signOut();
+            //     Navigator.pushNamed(context, PatientLogin.routeName);
+            //   },
+            //   icon: Icon(Icons.arrow_back_outlined),
+            //   color: Colors.black,
+            // ),
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,
@@ -218,6 +217,85 @@ class _hometaskState extends State<home> {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MedicineScreen())); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      4, 4), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(70)),
+                              color: Colors.white),
+                          width: 142,
+                          height: 142,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MedicineScreen(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                                  image: new AssetImage(
+                                      "assets/images/medicine.png"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MedicineScreen())); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Text(
+                          'Medicine',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2C698D)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
                 children: [
                   Column(
                     children: [
@@ -334,178 +412,72 @@ class _hometaskState extends State<home> {
               SizedBox(
                 height: 20,
               ),
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      GestureDetector(
-                        onTap: (() {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        MedicineScreen())); // navigator byn2l l page tanya
-                          });
-                        }),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 3,
-                                  blurRadius: 7,
-                                  offset: Offset(
-                                      4, 4), // changes position of shadow
-                                ),
-                              ],
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(70)),
-                              color: Colors.white),
-                          width: 142,
-                          height: 142,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MedicineScreen(),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: new BoxDecoration(
-                                image: new DecorationImage(
-                                  image: new AssetImage(
-                                      "assets/images/medicine.png"),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        MedicineScreen())); // navigator byn2l l page tanya
-                          });
-                        }),
-                        child: Text(
-                          'Medicine',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF2C698D)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 7,
-                                offset:
-                                Offset(4, 4), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(70)),
-                            color: Colors.white),
-                        width: 142,
-                        height: 142,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Measurments(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage("assets/images/medical info.png"),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                       Measurments())); // navigator byn2l l page tanya
-                          });
-                        }),
-                        child: Text(
-                          'Measurements',
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF2C698D)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  // Column(
-                  //   children: [
-                  //     Container(
-                  //       decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.5),
-                  //               spreadRadius: 3,
-                  //               blurRadius: 7,
-                  //               offset:
-                  //                   Offset(4, 4), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.all(Radius.circular(70)),
-                  //           color: Colors.white),
-                  //       width: 142,
-                  //       height: 142,
-                  //       child: Container(
-                  //         decoration: new BoxDecoration(
-                  //           image: new DecorationImage(
-                  //             image: new AssetImage(
-                  //                 "assets/images/medical info.png"),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     SizedBox(
-                  //       height: 10,
-                  //     ),
-                  //     Text(
-                  //       "Measurments",
-                  //       style: TextStyle(
-                  //           fontSize: 16, fontWeight: FontWeight.bold),
-                  //     )
-                  //   ],
-                  // )
-                ],
-              ),
+              // Row(
+              //   children: [
+              // SizedBox(
+              //   width: 40,
+              // ),
+              // Column(
+              //   children: [
+              //     Container(
+              //       decoration: BoxDecoration(
+              //           boxShadow: [
+              //             BoxShadow(
+              //               color: Colors.grey.withOpacity(0.5),
+              //               spreadRadius: 3,
+              //               blurRadius: 7,
+              //               offset:
+              //                   Offset(4, 4), // changes position of shadow
+              //             ),
+              //           ],
+              //           borderRadius: BorderRadius.all(Radius.circular(70)),
+              //           color: Colors.white),
+              //       width: 142,
+              //       height: 142,
+              //       child: InkWell(
+              //         onTap: () {
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => Measurments(),
+              //             ),
+              //           );
+              //         },
+              //         child: Container(
+              //           decoration: new BoxDecoration(
+              //             image: new DecorationImage(
+              //               image: new AssetImage(
+              //                   "assets/images/medical info.png"),
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(
+              //       height: 10,
+              //     ),
+              //     TextButton(
+              //       onPressed: (() {
+              //         setState(() {
+              //           Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                   builder: (context) =>
+              //                       Measurments())); // navigator byn2l l page tanya
+              //         });
+              //       }),
+              //       child: Text(
+              //         'Measurements',
+              //         style: TextStyle(
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.bold,
+              //             color: Color(0xFF2C698D)),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              //   ],
+              // ),
             ],
           ),
         ),

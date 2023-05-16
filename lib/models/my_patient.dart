@@ -1,34 +1,56 @@
 import 'package:grad_project/models/base_data.dart';
 
-class MyPatient extends BaseData{
+class MyPatient extends BaseData {
   static const String COLLECTION_NAME = "Patients";
   String id;
   String fullname;
   String username;
   String email;
   String phonenumber;
+  String age;
   String image;
   String qrcode;
+  String blood_sugar;
+  String blood_pressure;
+  String heart;
+  String kidney;
+  String liver;
+  String blood_type;
 
-  MyPatient(
-      {required this.id,
-        required this.email,
-        required this.username,
-        required this.fullname,
-        required this.phonenumber,
-        required this.image,
-        required this.qrcode});
+  MyPatient({
+    required this.id,
+    required this.email,
+    required this.username,
+    required this.fullname,
+    required this.phonenumber,
+    required this.age,
+    required this.image,
+    required this.qrcode,
+    required this.blood_sugar,
+    required this.blood_pressure,
+    required this.heart,
+    required this.kidney,
+    required this.liver,
+    required this.blood_type,
+  });
 
   MyPatient.fromjson(Map<String, dynamic> json)
       : this(
-      id: json["id"],
-      fullname: json["fullname"],
-      username: json["username"],
-      phonenumber: json["phonenumber"],
-      email: json["email"],
-      image: json["image"],
-      qrcode: json["qrcode"]
-  );
+          id: json["id"],
+          fullname: json["fullname"],
+          username: json["username"],
+          phonenumber: json["phonenumber"],
+          age: json["age"],
+          email: json["email"],
+          image: json["image"],
+          qrcode: json["qrcode"],
+          blood_sugar: json["blood_sugar"],
+          blood_pressure: json["blood_pressure"],
+          heart: json["heart"],
+          kidney: json["kidney"],
+          liver: json["liver"],
+          blood_type: json["blood_type"],
+        );
 
   Map<String, dynamic> tojson() {
     return {
@@ -36,8 +58,15 @@ class MyPatient extends BaseData{
       "fullname": fullname,
       "username": username,
       "phonenumber": phonenumber,
+      "age": age,
       "email": email,
       "image": image,
+      "blood_sugar": blood_sugar,
+      "blood_pressure": blood_pressure,
+      "heart": heart,
+      "kidney": kidney,
+      "liver": liver,
+      "blood_type": blood_type,
     };
   }
 }

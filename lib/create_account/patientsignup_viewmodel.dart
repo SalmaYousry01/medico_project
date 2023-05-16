@@ -8,21 +8,45 @@ import '../basenavigator.dart';
 class patientsignupViewModel extends BaseViewModel<PatientAccountNavigator> {
   var auth = FirebaseAuth.instance;
 
-  void signupViewModel(String email, String password, String fullname,
-      String username, String phonenumber, String image, String qrcode) async {
+  void signupViewModel(
+      String email,
+      String password,
+      String fullname,
+      String username,
+      String phonenumber,
+      String age ,
+      String image,
+      String qrcode,
+      String blood_sugar,
+      String blood_pressure ,
+      String heart ,
+      String kidney ,
+      String liver,
+      String blood_type ,
+      ) async {
     try {
       final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
+
+
       );
       MyPatient patient = MyPatient(
-          id: credential.user?.uid ?? "",
-          fullname: fullname,
-          username: username,
-          phonenumber: phonenumber,
-          email: email,
-          image: image,
-          qrcode: qrcode);
+        id: credential.user?.uid ?? "",
+        fullname: fullname,
+        username: username,
+        phonenumber: phonenumber,
+        age: age ,
+        email: email,
+        image: image,
+        qrcode: qrcode,
+        blood_sugar:blood_sugar,
+        blood_pressure:blood_pressure,
+        heart: heart,
+        kidney:kidney,
+        liver:liver,
+        blood_type: blood_type,
+      );
       DatabaseUtilspatient.AddUserToFirestore(patient).then((value) {
         navigator!.goToHome(patient);
         return;
@@ -38,3 +62,4 @@ class patientsignupViewModel extends BaseViewModel<PatientAccountNavigator> {
     }
   }
 }
+
