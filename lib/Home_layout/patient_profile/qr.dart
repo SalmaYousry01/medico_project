@@ -11,6 +11,8 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 // import 'package:screenshot/screenshot.dart';
+// import 'dart:typed_data';
+// import 'dart:ui';
 //
 // class QRCode extends StatefulWidget {
 //   @override
@@ -105,10 +107,10 @@
 //               ),
 //             ),
 //             SizedBox(height: 20.0),
-//             GestureDetector(
-//               child: ElevatedButton(
-//                 onPressed: () {
-//                   updateqrinfirestore;
+//             ElevatedButton(
+//               onPressed: () {
+//                 setState(() {
+//                   updateqrinfirestore();
 //                   Get.snackbar(
 //                     "Hello",
 //                     "Your QRCode has been generated",
@@ -117,15 +119,13 @@
 //                     duration: Duration(seconds: 2),
 //                     snackPosition: SnackPosition.BOTTOM,
 //                   );
-//                   // Navigator.pushReplacement(
-//                   //     context, MaterialPageRoute(builder: (_) => ProfileTab()));
-//                 },
-//                 style: ButtonStyle(
-//                     backgroundColor: MaterialStateProperty.all(
-//                   Color(0xFF22C698D),
-//                 )),
-//                 child: Text('Generate QR Code'),
-//               ),
+//                 });
+//               },
+//               style: ButtonStyle(
+//                   backgroundColor: MaterialStateProperty.all(
+//                 Color(0xFF22C698D),
+//               )),
+//               child: Text('Generate QR Code'),
 //             ),
 //           ],
 //         ),

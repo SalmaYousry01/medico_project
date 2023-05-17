@@ -21,10 +21,10 @@ class SingleDoctorWithoutPlus extends StatelessWidget {
       child: ListTile(
         onTap: () {
           DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(doctor.id).then(
-                  (clinic) => Navigator.pushNamed(
+              (clinic) => Navigator.pushNamed(
                   context, SingleDoctorClinicProfile.routeName,
                   arguments:
-                  DoctorClinicModel(doctor: doctor, clinic: clinic!)));
+                      DoctorClinicModel(doctor: doctor, clinic: clinic!)));
         },
         leading: CircleAvatar(backgroundImage: NetworkImage(doctor.image)),
         title: Text(doctor.fullName),

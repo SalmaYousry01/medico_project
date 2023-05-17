@@ -14,7 +14,7 @@ class DoctorController extends GetxController {
 
     Get.snackbar("Doctor Added",
         "you have added doctor ${doctor.fullName} to your doctors",
-        snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 1));
+        snackPosition: SnackPosition.TOP, duration: Duration(seconds: 1));
   }
 
   void removeDoctor(DoctorDataBase doctor) {

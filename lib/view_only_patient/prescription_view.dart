@@ -6,6 +6,7 @@ import '../DatabaseUtils/prescription_database.dart';
 import '../Home_layout/prescription/pateint_uploaded_prescriptions/prescription_navigator.dart';
 import '../Home_layout/prescription/pateint_uploaded_prescriptions/prescription_viewmodel.dart';
 import '../basenavigator.dart';
+import '../models/my_doctor.dart';
 
 class PrescriptionView extends StatefulWidget {
   static const String routeName = 'PatientPrescription';
@@ -17,12 +18,13 @@ class PrescriptionView extends StatefulWidget {
 class _PrescriptionViewState
     extends BaseView<PrescriptionView, PrescriptionViewModel>
     implements PrescriptionNavigator {
+  late DoctorDataBase doctor;
   Stream<QuerySnapshot<Myprescription>>? myPrescriptionStream;
 
   @override
   void initState() {
     super.initState();
-    DatabaseUtilsMyPrescription.readPresFromFiresore();
+    DatabaseUtilsMyPrescription.readPrescriptionFromFiresore(doctor.id);
     myPrescriptionStream =
         DatabaseUtilsMyPrescription.getPrescriptionCollection().snapshots();
   }
@@ -171,4 +173,10 @@ class view extends StatelessWidget {
       ),
     );
   }
+}
+
+class PrescriptionModel {
+  final DoctorDataBase doctor;
+
+  PrescriptionModel({required this.doctor});
 }

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grad_project/Home_layout/Allergies/allergytry.dart';
-import 'package:grad_project/Home_layout/Allergies/history.dart';
-import 'package:grad_project/Home_layout/family_history/family_history.dart';
-import 'package:grad_project/Home_layout/home.dart';
+import 'package:grad_project/Home_layout/Allergies/allergy.dart';
+import '../family_history/familyhistory.dart';
 
 class chooose extends StatelessWidget {
   static const String routeName = 'chooose';

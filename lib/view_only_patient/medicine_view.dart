@@ -7,8 +7,6 @@ import '../Home_layout/medicine/medicine_viewmodel.dart';
 import '../models/my_medicine.dart';
 
 class MedicineView extends StatefulWidget {
-  const MedicineView({Key? key}) : super(key: key);
-
   @override
   State<MedicineView> createState() => MedicineViewState();
   static const String routeName = 'medicineview';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grad_project/view_only_patient/prescription_view.dart';
 import 'package:grad_project/view_only_patient/test_view.dart';
-import '../Home_layout/family_history/family_history.dart';
+import '../Home_layout/family_history/familyhistory.dart';
 import '../Home_layout/medicine/medicine_screen.dart';
 import '../doctor_layout/all_patients/All_Patient.dart';
 import 'allergy_view.dart';

@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:grad_project/Home_layout/your_doctor/single_doctor_widget.dart';
 import 'package:grad_project/Profile/clinicProfile_navigator.dart';
 import 'package:grad_project/basenavigator.dart';
-import 'package:grad_project/login/doctor_login.dart';
 import 'package:grad_project/models/my_clinic.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';

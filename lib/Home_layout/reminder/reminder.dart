@@ -4,10 +4,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:grad_project/DatabaseUtils/reminder_database.dart';
 import 'package:grad_project/Home_layout/Reminder/reminder_items.dart';
 import 'package:grad_project/Home_layout/Reminder/reminder_viewmodel.dart';
-import 'package:grad_project/Home_layout/home.dart';
 import 'package:grad_project/models/my_reminder.dart';
 import 'package:intl/intl.dart';
-
 import 'notification_service.dart';
 
 class reminder1 extends StatefulWidget {

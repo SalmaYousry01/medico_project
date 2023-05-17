@@ -21,7 +21,7 @@ class _navvState extends State<navv> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[];
   List pages = [
-    const home(),
+    home(),
     reminder1(),
     NotesPage(),
     ProfileTab(),

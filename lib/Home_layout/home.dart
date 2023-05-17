@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/Home_layout/patient_profile/profile.dart';
@@ -5,12 +6,10 @@ import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescript
 import 'package:grad_project/Home_layout/prescription/prescription_navbar.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
-import '../login/patient_login.dart';
 import 'Allergies/chooose.dart';
 import 'medicine/medicine_screen.dart';
 
 class home extends StatefulWidget {
-  const home({Key? key}) : super(key: key);
   static const String routeName = 'home';
 
   @override
@@ -18,6 +17,29 @@ class home extends StatefulWidget {
 }
 
 class _hometaskState extends State<home> {
+  String? username = "";
+
+  Future _getDataFromDatabase() async {
+    await FirebaseFirestore.instance
+        .collection("Patients")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((snapshot) async {
+      //means if data exists
+      if (snapshot.exists) {
+        setState(() {
+          username = snapshot.data()!["username"];
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getDataFromDatabase();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(children: [
@@ -50,7 +72,7 @@ class _hometaskState extends State<home> {
             title: Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Text(
-                "Hi username",
+                "Hi " + username!,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
