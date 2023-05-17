@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_project/Home_layout/Allergies/allergy.dart';
 import 'package:grad_project/Home_layout/patient_profile/profile.dart';
 import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import 'package:grad_project/Home_layout/prescription/prescription_navbar.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
 import 'Allergies/chooose.dart';
+import 'family_history/familyhistory.dart';
 import 'medicine/medicine_screen.dart';
 
 class home extends StatefulWidget {
@@ -312,6 +314,80 @@ class _hometaskState extends State<home> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        MedicineScreen())); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      4, 4), // changes position of shadow
+                                ),
+                              ],
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(70)),
+                              color: Colors.white),
+                          width: 142,
+                          height: 142,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FamilyHistory(),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                                  image: new AssetImage(
+                                      "assets/images/medicine.png"),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        FamilyHistory())); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Text(
+                          'Family History',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2C698D)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
               SizedBox(
@@ -390,7 +466,7 @@ class _hometaskState extends State<home> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        chooose())); // navigator byn2l l page tanya
+                                        allergy1())); // navigator byn2l l page tanya
                           });
                         }),
                         child: Container(

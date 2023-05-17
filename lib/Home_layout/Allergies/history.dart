@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:grad_project/Home_layout/Allergies/chooose.dart';
 
 
 enum options {Yes,No}
@@ -18,12 +17,12 @@ class _familyState extends State<family> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading:  IconButton(onPressed: (){
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) => chooose(),
-          ),  );
-        },
-            icon: Icon(Icons.arrow_back)),
+        // leading:  IconButton(onPressed: (){
+        //   Navigator.push(context, MaterialPageRoute(
+        //     builder: (context) => chooose(),
+        //   ),  );
+        // },
+        //     icon: Icon(Icons.arrow_back)),
         title: Text('Family History'),
         centerTitle: true,
         backgroundColor: Color(0xFF2C698D),

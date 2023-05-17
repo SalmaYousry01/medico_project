@@ -106,7 +106,6 @@ class MyApp extends StatelessWidget {
           MedicineScreen.routeName: (c) => MedicineScreen(),
           NotesPage.routeName: (c) => NotesPage(),
           MedicineScreen.routeName: (c) => MedicineScreen(),
-          chooose.routeName: (c) => chooose(),
           reminder1.routeName: (c) => reminder1(),
           allergy1.routeName: (c) => allergy1(),
           AllDoctor.routeName: (c) => AllDoctor(),

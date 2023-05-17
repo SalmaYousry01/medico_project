@@ -24,16 +24,16 @@ class _allergy1State extends State<allergy1> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => chooose(),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.arrow_back)),
+            // IconButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //           builder: (context) => chooose(),
+            //         ),
+            //       );
+            //     },
+            //     icon: Icon(Icons.arrow_back)),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Row(
