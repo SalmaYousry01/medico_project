@@ -9,7 +9,6 @@ class MyPatient extends BaseData {
   String phonenumber;
   String age;
   String image;
-  String qrcode;
   String blood_sugar;
   String blood_pressure;
   String heart;
@@ -25,7 +24,6 @@ class MyPatient extends BaseData {
     required this.phonenumber,
     required this.age,
     required this.image,
-    required this.qrcode,
     required this.blood_sugar,
     required this.blood_pressure,
     required this.heart,
@@ -43,7 +41,6 @@ class MyPatient extends BaseData {
           age: json["age"],
           email: json["email"],
           image: json["image"],
-          qrcode: json["qrcode"],
           blood_sugar: json["blood_sugar"],
           blood_pressure: json["blood_pressure"],
           heart: json["heart"],

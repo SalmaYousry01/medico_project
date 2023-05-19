@@ -21,7 +21,7 @@ class DatabaseUtilsAllergy {
   //return getNotesCollection().doc(note.id).set(note);
   //}
   static CollectionReference<MyAllergy> getUsersCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyAllergy.COLLECTION_NAME)
         .withConverter<MyAllergy>(
@@ -74,7 +74,7 @@ class DatabaseUtilsAllergy {
 }
 
 CollectionReference<MyAllergy> getAllergyCollection() {
-  return DatabaseUtilspatient.getUsersCollection()
+  return DatabaseUtilspatient.getPatientsCollection()
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(MyAllergy.COLLECTION_NAME)
       .withConverter<MyAllergy>(

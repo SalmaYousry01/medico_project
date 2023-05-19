@@ -1,32 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
-import '../DatabaseUtils/medicine_database.dart';
-import '../Home_layout/medicine/medicine_items.dart';
-import '../Home_layout/medicine/medicine_viewmodel.dart';
-import '../models/my_medicine.dart';
+import 'package:grad_project/DatabaseUtils/doctor_database.dart';
+import '../../Home_layout/medicine/medicine_items.dart';
+import '../../models/my_medicine.dart';
 
 class MedicineView extends StatefulWidget {
   @override
   State<MedicineView> createState() => MedicineViewState();
   static const String routeName = 'medicineview';
+
+  String? patientId;
+
+  MedicineView([this.patientId]);
 }
 
 class MedicineViewState extends State<MedicineView> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ViewOnlyPatientView(),
-                ),
-              );
-            },
-            icon: Icon(Icons.arrow_back)),
+        // leading: IconButton(
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => ViewOnlyPatientView(),
+        //         ),
+        //       );
+        //     },
+        //     icon: Icon(Icons.arrow_back)),
         title: Text('Medicine'),
         centerTitle: true,
         backgroundColor: Color(0xFF2C698D),
@@ -39,7 +47,7 @@ class MedicineViewState extends State<MedicineView> {
                 image: AssetImage("assets/images/welcome page.png"),
                 fit: BoxFit.cover)),
         child: FutureBuilder<QuerySnapshot<Mymedicine>>(
-            future: getmedicinetofirestore(),
+            future: DatabaseUtilsdoctor.getPatientMedicines(widget.patientId!),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
@@ -49,36 +57,16 @@ class MedicineViewState extends State<MedicineView> {
               }
               var medicine =
                   snapshot.data?.docs.map((docs) => docs.data()).toList() ?? [];
-              return medicine.length > 0
-                  ? Expanded(
-                      child: ListView.builder(
-                          itemCount: medicine.length,
-                          itemBuilder: (context, Index) {
-                            return MedicineItem(medicine[Index]);
-                          }),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.only(left: 95, top: 70),
-                      child: Center(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Add New Medicine..",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                                height: 37,
-                                child: Image.asset(
-                                  'assets/images/medicinehome.png',
-                                ))
-                          ],
-                        ),
-                      ),
-                    );
+              if(medicine.isEmpty){
+                return const Center(
+                  child: Text("This patient has no medicine"),
+                );
+              }
+              return ListView.builder(
+                  itemCount: medicine.length,
+                  itemBuilder: (context, Index) {
+                    return MedicineItem(medicine[Index]);
+                  });
             }),
       ),
     );
@@ -201,8 +189,8 @@ class MedicineViewState extends State<MedicineView> {
     );
   }
 
-  @override
-  MedicineViewModel initViewModel() {
-    return MedicineViewModel();
-  }
+// @override
+// MedicineViewOnlyViewModel initViewModel() {
+//   return MedicineViewOnlyViewModel();
+// }
 }

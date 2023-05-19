@@ -1,32 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import '../../../models/my_prescription.dart';
-import '../DatabaseUtils/prescription_database.dart';
-import '../Home_layout/prescription/pateint_uploaded_prescriptions/prescription_navigator.dart';
-import '../Home_layout/prescription/pateint_uploaded_prescriptions/prescription_viewmodel.dart';
-import '../basenavigator.dart';
-import '../models/my_doctor.dart';
 
-class PrescriptionView extends StatefulWidget {
-  static const String routeName = 'PatientPrescription';
+import '../../DatabaseUtils/test_database.dart';
+import '../../Home_layout/test/test_navigator.dart';
+import '../../Home_layout/test/test_viewmodel.dart';
+import '../../basenavigator.dart';
+import '../../models/my_test.dart';
+
+class TestView extends StatefulWidget {
+  static const String routeName = 'TestView';
 
   @override
-  State<PrescriptionView> createState() => _PrescriptionViewState();
+  State<TestView> createState() => _TestViewState();
 }
 
-class _PrescriptionViewState
-    extends BaseView<PrescriptionView, PrescriptionViewModel>
-    implements PrescriptionNavigator {
-  late DoctorDataBase doctor;
-  Stream<QuerySnapshot<Myprescription>>? myPrescriptionStream;
+class _TestViewState extends BaseView<TestView, TestViewModel>
+    implements TestNavigator {
+  Stream<QuerySnapshot<MyTest>>? myTestStream;
 
   @override
   void initState() {
     super.initState();
-    DatabaseUtilsMyPrescription.readPrescriptionFromFiresore(doctor.id);
-    myPrescriptionStream =
-        DatabaseUtilsMyPrescription.getPrescriptionCollection().snapshots();
+    myTestStream = DatabaseUtilsTest.getTestCollection().snapshots();
   }
 
   @override
@@ -40,11 +37,22 @@ class _PrescriptionViewState
             bottom: Radius.circular(30),
           ),
         ),
-        title: Text('prescription'),
+        title: Text('Tests'),
         centerTitle: true,
+        // leading: GestureDetector(
+        //   onTap: () {
+        //     Navigator.pushReplacement(context,
+        //         MaterialPageRoute(builder: (_) => ViewOnlyPatientView()));
+        //   },
+        //   child: Icon(
+        //     Icons.arrow_back,
+        //     size: 30,
+        //     color: Colors.black,
+        //   ),
+        // ),
       ),
       body: StreamBuilder(
-        stream: myPrescriptionStream,
+        stream: myTestStream,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -107,6 +115,7 @@ class _PrescriptionViewState
                                   InkWell(
                                     onTap: () {
                                       //showLoading(context,'Deleting');
+
                                       // DatabaseUtilsMyPrescription
                                       //     .deleteprescriptiontofirestore(
                                       //         Myprescription(
@@ -147,8 +156,8 @@ class _PrescriptionViewState
   }
 
   @override
-  PrescriptionViewModel initViewModel() {
-    return PrescriptionViewModel();
+  TestViewModel initViewModel() {
+    return TestViewModel();
   }
 }
 
@@ -165,7 +174,7 @@ class view extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF2C698D),
-        title: Text("view prescription"),
+        title: Text("view test"),
       ),
       body: SfPdfViewer.network(
         url,
@@ -173,10 +182,4 @@ class view extends StatelessWidget {
       ),
     );
   }
-}
-
-class PrescriptionModel {
-  final DoctorDataBase doctor;
-
-  PrescriptionModel({required this.doctor});
 }

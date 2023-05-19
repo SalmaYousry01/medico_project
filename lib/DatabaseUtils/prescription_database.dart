@@ -6,7 +6,7 @@ import '../models/my_prescription.dart';
 
 class DatabaseUtilsMyPrescription {
   static CollectionReference<Myprescription> getPrescriptionCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Myprescription.PRESCRIPTION)
         .withConverter<Myprescription>(

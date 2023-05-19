@@ -6,7 +6,7 @@ import 'Patient_Database.dart';
 
 class DatabaseUtilsTest {
   static CollectionReference<MyTest> getTestCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyTest.TEST)
         .withConverter<MyTest>(

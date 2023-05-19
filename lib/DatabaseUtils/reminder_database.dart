@@ -21,7 +21,7 @@ class DatabaseUtilsReminder {
   //return getNotesCollection().doc(note.id).set(note);
   //}
   static CollectionReference<MyReminder> getUsersCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyReminder.COLLECTION_NAME)
         .withConverter<MyReminder>(
@@ -67,7 +67,7 @@ class DatabaseUtilsReminder {
 }
 
 CollectionReference<MyReminder> getReminderCollection() {
-  return DatabaseUtilspatient.getUsersCollection()
+  return DatabaseUtilspatient.getPatientsCollection()
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(MyReminder.COLLECTION_NAME)
       .withConverter<MyReminder>(

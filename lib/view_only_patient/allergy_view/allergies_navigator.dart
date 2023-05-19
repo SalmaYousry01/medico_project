@@ -1,4 +1,4 @@
-import '../../basenavigator.dart';
+import '../../../basenavigator.dart';
 
 abstract class AllergiesNavigator extends BaseNavigator {
 }

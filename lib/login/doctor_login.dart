@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:grad_project/Home_layout/navv.dart';
 import 'package:grad_project/Profile/clinicProfile.dart';
-import 'package:grad_project/Profile/clinicProfile_navigator.dart';
 import 'package:grad_project/basenavigator.dart';
 import 'package:grad_project/create_account/doctor_signup.dart';
+import 'package:grad_project/doctor_layout/doctor_navbar.dart';
 import 'package:grad_project/login/doctorlogin_navigator.dart';
 import 'package:grad_project/models/my_doctor.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +21,8 @@ class DoctortLogin extends StatefulWidget {
   State<DoctortLogin> createState() => _DoctortLoginState();
 }
 
-class _DoctortLoginState extends BaseView<DoctortLogin,doctorloginViewModel> implements DoctorLoginNavigator{
+class _DoctortLoginState extends BaseView<DoctortLogin, doctorloginViewModel>
+    implements DoctorLoginNavigator {
   var email, password;
 
   bool passwordVisible = false;
@@ -97,7 +97,7 @@ class _DoctortLoginState extends BaseView<DoctortLogin,doctorloginViewModel> imp
                               return "Please Enter Email";
                             }
                             final bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(text);
                             if (!emailValid) {
                               return "please Enter Valid email";
@@ -113,10 +113,12 @@ class _DoctortLoginState extends BaseView<DoctortLogin,doctorloginViewModel> imp
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7.69),
-                                borderSide: BorderSide(color: Color(0xFF2C698D))),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF2C698D))),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7.69),
-                                borderSide: BorderSide(color: Color(0xFF2C698D))),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF2C698D))),
                           ),
                         ),
                         SizedBox(
@@ -176,10 +178,12 @@ class _DoctortLoginState extends BaseView<DoctortLogin,doctorloginViewModel> imp
                             ),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7.69),
-                                borderSide: BorderSide(color: Color(0xFF2C698D))),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF2C698D))),
                             enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7.69),
-                                borderSide: BorderSide(color: Color(0xFF2C698D))),
+                                borderSide:
+                                    BorderSide(color: Color(0xFF2C698D))),
                           ),
                         ),
                         SizedBox(
@@ -195,7 +199,7 @@ class _DoctortLoginState extends BaseView<DoctortLogin,doctorloginViewModel> imp
                                   //shadowColor: Colors.transparent,
                                 ),
                                 onPressed: () {
-                                  if(formstate.currentState!.validate()){
+                                  if (formstate.currentState!.validate()) {
                                     ValidateForm();
                                   }
                                 },
@@ -241,8 +245,10 @@ class _DoctortLoginState extends BaseView<DoctortLogin,doctorloginViewModel> imp
   void goToProfilePage(DoctorDataBase doctorDataBase) {
     // go to home screen
     Provider.of<MyProvider>(context, listen: false);
-    Navigator.pushReplacementNamed(context, ClinicProfile.routeName, arguments: true);
+    Navigator.pushReplacementNamed(context, navdoc.routeName,
+        arguments: true);
   }
+
   @override
   void initState() {
     super.initState();

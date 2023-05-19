@@ -7,7 +7,7 @@ import '../models/my_notes.dart';
 class DatabaseUtilsNotes {
 
   static CollectionReference<Mynotes> getNotesCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Mynotes.NOTES)
         .withConverter<Mynotes>(
@@ -37,7 +37,7 @@ class DatabaseUtilsNotes {
 }
 
 CollectionReference<Mynotes> getNotesCollection() {
-  return DatabaseUtilspatient.getUsersCollection()
+  return DatabaseUtilspatient.getPatientsCollection()
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(Mynotes.NOTES)
       .withConverter<Mynotes>(

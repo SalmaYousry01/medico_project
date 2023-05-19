@@ -21,7 +21,7 @@ class DatabaseUtilsmedicine {
   //return getNotesCollection().doc(note.id).set(note);
   //}
   static CollectionReference<Mymedicine> getUsersCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Mymedicine.COLLECTION_NAME)
         .withConverter<Mymedicine>(
@@ -68,25 +68,25 @@ class DatabaseUtilsmedicine {
     return medicineDataBase;
   }
 
-  // static Future<Mymedicine?> getMedicineCollectionFromId(String id) async {
-  //   QuerySnapshot<Mymedicine> clinicCollction =
-  //       await DatabaseUtilspatient.getUsersCollection()
-  //           .doc(id)
-  //           .collection(Mymedicine.COLLECTION_NAME)
-  //           .withConverter<Mymedicine>(
-  //             fromFirestore: (snapshot, options) =>
-  //                 Mymedicine.fromjson(snapshot.data()!),
-  //             toFirestore: (Mymedicine, options) => Mymedicine.tojson(),
-  //           )
-  //           .get();
-  //
-  //   var medicineDataBase = clinicCollction.docs.first.data();
-  //   return medicineDataBase;
-  // }
+  static Future<Mymedicine?> getMedicineCollectionFromId(String id) async {
+    QuerySnapshot<Mymedicine> medicineCollction =
+        await DatabaseUtilspatient.getPatientsCollection()
+            .doc(id)
+            .collection(Mymedicine.COLLECTION_NAME)
+            .withConverter<Mymedicine>(
+              fromFirestore: (snapshot, options) =>
+                  Mymedicine.fromjson(snapshot.data()!),
+              toFirestore: (Mymedicine, options) => Mymedicine.tojson(),
+            )
+            .get();
+
+    var medicineDataBase = medicineCollction.docs.first.data();
+    return medicineDataBase;
+  }
 }
 
 CollectionReference<Mymedicine> getmedicineCollection() {
-  return DatabaseUtilspatient.getUsersCollection()
+  return DatabaseUtilspatient.getPatientsCollection()
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(Mymedicine.COLLECTION_NAME)
       .withConverter<Mymedicine>(

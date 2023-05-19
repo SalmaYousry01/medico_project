@@ -14,10 +14,10 @@ class AllDoctorViewModel extends BaseViewModel {
     });
   }
 
-  // void readDoctorClinic(){
-  //   DatabaseUtilsClinic.readClinicFromFiresore().then((value) {
-  //     clinic = value;
-  //     notifyListeners();
-  //   });
-  // }
+// void readDoctorClinic(){
+//   DatabaseUtilsClinic.readClinicFromFiresore().then((value) {
+//     clinic = value;
+//     notifyListeners();
+//   });
+// }
 }

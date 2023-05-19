@@ -6,7 +6,7 @@ import 'doctor_database.dart';
 
 class DatabaseUtilsClinic {
   static CollectionReference<MyClinic> getClinicsCollection() {
-    return DatabaseUtilsdoctor.getUsersCollection()
+    return DatabaseUtilsdoctor.getDoctorsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyClinic.CLINIC_PROFILE)
         .withConverter<MyClinic>(
@@ -39,7 +39,7 @@ class DatabaseUtilsClinic {
 
   static Future<MyClinic?> getDoctorClinicsCollectionFromId(String id) async {
     QuerySnapshot<MyClinic> clinicCollction =
-        await DatabaseUtilsdoctor.getUsersCollection()
+        await DatabaseUtilsdoctor.getDoctorsCollection()
             .doc(id)
             .collection(MyClinic.CLINIC_PROFILE)
             .withConverter<MyClinic>(

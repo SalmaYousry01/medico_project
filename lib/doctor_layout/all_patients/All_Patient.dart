@@ -6,6 +6,7 @@ import 'package:grad_project/doctor_layout/all_patients/all_navP.dart';
 import 'package:grad_project/doctor_layout/all_patients/sea.dart';
 import 'package:grad_project/models/my_patient.dart';
 import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
+import '../../DatabaseUtils/doctor_database.dart';
 import '../../basenavigator.dart';
 
 class AllPatient extends StatefulWidget {
@@ -17,12 +18,12 @@ class AllPatient extends StatefulWidget {
 
 class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
     implements AllPatientNavigator {
-  CollectionReference firebasefirestore =
-      FirebaseFirestore.instance.collection(MyPatient.COLLECTION_NAME);
+  late Stream<QuerySnapshot<MyPatient>> patientsStream;
 
   void initState() {
     super.initState();
     viewModel.navigator = this;
+    patientsStream = DatabaseUtilsdoctor.getDoctorPatientsCollectionAsStream();
   }
 
   @override
@@ -47,7 +48,7 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
           ],
         ),
         body: StreamBuilder<QuerySnapshot>(
-            stream: firebasefirestore.snapshots().asBroadcastStream(),
+            stream: patientsStream,
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -56,6 +57,9 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
               if (snapshot.hasError) {
                 return Center(child: Text('something went wrong'));
               } else {
+                List<MyPatient> myPatients = snapshot.data!.docs
+                    .map((e) => e.data() as MyPatient)
+                    .toList();
                 return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -65,7 +69,9 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
                         child: ListTile(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => ViewOnlyPatientView()));
+                                builder: (_) => ViewOnlyPatientView(
+                                      patient: myPatients[index],
+                                    )));
                           },
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(

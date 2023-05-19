@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:grad_project/basenavigator.dart';
 import 'package:grad_project/create_account/doctor_nav.dart';
 import 'package:grad_project/shared/components/firebase_errors.dart';
@@ -10,11 +7,17 @@ import '../models/my_doctor.dart';
 
 class DoctorSignupViewModel extends BaseViewModel<DoctorAccountNavigator> {
   var auth = FirebaseAuth.instance;
-  void doctorSignupWithFirebaseAuth(String email, String password,
-      String fullname, String idNumber, String phonenumber, String Field,String image) async {
+
+  void doctorSignupWithFirebaseAuth(
+      String email,
+      String password,
+      String fullname,
+      String idNumber,
+      String phonenumber,
+      String Field,
+      String image) async {
     try {
-      final credential =
-          await auth.createUserWithEmailAndPassword(
+      final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -27,11 +30,10 @@ class DoctorSignupViewModel extends BaseViewModel<DoctorAccountNavigator> {
           Field: Field,
           id: credential.user?.uid ?? "",
           image: image);
-      DatabaseUtilsdoctor.AddUserToFirestore(doctorDataBase)
-          .then((value) {
+      DatabaseUtilsdoctor.AddUserToFirestore(doctorDataBase).then((value) {
         navigator!.goToProfilePage(doctorDataBase);
         return;
-              });
+      });
       //Read User from Database
       // DoctorDataBase? doctorDataBase=await DatabaseUtils.readUserFromFiresore(credential.user?.uid??"");
     } on FirebaseAuthException catch (e) {

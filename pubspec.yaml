@@ -57,6 +57,8 @@ dependencies:
   flutter_datetime_picker: ^1.5.1
   firebase_messaging: ^14.4.1
   timezone: ^0.9.1
+  pinput: ^2.2.31
+  http:
 
 dev_dependencies:
   flutter_test:

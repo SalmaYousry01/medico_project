@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:grad_project/view_only_patient/prescription_view.dart';
-import 'package:grad_project/view_only_patient/test_view.dart';
+import 'package:grad_project/view_only_patient/prescription_view/prescription_exported_pdfs/doctor_uploaded_prescription.dart';
+import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
+import 'package:grad_project/view_only_patient/prescription_view/prescription_view_navbar.dart';
+import 'package:grad_project/view_only_patient/test_view/test_view.dart';
 import '../Home_layout/family_history/familyhistory.dart';
 import '../Home_layout/medicine/medicine_screen.dart';
 import '../doctor_layout/all_patients/All_Patient.dart';
-import 'allergy_view.dart';
-import 'medicine_view.dart';
+import '../models/my_patient.dart';
+import 'allergy_view/allergy_view.dart';
+import 'medicine_view/medicine_view.dart';
 
 class ViewOnlyPatientView extends StatefulWidget {
-  const ViewOnlyPatientView({Key? key}) : super(key: key);
   static const String routeName = 'viewonlypatientview';
+
+  MyPatient? patient;
+
+  ViewOnlyPatientView({this.patient});
 
   @override
   State<ViewOnlyPatientView> createState() => _hometaskState();
@@ -112,7 +118,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PrescriptionView(),
+                                builder: (context) => PrescriptionViewNavbar(),
                               ),
                             );
                           },
@@ -133,8 +139,9 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        PrescriptionView())); // navigator byn2l l page tanya
+                                    builder: (context) => PrescriptionView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Text(
@@ -367,7 +374,8 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => MedicineView(),
+                                  builder: (context) =>
+                                      MedicineView(widget.patient!.id),
                                 ),
                               );
                             },
@@ -391,12 +399,141 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        MedicineView())); // navigator byn2l l page tanya
+                                    builder: (context) => MedicineView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Text(
                           'Medicine',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2C698D)),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(4, 4), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(70)),
+                            color: Colors.white),
+                        width: 135,
+                        height: 135,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PrescriptionView(widget.patient!.id),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                image: new AssetImage(
+                                  "assets/images/prescreption.png",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PrescriptionView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Text(
+                          'Prescription View',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF2C698D)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 3,
+                                blurRadius: 7,
+                                offset:
+                                    Offset(4, 4), // changes position of shadow
+                              ),
+                            ],
+                            borderRadius: BorderRadius.all(Radius.circular(70)),
+                            color: Colors.white),
+                        width: 135,
+                        height: 135,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    DoctorUploadedPrescription(
+                                        widget.patient!.id),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                image: new AssetImage(
+                                  "assets/images/prescreption.png",
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: (() {
+                          setState(() {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        DoctorUploadedPrescription(widget
+                                            .patient!
+                                            .id))); // navigator byn2l l page tanya
+                          });
+                        }),
+                        child: Text(
+                          'Exported Prescriptions',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

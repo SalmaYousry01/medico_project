@@ -7,7 +7,7 @@ import 'package:grad_project/models/my_measurments.dart';
 
 class DatabaseUtilsMeasurments {
   static CollectionReference<Mymeasurments> getMeasurmentsCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Mymeasurments.MEASURMENTS)
         .withConverter<Mymeasurments>(

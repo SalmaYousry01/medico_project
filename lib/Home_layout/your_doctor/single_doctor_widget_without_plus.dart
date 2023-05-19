@@ -9,42 +9,52 @@ import '../../models/my_doctor.dart';
 import 'package:grad_project/DatabaseUtils/clinic_database.dart';
 import 'doctor_controller.dart';
 
-class SingleDoctorWithoutPlus extends StatelessWidget {
-  final controller = Get.put(DoctorController());
+class SingleDoctorWithoutPlus extends StatefulWidget {
   DoctorDataBase doctor;
 
   SingleDoctorWithoutPlus(this.doctor);
+
+  @override
+  State<SingleDoctorWithoutPlus> createState() => _SingleDoctorWithoutPlusState();
+}
+
+class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
+  final controller = Get.put(DoctorController());
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
         onTap: () {
-          DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(doctor.id).then(
+          DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(widget.doctor.id).then(
               (clinic) => Navigator.pushNamed(
                   context, SingleDoctorClinicProfile.routeName,
                   arguments:
-                      DoctorClinicModel(doctor: doctor, clinic: clinic!)));
+                      DoctorClinicModel(doctor: widget.doctor, clinic: clinic!)));
         },
-        leading: CircleAvatar(backgroundImage: NetworkImage(doctor.image)),
-        title: Text(doctor.fullName),
-        subtitle: Text(doctor.Field),
+        leading: CircleAvatar(backgroundImage: NetworkImage(widget.doctor.image)),
+        title: Text(widget.doctor.fullName),
+        subtitle: Text(widget.doctor.Field),
         trailing: IconButton(
           highlightColor: Colors.transparent,
           splashColor: Color.fromARGB(0, 63, 36, 36),
           padding: EdgeInsets.zero,
-          onPressed: () {
+          onPressed: () async{
             // controller.addOrRemoveDoctor(doctor);
             // controller.addDoctor(doctor);
             DoctorDataBase yourdoctor = DoctorDataBase(
-                Field: doctor.Field,
-                email: doctor.email,
-                fullName: doctor.fullName,
-                image: doctor.image,
-                id: doctor.id,
-                nationalID: doctor.nationalID,
-                phoneNumber: doctor.phoneNumber);
-            DatabaseUtilsDoctorPatient.deletedoctorfirestore(yourdoctor);
+                Field: widget.doctor.Field,
+                email: widget.doctor.email,
+                fullName: widget.doctor.fullName,
+                image: widget.doctor.image,
+                id: widget.doctor.id,
+                nationalID: widget.doctor.nationalID,
+                phoneNumber: widget.doctor.phoneNumber);
+            await DatabaseUtilsDoctorPatient.deleteDoctorFirestore(yourdoctor);
+
+            setState(() {
+
+            });
             // controller.addDoctor();
             // widget.doctorController.addDoctor(widget.doctor);
             // Get.to(() => YourDoctors());

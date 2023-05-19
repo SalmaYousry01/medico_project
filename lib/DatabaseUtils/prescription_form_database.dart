@@ -8,7 +8,7 @@ import 'package:grad_project/models/my_prescription_form.dart';
 class DatabaseUtilsPrescriptionForm {
   static CollectionReference<Myprescriptionform>
       getPrescriptionFormCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Myprescriptionform.PRESCRIPTION_FORM)
         .withConverter<Myprescriptionform>(
@@ -45,7 +45,7 @@ class DatabaseUtilsPrescriptionForm {
 }
 
 CollectionReference<Myprescriptionform> getPrescriptionFormCollection() {
-  return DatabaseUtilspatient.getUsersCollection()
+  return DatabaseUtilspatient.getPatientsCollection()
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(Myprescriptionform.PRESCRIPTION_FORM)
       .withConverter<Myprescriptionform>(

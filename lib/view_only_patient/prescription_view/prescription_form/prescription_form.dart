@@ -12,10 +12,11 @@ import 'package:screenshot/screenshot.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 import 'package:pdf/widgets.dart' as pw;
 import '../../../DatabaseUtils/exported_prescription_database.dart';
+import '../../../Home_layout/prescription/prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 import '../../../models/my_clinic.dart';
 import '../../../models/my_prescription__exported_pdf.dart';
 import '../../../models/my_prescription_form.dart';
-import '../prescription_exported_pdfs/doctor_uploaded_prescription.dart';
+
 
 class DoctorPrescription extends StatefulWidget {
   @override
@@ -237,17 +238,6 @@ class DoctorPrescriptionState extends State<DoctorPrescription> {
         child: AppBar(
           backgroundColor: (Colors.white),
           elevation: 0,
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => home()));
-            },
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-              size: 30,
-            ),
-          ),
           actions: [
             GestureDetector(
                 onTap: () => _showPrescriptionList(context),

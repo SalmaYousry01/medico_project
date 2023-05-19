@@ -1,29 +1,35 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
+import 'package:grad_project/DatabaseUtils/doctor_database.dart';
+import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_viewonly_navigator.dart';
+import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_viewonly_viewmodel.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+import '../../../../../models/my_prescription.dart';
+import '../../../basenavigator.dart';
+import '../../../models/my_doctor.dart';
 
-import '../DatabaseUtils/test_database.dart';
-import '../Home_layout/test/test_navigator.dart';
-import '../Home_layout/test/test_viewmodel.dart';
-import '../basenavigator.dart';
-import '../models/my_test.dart';
+class PrescriptionView extends StatefulWidget {
+  static const String routeName = 'PatientPrescription';
 
-class TestView extends StatefulWidget {
-  static const String routeName = 'TestView';
+  String? patientId;
+
+  PrescriptionView([this.patientId]);
 
   @override
-  State<TestView> createState() => _TestViewState();
+  State<PrescriptionView> createState() => _PrescriptionViewState();
 }
 
-class _TestViewState extends BaseView<TestView, TestViewModel>
-    implements TestNavigator {
-  Stream<QuerySnapshot<MyTest>>? myTestStream;
+class _PrescriptionViewState
+    extends BaseView<PrescriptionView, PrescriptionViewOnlyViewModel>
+    implements PrescriptionViewOnlyNavigator {
+  late DoctorDataBase doctor;
+  Stream<QuerySnapshot<Myprescription>>? myPrescriptionStream;
 
   @override
   void initState() {
     super.initState();
-    myTestStream = DatabaseUtilsTest.getTestCollection().snapshots();
+    myPrescriptionStream =
+        DatabaseUtilsdoctor.getPrescriptionAsStream(widget.patientId!);
   }
 
   @override
@@ -37,22 +43,11 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
             bottom: Radius.circular(30),
           ),
         ),
-        title: Text('Tests'),
+        title: Text('prescription'),
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (_) => (ViewOnlyPatientView())));
-          },
-          child: Icon(
-            Icons.arrow_back,
-            size: 30,
-            color: Colors.black,
-          ),
-        ),
       ),
       body: StreamBuilder(
-        stream: myTestStream,
+        stream: myPrescriptionStream,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -66,7 +61,6 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
                             MaterialPageRoute(
                                 builder: (context) => view(
                                       url: x['fileUrl'],
-                                      // image: x["image"],
                                     )));
 
                         // NetworkImage(image!);
@@ -115,7 +109,6 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
                                   InkWell(
                                     onTap: () {
                                       //showLoading(context,'Deleting');
-
                                       // DatabaseUtilsMyPrescription
                                       //     .deleteprescriptiontofirestore(
                                       //         Myprescription(
@@ -156,8 +149,8 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
   }
 
   @override
-  TestViewModel initViewModel() {
-    return TestViewModel();
+  PrescriptionViewOnlyViewModel initViewModel() {
+    return PrescriptionViewOnlyViewModel();
   }
 }
 
@@ -174,7 +167,7 @@ class view extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF2C698D),
-        title: Text("view test"),
+        title: Text("view prescription"),
       ),
       body: SfPdfViewer.network(
         url,
@@ -183,3 +176,9 @@ class view extends StatelessWidget {
     );
   }
 }
+
+// class PrescriptionModel {
+//   final DoctorDataBase doctor;
+//
+//   PrescriptionModel({required this.doctor});
+// }

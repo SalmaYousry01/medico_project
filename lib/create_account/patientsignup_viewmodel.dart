@@ -39,7 +39,6 @@ class patientsignupViewModel extends BaseViewModel<PatientAccountNavigator> {
         age: age ,
         email: email,
         image: image,
-        qrcode: qrcode,
         blood_sugar:blood_sugar,
         blood_pressure:blood_pressure,
         heart: heart,

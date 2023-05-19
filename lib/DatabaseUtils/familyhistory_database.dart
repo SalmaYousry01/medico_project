@@ -19,7 +19,7 @@ class DatabaseUtilsFamilyhistory {
   //return getNotesCollection().doc(note.id).set(note);
   //}
   static CollectionReference<MyFamilyhistory> getUsersCollection() {
-    return DatabaseUtilspatient.getUsersCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyFamilyhistory.COLLECTION_NAME)
         .withConverter<MyFamilyhistory>(
@@ -74,7 +74,7 @@ class DatabaseUtilsFamilyhistory {
 }
 
 CollectionReference<MyFamilyhistory> getFamilyhistoryCollection() {
-  return DatabaseUtilspatient.getUsersCollection()
+  return DatabaseUtilspatient.getPatientsCollection()
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(MyFamilyhistory.COLLECTION_NAME)
       .withConverter<MyFamilyhistory>(

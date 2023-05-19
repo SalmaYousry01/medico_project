@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/models/my_patient.dart';
-import 'package:grad_project/view_only_patient/allergies_navigator.dart';
+import 'package:grad_project/view_only_patient/allergy_view/allergies_navigator.dart';
 import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
-import '../DatabaseUtils/allergy_database.dart';
-import '../Home_layout/Allergies/allergy.items.dart';
-import '../models/my_allergies.dart';
+import '../../DatabaseUtils/allergy_database.dart';
+import '../../Home_layout/Allergies/allergy.items.dart';
+import '../../models/my_allergies.dart';
 import 'allergies_viewmodel.dart';
 import 'package:grad_project/basenavigator.dart';
 
@@ -107,16 +107,6 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ViewOnlyPatientView(),
-                    ),
-                  );
-                },
-                icon: Icon(Icons.arrow_back)),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Row(

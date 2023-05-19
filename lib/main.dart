@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:grad_project/Home_layout/Allergies/allergy.dart';
-import 'package:grad_project/Home_layout/Allergies/chooose.dart';
 import 'package:grad_project/Home_layout/measurements/measurments.dart';
 import 'package:grad_project/Home_layout/medicine/medicine_screen.dart';
 import 'package:grad_project/Home_layout/reminder/reminder.dart';
@@ -14,10 +13,11 @@ import 'package:grad_project/Home_layout/your_doctor/single_doctor_widget.dart';
 import 'package:grad_project/Profile/clinicProfile.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/doctor_layout/all_patients/All_Patient.dart';
-import 'package:grad_project/view_only_patient/allergy_view.dart';
-import 'package:grad_project/view_only_patient/medicine_view.dart';
-import 'package:grad_project/view_only_patient/prescription_view.dart';
-import 'package:grad_project/view_only_patient/test_view.dart';
+import 'package:grad_project/doctor_layout/doctor_navbar.dart';
+import 'package:grad_project/view_only_patient/allergy_view/allergy_view.dart';
+import 'package:grad_project/view_only_patient/medicine_view/medicine_view.dart';
+import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
+import 'package:grad_project/view_only_patient/test_view/test_view.dart';
 import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -119,8 +119,9 @@ class MyApp extends StatelessWidget {
           TestView.routeName: (c) => TestView(),
           AllergyView.routeName: (c) => AllergyView(),
           MedicineView.routeName: (c) => MedicineView(),
-          PrescriptionView.routeName: (c) => MedicineView(),
+          PrescriptionView.routeName: (c) => PrescriptionView(),
           FamilyHistory.routeName: (c) => FamilyHistory(),
+          navdoc.routeName: (c) => navdoc()
         };
         WidgetBuilder? builder = routes[settings.name];
         return MaterialPageRoute(builder: (ctx) => builder!(ctx));

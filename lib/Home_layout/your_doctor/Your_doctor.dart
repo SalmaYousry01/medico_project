@@ -56,7 +56,7 @@ class _YourDoctorsState extends BaseView<YourDoctors, YourDoctorViewModel>
             children: [
               Container(
                 child: FutureBuilder<QuerySnapshot<DoctorDataBase>>(
-                    future: DatabaseUtilsDoctorPatient.getdoctortofirestore(),
+                    future: DatabaseUtilsDoctorPatient.getDoctorToFirestore(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(child: CircularProgressIndicator());

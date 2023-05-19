@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:grad_project/models/my_patient.dart';
 
 class DatabaseUtilspatient {
-  static CollectionReference<MyPatient> getUsersCollection() {
+  static CollectionReference<MyPatient> getPatientsCollection() {
     return FirebaseFirestore.instance
         .collection(MyPatient.COLLECTION_NAME)
         .withConverter<MyPatient>(
@@ -13,11 +13,11 @@ class DatabaseUtilspatient {
   }
 
   static Future<void> AddUserToFirestore(MyPatient patient) {
-    return getUsersCollection().doc(patient.id).set(patient);
+    return getPatientsCollection().doc(patient.id).set(patient);
   }
 
   static Future<MyPatient?> readPateintFromFiresore(String id) async {
-    DocumentSnapshot<MyPatient> user = await getUsersCollection().doc(id).get();
+    DocumentSnapshot<MyPatient> user = await getPatientsCollection().doc(id).get();
     var patient = user.data();
     return patient;
   }
