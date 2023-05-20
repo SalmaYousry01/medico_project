@@ -6,7 +6,7 @@ import '../../models/my_prescription__exported_pdf.dart';
 import 'prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 
 class Prescreption_navbar extends StatefulWidget {
-  const Prescreption_navbar({Key? key}) : super(key: key);
+
   static const String routeName = 'Prescription_navbar';
 
   @override

@@ -5,25 +5,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/Home_layout/home.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 import 'package:pdf/widgets.dart' as pw;
 import '../../../DatabaseUtils/exported_prescription_database.dart';
-import '../../../Home_layout/prescription/prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 import '../../../models/my_clinic.dart';
 import '../../../models/my_prescription__exported_pdf.dart';
 import '../../../models/my_prescription_form.dart';
 
-
-class DoctorPrescription extends StatefulWidget {
+class PrescriptionForm extends StatefulWidget {
   @override
-  DoctorPrescriptionState createState() => DoctorPrescriptionState();
+  PrescriptionFormState createState() => PrescriptionFormState();
 }
 
-class DoctorPrescriptionState extends State<DoctorPrescription> {
+class PrescriptionFormState extends State<PrescriptionForm> {
   final parentDocRef = FirebaseFirestore.instance
       .collection('Patients')
       .doc(FirebaseAuth.instance.currentUser!.uid);
@@ -87,6 +86,25 @@ class DoctorPrescriptionState extends State<DoctorPrescription> {
     DatabaseUtilsMyprescpdf.AddPrescrToFirestore(prescpdf);
   }
 
+  Future<void> UploadPdfToPrescriptionList() async {
+    //generate random number
+    number = Random().nextInt(10);
+    String name = DateTime.now().millisecondsSinceEpoch.toString();
+    final imageBytes = await _controller.capture();
+    final pdfBytes = await _createPdf(imageBytes!);
+    var pdfFile = fstorage.FirebaseStorage.instance
+        .ref()
+        .child("Patients/pdf")
+        .child(name);
+    fstorage.UploadTask task = pdfFile.putData(pdfBytes);
+    TaskSnapshot snapshot = await task;
+    url = await snapshot.ref.getDownloadURL();
+
+    //upload url to cloud firebase
+    final prescpdf = Myprescpdf(fileUrl: url, num: "Prescription $number");
+    DatabaseUtilsMyprescpdf.getPrecscAsStream();
+  }
+
   Future<Uint8List> _createPdf(Uint8List imageBytes) async {
     final document = pw.Document();
     document.addPage(pw.Page(
@@ -101,12 +119,15 @@ class DoctorPrescriptionState extends State<DoctorPrescription> {
 
   Future<void> _showPrescriptionList(BuildContext context) async {
     await uploadpdfToFirebase();
+    await UploadPdfToPrescriptionList();
+    Get.snackbar("Misiion Done", "Prescription Has Been Uploaded",
+        snackPosition: SnackPosition.TOP, duration: Duration(seconds: 2));
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                PrescListPage(myPrescriptionStream: myPrescriptionStream)));
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //         builder: (context) =>
+    //             PrescListPage()));
   }
 
   Stream<QuerySnapshot<Myprescpdf>>? myPrescriptionStream;

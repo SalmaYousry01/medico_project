@@ -481,67 +481,66 @@ class _hometaskState extends State<ViewOnlyPatientView> {
               ),
               Row(
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 7,
-                                offset:
-                                    Offset(4, 4), // changes position of shadow
-                              ),
-                            ],
-                            borderRadius: BorderRadius.all(Radius.circular(70)),
-                            color: Colors.white),
-                        width: 135,
-                        height: 135,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    DoctorUploadedPrescription(
-                                        widget.patient!.id),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                  "assets/images/prescreption.png",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        DoctorUploadedPrescription(widget
-                                            .patient!
-                                            .id))); // navigator byn2l l page tanya
-                          });
-                        }),
-                        child: Text(
-                          'Exported Prescriptions',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF2C698D)),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Column(
+                  //   children: [
+                  //     Container(
+                  //       decoration: BoxDecoration(
+                  //           boxShadow: [
+                  //             BoxShadow(
+                  //               color: Colors.grey.withOpacity(0.5),
+                  //               spreadRadius: 3,
+                  //               blurRadius: 7,
+                  //               offset:
+                  //                   Offset(4, 4), // changes position of shadow
+                  //             ),
+                  //           ],
+                  //           borderRadius: BorderRadius.all(Radius.circular(70)),
+                  //           color: Colors.white),
+                  //       width: 135,
+                  //       height: 135,
+                  //       child: InkWell(
+                  //         onTap: () {
+                  //           Navigator.push(
+                  //             context,
+                  //             MaterialPageRoute(
+                  //               builder: (context) =>
+                  //                   PrescListPage(myPrescriptionStream: myPrescriptionStream),
+                  //             ),
+                  //           );
+                  //         },
+                  //         child: Container(
+                  //           decoration: new BoxDecoration(
+                  //             image: new DecorationImage(
+                  //               image: new AssetImage(
+                  //                 "assets/images/prescreption.png",
+                  //               ),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     TextButton(
+                  //       onPressed: (() {
+                  //         setState(() {
+                  //           Navigator.push(
+                  //               context,
+                  //               MaterialPageRoute(
+                  //                   builder: (context) =>
+                  //                       DoctorUploadedPrescription(widget
+                  //                           .patient!
+                  //                           .id))); // navigator byn2l l page tanya
+                  //         });
+                  //       }),
+                  //       child: Text(
+                  //         'Exported Prescriptions',
+                  //         style: TextStyle(
+                  //             fontSize: 20,
+                  //             fontWeight: FontWeight.bold,
+                  //             color: Color(0xFF2C698D)),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ],

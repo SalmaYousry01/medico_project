@@ -7,19 +7,6 @@ import 'package:grad_project/models/my_medicine.dart';
 import 'Patient_Database.dart';
 
 class DatabaseUtilsmedicine {
-  //CollectionReference<Mymedicine> getNotesCollection() {
-  //return FirebaseFirestore.instance
-  //  .collection(Mymedicine.COLLECTION_NAME)
-  //.withConverter<Mymedicine>(
-  //fromFirestore: (snapshot, options) =>
-  //  Mymedicine.fromjson(snapshot.data()!),
-  //toFirestore: (value, options) => value.tojson(),
-  //);
-  //}
-
-  //Future<void> AddNotesToFirestore(Mymedicine medicine) {
-  //return getNotesCollection().doc(note.id).set(note);
-  //}
   static CollectionReference<Mymedicine> getUsersCollection() {
     return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -40,15 +27,7 @@ class DatabaseUtilsmedicine {
             toFirestore: (medicine, sp) => medicine.tojson());
   }
 
-//Future<void>addnotetofirestore(Mymedicine note){
-  //   return  getNotesCollection().doc(note.id).set(note);
-
-//}
   static Future<void> AddmedicineToFirestore(Mymedicine medicine) {
-    // var collection=getClinicsCollection();
-    // var docRef=collection.doc();
-    // clinic.catId=docRef.id;
-    // return docRef.set(clinic);
     return getmedicineCollection().doc(medicine.id).set(medicine);
   }
 

@@ -1,27 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/DatabaseUtils/doctor_database.dart';
 import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import '../../../models/my_prescription__exported_pdf.dart';
 
-class DoctorUploadedPrescription extends StatefulWidget {
-  String? patientId;
+class PrescListPage extends StatelessWidget {
+  final Stream<QuerySnapshot<Myprescpdf>>? myPrescriptionStream;
 
-  DoctorUploadedPrescription([this.patientId]);
-
-  @override
-  State<DoctorUploadedPrescription> createState() => _DoctorUploadedPrescriptionState();
-}
-
-class _DoctorUploadedPrescriptionState extends State<DoctorUploadedPrescription> {
-  Stream<QuerySnapshot<Myprescpdf>>? myUploadedPrescriptionPdfStream;
-
-  @override
-  void initState() {
-    super.initState();
-    myUploadedPrescriptionPdfStream =
-        DatabaseUtilsdoctor.getMyPrescriptionPdfAsStream(widget.patientId!);
-  }
+  PrescListPage({required this.myPrescriptionStream});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +23,7 @@ class _DoctorUploadedPrescriptionState extends State<DoctorUploadedPrescription>
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: myUploadedPrescriptionPdfStream,
+        stream: myPrescriptionStream,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -52,8 +37,8 @@ class _DoctorUploadedPrescriptionState extends State<DoctorUploadedPrescription>
                             MaterialPageRoute(
                                 builder: (context) => view(
                                   url: x['fileUrl'],
+                                  // image: x["image"],
                                 )));
-
                         // NetworkImage(image!);
                       },
                       child: Container(
@@ -88,52 +73,15 @@ class _DoctorUploadedPrescriptionState extends State<DoctorUploadedPrescription>
                                     ),
                                   ],
                                 ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.symmetric(horizontal: 15),
-                                decoration: BoxDecoration(
-                                    color: Color(0xFF2C698D),
-                                    borderRadius: BorderRadius.circular(12)),
-                              ),
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      //showLoading(context,'Deleting');
-                                      // DatabaseUtilsMyPrescription
-                                      //     .deleteprescriptiontofirestore(
-                                      //         Myprescription(
-                                      //             fileUrl: x['fileUrl'],
-                                      //             num: x['num']));
-                                    },
-                                    child: Container(
-                                      padding:
-                                      EdgeInsets.symmetric(horizontal: 5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                          BorderRadius.circular(12)),
-                                      child: Icon(
-                                        Icons.delete,
-                                        size: 25,
-                                        color: Color(0xFF2C698D),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
-                              ),
+                              )
                             ],
                           ),
                         ),
                       ));
                 });
+          } else {
+            return Center(child: CircularProgressIndicator());
           }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
         },
       ),
     );

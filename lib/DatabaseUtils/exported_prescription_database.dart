@@ -2,12 +2,12 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grad_project/DatabaseUtils/Patient_Database.dart';
-
+import 'package:grad_project/DatabaseUtils/doctor_database.dart';
 import '../models/my_prescription__exported_pdf.dart';
 
 class DatabaseUtilsMyprescpdf {
   static CollectionReference<Myprescpdf> getPrescCollection() {
-    return DatabaseUtilspatient.getPatientsCollection()
+    return DatabaseUtilsdoctor.getDoctorsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Myprescpdf.PRESC_PDF)
         .withConverter<Myprescpdf>(
@@ -15,6 +15,16 @@ class DatabaseUtilsMyprescpdf {
                 Myprescpdf.fromjson(snapshot.data()!),
             toFirestore: (Myprescpdf, options) => Myprescpdf.tojson());
   }
+
+  // static CollectionReference<Myprescpdf> getPrescCollectionToPatient() {
+  //   return DatabaseUtilspatient.getPatientsCollection()
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .collection(Myprescpdf.PRESC_PDF)
+  //       .withConverter<Myprescpdf>(
+  //       fromFirestore: (snapshot, options) =>
+  //           Myprescpdf.fromjson(snapshot.data()!),
+  //       toFirestore: (Myprescpdf, options) => Myprescpdf.tojson());
+  // }
 
   static Future<void> AddPrescrToFirestore(Myprescpdf prescpdf) {
     final collection = getPrescCollection();

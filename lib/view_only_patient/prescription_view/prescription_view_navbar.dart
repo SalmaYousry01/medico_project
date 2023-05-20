@@ -14,7 +14,6 @@ class PrescriptionViewNavbar extends StatefulWidget {
 
   PrescriptionViewNavbar({this.patient});
 
-
   @override
   State<PrescriptionViewNavbar> createState() => PrescriptionViewNavbarState();
 }
@@ -33,9 +32,9 @@ class PrescriptionViewNavbarState extends State<PrescriptionViewNavbar> {
   @override
   Widget build(BuildContext context) {
     List<Widget> tabs = [
-      // PrescriptionView(),
-      DoctorUploadedPrescription(),
-      DoctorPrescription()
+      PrescriptionView(),
+      PrescListPage(myPrescriptionStream: myPrescriptionStream),
+      PrescriptionForm()
     ];
 
     return Scaffold(
@@ -52,12 +51,12 @@ class PrescriptionViewNavbarState extends State<PrescriptionViewNavbar> {
             });
           },
           items: [
-            // BottomNavigationBarItem(
-            //     icon: Icon(
-            //       Icons.people_alt_rounded,
-            //       size: 30,
-            //     ),
-            //     label: 'Patient Prescriptions'),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.people_alt_rounded,
+                  size: 30,
+                ),
+                label: 'Patient Prescriptions'),
             //  BottomNavigationBarItem(icon: Icon(Icons.person, size: 30), label: 'Doctor Prescription'),
             BottomNavigationBarItem(
                 icon: Icon(
