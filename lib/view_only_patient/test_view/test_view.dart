@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
-import '../../DatabaseUtils/test_database.dart';
+import '../../DatabaseUtils/doctor_database.dart';
 import '../../Home_layout/test/test_navigator.dart';
 import '../../Home_layout/test/test_viewmodel.dart';
 import '../../basenavigator.dart';
@@ -11,6 +9,9 @@ import '../../models/my_test.dart';
 
 class TestView extends StatefulWidget {
   static const String routeName = 'TestView';
+  String? patientId;
+
+  TestView([this.patientId]);
 
   @override
   State<TestView> createState() => _TestViewState();
@@ -23,7 +24,7 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
   @override
   void initState() {
     super.initState();
-    myTestStream = DatabaseUtilsTest.getTestCollection().snapshots();
+    myTestStream = DatabaseUtilsdoctor.getTestAsStream(widget.patientId!);
   }
 
   @override

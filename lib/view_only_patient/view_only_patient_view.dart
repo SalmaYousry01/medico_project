@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:grad_project/view_only_patient/prescription_view/prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view_navbar.dart';
 import 'package:grad_project/view_only_patient/test_view/test_view.dart';
-import '../Home_layout/family_history/familyhistory.dart';
 import '../Home_layout/medicine/medicine_screen.dart';
 import '../doctor_layout/all_patients/All_Patient.dart';
 import '../models/my_patient.dart';
 import 'allergy_view/allergy_view.dart';
+import 'familyHistory_view/familyhistory_view.dart';
 import 'medicine_view/medicine_view.dart';
 
 class ViewOnlyPatientView extends StatefulWidget {
@@ -177,7 +176,8 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TestView(),
+                                builder: (context) =>
+                                    TestView(widget.patient!.id),
                               ),
                             );
                           },
@@ -196,8 +196,9 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        TestView())); // navigator byn2l l page tanya
+                                    builder: (context) => TestView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Text(
@@ -222,8 +223,9 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        AllergyView())); // navigator byn2l l page tanya
+                                    builder: (context) => AllergyView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Container(
@@ -261,8 +263,9 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        AllergyView())); // navigator byn2l l page tanya
+                                    builder: (context) => AllergyView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Text(
@@ -284,8 +287,9 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        FamilyHistory())); // navigator byn2l l page tanya
+                                    builder: (context) => FamilyhistoryView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Container(
@@ -323,8 +327,9 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        FamilyHistory())); // navigator byn2l l page tanya
+                                    builder: (context) => FamilyhistoryView(widget
+                                        .patient!
+                                        .id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Text(

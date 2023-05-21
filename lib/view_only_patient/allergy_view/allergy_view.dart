@@ -5,6 +5,7 @@ import 'package:grad_project/models/my_patient.dart';
 import 'package:grad_project/view_only_patient/allergy_view/allergies_navigator.dart';
 import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
 import '../../DatabaseUtils/allergy_database.dart';
+import '../../DatabaseUtils/doctor_database.dart';
 import '../../Home_layout/Allergies/allergy.items.dart';
 import '../../models/my_allergies.dart';
 import 'allergies_viewmodel.dart';
@@ -12,6 +13,9 @@ import 'package:grad_project/basenavigator.dart';
 
 class AllergyView extends StatefulWidget {
   static const String routeName = 'allergyview';
+  String? patientId;
+
+  AllergyView([this.patientId]);
 
   @override
   State<AllergyView> createState() => _AllergyViewState();
@@ -130,7 +134,7 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
             ),
             Container(
               child: FutureBuilder<QuerySnapshot<MyAllergy>>(
-                  future: getAllergytofirestore(),
+                  future: DatabaseUtilsdoctor.getPatientAllegry(widget.patientId!),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
