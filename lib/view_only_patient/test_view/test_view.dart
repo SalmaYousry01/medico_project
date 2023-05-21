@@ -111,37 +111,6 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
                                     color: Color(0xFF2C698D),
                                     borderRadius: BorderRadius.circular(12)),
                               ),
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      //showLoading(context,'Deleting');
-
-                                      // DatabaseUtilsMyPrescription
-                                      //     .deleteprescriptiontofirestore(
-                                      //         Myprescription(
-                                      //             fileUrl: x['fileUrl'],
-                                      //             num: x['num']));
-                                    },
-                                    child: Container(
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 5),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(12)),
-                                      child: Icon(
-                                        Icons.delete,
-                                        size: 25,
-                                        color: Color(0xFF2C698D),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                         ),

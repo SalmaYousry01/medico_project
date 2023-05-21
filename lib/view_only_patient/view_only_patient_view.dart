@@ -31,16 +31,16 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 180,
-            leading: IconButton(
-              onPressed: () {
-                // FirebaseAuth.instance.signOut();
-                // Navigator.pushNamed(context, PatientLogin.routeName);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllPatient()));
-              },
-              icon: Icon(Icons.arrow_back_outlined),
-              color: Colors.black,
-            ),
+            // leading: IconButton(
+            //   onPressed: () {
+            //     // FirebaseAuth.instance.signOut();
+            //     // Navigator.pushNamed(context, PatientLogin.routeName);
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => AllPatient()));
+            //   },
+            //   icon: Icon(Icons.arrow_back_outlined),
+            //   color: Colors.black,
+            // ),
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,

@@ -3,11 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:grad_project/DatabaseUtils/Patient_Database.dart';
 import 'package:grad_project/DatabaseUtils/doctor_database.dart';
+import 'package:grad_project/models/my_patient.dart';
 import '../models/my_prescription__exported_pdf.dart';
 
 class DatabaseUtilsMyprescpdf {
   static CollectionReference<Myprescpdf> getPrescCollection() {
     return DatabaseUtilsdoctor.getDoctorsCollection()
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection(MyPatient.COLLECTION_NAME)
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Myprescpdf.PRESC_PDF)
         .withConverter<Myprescpdf>(

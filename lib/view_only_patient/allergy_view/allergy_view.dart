@@ -134,7 +134,8 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
             ),
             Container(
               child: FutureBuilder<QuerySnapshot<MyAllergy>>(
-                  future: DatabaseUtilsdoctor.getPatientAllegry(widget.patientId!),
+                  future:
+                      DatabaseUtilsdoctor.getPatientAllegry(widget.patientId!),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
@@ -146,6 +147,11 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
                             .map((docs) => docs.data())
                             .toList() ??
                         [];
+                    if (allergy.isEmpty) {
+                      return const Center(
+                        child: Text("This patient has no allergy"),
+                      );
+                    }
                     return Expanded(
                       child: ListView.builder(
                           itemCount: allergy.length,

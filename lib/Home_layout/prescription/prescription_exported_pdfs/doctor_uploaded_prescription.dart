@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:grad_project/DatabaseUtils/doctor_database.dart';
+import 'package:grad_project/DatabaseUtils/exported_prescription_database.dart';
 import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import 'package:grad_project/models/my_doctor.dart';
 import '../../../models/my_prescription__exported_pdf.dart';
@@ -29,7 +31,7 @@ class PrescListPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: myPrescriptionStream,
+        stream: DatabaseUtilsMyprescpdf.getPrecscAsStream(),
         // stream: _firebaseFirestore.snapshots().asBroadcastStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
