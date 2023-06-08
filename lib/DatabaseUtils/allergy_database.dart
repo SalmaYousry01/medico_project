@@ -67,10 +67,6 @@ class DatabaseUtilsAllergy {
     var AllergyDataBase = user.data();
     return AllergyDataBase;
   }
-
-  static Future<void> deleteAllergytofirestore(MyAllergy allergy) {
-    return getAllergyCollection().doc(allergy.id).delete();
-  }
 }
 
 CollectionReference<MyAllergy> getAllergyCollection() {
@@ -91,4 +87,8 @@ Future<void> AddAllergyToFirestore(MyAllergy allergy) {
   var docRef = collection.doc();
   allergy.id = docRef.id;
   return docRef.set(allergy);
+}
+
+Future<void> deleteallergytofirestore(MyAllergy allergy) {
+  return getAllergyCollection().doc(allergy.id).delete();
 }

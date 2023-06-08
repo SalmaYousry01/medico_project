@@ -88,4 +88,5 @@ Future<void> AddReminderToFirestore(MyReminder reminder) {
 
 Future<void> deleteRemindertofirestore(MyReminder reminder) {
   return getReminderCollection().doc(reminder.id).delete();
+
 }

@@ -14,38 +14,36 @@ class patientsignupViewModel extends BaseViewModel<PatientAccountNavigator> {
       String fullname,
       String username,
       String phonenumber,
-      String age ,
+      String age,
       String image,
       String qrcode,
       String blood_sugar,
-      String blood_pressure ,
-      String heart ,
-      String kidney ,
+      String blood_pressure,
+      String heart,
+      String kidney,
       String liver,
-      String blood_type ,
-      ) async {
+      String blood_type,
+      String surgery) async {
     try {
       final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
-
-
       );
       MyPatient patient = MyPatient(
-        id: credential.user?.uid ?? "",
-        fullname: fullname,
-        username: username,
-        phonenumber: phonenumber,
-        age: age ,
-        email: email,
-        image: image,
-        blood_sugar:blood_sugar,
-        blood_pressure:blood_pressure,
-        heart: heart,
-        kidney:kidney,
-        liver:liver,
-        blood_type: blood_type,
-      );
+          id: credential.user?.uid ?? "",
+          fullname: fullname,
+          username: username,
+          phonenumber: phonenumber,
+          age: age,
+          email: email,
+          image: image,
+          blood_sugar: blood_sugar,
+          blood_pressure: blood_pressure,
+          heart: heart,
+          kidney: kidney,
+          liver: liver,
+          blood_type: blood_type,
+          surgery: surgery);
       DatabaseUtilspatient.AddUserToFirestore(patient).then((value) {
         navigator!.goToHome(patient);
         return;
@@ -61,4 +59,3 @@ class patientsignupViewModel extends BaseViewModel<PatientAccountNavigator> {
     }
   }
 }
-

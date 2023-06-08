@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:grad_project/Home_layout/family_history/familyhistory.dart';
 
 import '../../models/my_family.dart';
+import 'package:grad_project/DatabaseUtils/familyhistory_database.dart';
 
 class FamilyhistoryItem extends StatelessWidget {
   MyFamilyhistory familyhistory;
 
   FamilyhistoryItem(
-    this.familyhistory,
-  );
+      this.familyhistory,
+      );
 
   var detailsController = TextEditingController();
   var degreeController = TextEditingController();
@@ -88,29 +90,30 @@ class FamilyhistoryItem extends StatelessWidget {
                   color: Color(0xFF2C698D),
                   borderRadius: BorderRadius.circular(12)),
             ),
+            Spacer(),
             Row(
               children: [
-                // InkWell(
-                //   onTap: () {
-                //     //    showLoading(context, 'Deleting');
-                //
-                //     // deletenotetofirestore(medicine as Mynotes);
-                //     // hideLoading(BuildContext context) {
-                //     //   Navigator.pop(context);
-                //     // }
-                //   },
-                //   child: Container(
-                //     padding: EdgeInsets.symmetric(horizontal: 5),
-                //     decoration: BoxDecoration(
-                //         color: Colors.white,
-                //         borderRadius: BorderRadius.circular(12)),
-                //     // child: Icon(
-                //     //   Icons.notification_add,
-                //     //   size: 25,
-                //     //   color: Color(0xFF2C698D),
-                //     // ),
-                //   ),
-                // ),
+                InkWell(
+                  onTap: () {
+
+
+                    deleteFamilyhistorytofirestore(familyhistory);
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyHistory(),));
+
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Icon(
+                      Icons.delete,
+                      size: 25,
+                      color: Color(0xFF2C698D),
+                    ),
+                  ),
+                ),
                 SizedBox(
                   width: 5,
                 ),

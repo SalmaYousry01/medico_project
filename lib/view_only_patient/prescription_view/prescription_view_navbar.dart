@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_form/prescription_form.dart';
-import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
 import '../../DatabaseUtils/exported_prescription_database.dart';
 import '../../models/my_patient.dart';
 import '../../models/my_prescription__exported_pdf.dart';
@@ -62,7 +60,7 @@ class PrescriptionViewNavbarState extends State<PrescriptionViewNavbar> {
                   Icons.person,
                   size: 30,
                 ),
-                label: 'Prescription'),
+                label: 'Prescription List'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.people_alt_rounded,

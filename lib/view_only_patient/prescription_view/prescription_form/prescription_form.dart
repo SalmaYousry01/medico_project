@@ -5,17 +5,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:grad_project/Home_layout/home.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 import 'package:pdf/widgets.dart' as pw;
 import '../../../DatabaseUtils/exported_prescription_database.dart';
-import '../../../models/my_clinic.dart';
+import '../../../models/my_doctor.dart';
 import '../../../models/my_prescription__exported_pdf.dart';
 import '../../../models/my_prescription_form.dart';
+import '../prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 
 class PrescriptionForm extends StatefulWidget {
   @override
@@ -59,11 +59,13 @@ class PrescriptionFormState extends State<PrescriptionForm> {
   List<String> empty_time_list = [];
   String? time;
   String? phoneNumber = "";
+  String? fullName = "";
+  String? Field = '';
   String? date;
   String? signature;
 
   final ScreenshotController _controller = ScreenshotController();
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   String url = "";
   int? number;
 
@@ -86,25 +88,6 @@ class PrescriptionFormState extends State<PrescriptionForm> {
     DatabaseUtilsMyprescpdf.AddPrescrToFirestore(prescpdf);
   }
 
-  Future<void> UploadPdfToPrescriptionList() async {
-    //generate random number
-    number = Random().nextInt(10);
-    String name = DateTime.now().millisecondsSinceEpoch.toString();
-    final imageBytes = await _controller.capture();
-    final pdfBytes = await _createPdf(imageBytes!);
-    var pdfFile = fstorage.FirebaseStorage.instance
-        .ref()
-        .child("Patients/pdf")
-        .child(name);
-    fstorage.UploadTask task = pdfFile.putData(pdfBytes);
-    TaskSnapshot snapshot = await task;
-    url = await snapshot.ref.getDownloadURL();
-
-    //upload url to cloud firebase
-    final prescpdf = Myprescpdf(fileUrl: url, num: "Prescription $number");
-    DatabaseUtilsMyprescpdf.getPrecscAsStream();
-  }
-
   Future<Uint8List> _createPdf(Uint8List imageBytes) async {
     final document = pw.Document();
     document.addPage(pw.Page(
@@ -119,15 +102,12 @@ class PrescriptionFormState extends State<PrescriptionForm> {
 
   Future<void> _showPrescriptionList(BuildContext context) async {
     await uploadpdfToFirebase();
-    await UploadPdfToPrescriptionList();
-    Get.snackbar("Misiion Done", "Prescription Has Been Uploaded",
-        snackPosition: SnackPosition.TOP, duration: Duration(seconds: 2));
 
     // Navigator.push(
     //     context,
     //     MaterialPageRoute(
     //         builder: (context) =>
-    //             PrescListPage()));
+    //             PrescListPage(myPrescriptionStream: myPrescriptionStream)));
   }
 
   Stream<QuerySnapshot<Myprescpdf>>? myPrescriptionStream;
@@ -164,37 +144,13 @@ class PrescriptionFormState extends State<PrescriptionForm> {
     QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
-        title: "please add dosage",
-        text: "error");
-  }
-
-  test_alert() {
-    QuickAlert.show(
-        context: context,
-        type: QuickAlertType.error,
-        title: "please add required tests",
-        text: "error");
-  }
-
-  date_alert() {
-    QuickAlert.show(
-        context: context,
-        type: QuickAlertType.error,
-        title: "please add required tests",
-        text: "error");
-  }
-
-  signature_alert() {
-    QuickAlert.show(
-        context: context,
-        type: QuickAlertType.error,
-        title: "please add required tests",
+        title: "please add time",
         text: "error");
   }
 
   Future _getDataFromDatabase() async {
     await FirebaseFirestore.instance
-        .collection(MyClinic.CLINIC_PROFILE)
+        .collection(DoctorDataBase.COLLECTION_NAME)
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((snapshot) async {
@@ -202,6 +158,8 @@ class PrescriptionFormState extends State<PrescriptionForm> {
       if (snapshot.exists) {
         setState(() {
           phoneNumber = snapshot.data()!["phoneNumber"];
+          fullName = snapshot.data()!["fullName"];
+          Field = snapshot.data()!["Field"];
         });
       }
     });
@@ -218,36 +176,13 @@ class PrescriptionFormState extends State<PrescriptionForm> {
   String? prescriptionurl;
   File? prescriptionXFile;
 
-  void updateprescinfirestore() async {
-    // Capture the screenshot of the QR code
-    Uint8List? pngBytes = await _controller.capture();
-
-    // Upload the screenshot to Firebase Storage
-    String filename = DateTime.now().microsecondsSinceEpoch.toString();
-    Reference reference = FirebaseStorage.instance
-        .ref()
-        .child("Patients/Doctor uploaded prescription")
-        .child(filename);
-
-    UploadTask uploadTask = reference.putData(pngBytes!);
-
-    TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() {});
-
-    await taskSnapshot.ref.getDownloadURL().then((url) async {
-      prescriptionurl = url;
-    });
-
-    await FirebaseFirestore.instance
-        .collection(Myprescriptionform.PRESCRIPTION_FORM)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"prescription": prescriptionurl});
-    // image url will contain the downloaded pic
-  }
-
   @override
   void dispose() {
     _medicineEditingController.dispose();
     _testEditingController.dispose();
+    dosage_list.clear();
+    tests_list.clear();
+
     super.dispose();
   }
 
@@ -259,6 +194,17 @@ class PrescriptionFormState extends State<PrescriptionForm> {
         child: AppBar(
           backgroundColor: (Colors.white),
           elevation: 0,
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (_) => home()));
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+              size: 30,
+            ),
+          ),
           actions: [
             GestureDetector(
                 onTap: () => _showPrescriptionList(context),
@@ -311,12 +257,8 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                             const EdgeInsets.only(top: 8, left: 8.0, bottom: 3),
                         child: Row(
                           children: [
-                            Icon(Icons.badge_rounded),
-                            Text(" Clinic Name"),
-                            SizedBox(
-                              width: 130,
-                            ),
-                            Text("Doctor Name")
+                            Icon(Icons.account_circle_sharp),
+                            Text("Doctor: " + fullName!)
                           ],
                         ),
                       ),
@@ -326,11 +268,11 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                         child: Row(
                           children: [
                             Icon(Icons.phone),
-                            Text("Phone Number" + phoneNumber!),
+                            Text("" + phoneNumber!),
                             SizedBox(
                               width: 120,
                             ),
-                            Text("Doctor Major")
+                            Text("Field:" + Field!)
                           ],
                         ),
                       ),
@@ -363,9 +305,6 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                               return "Enter medicine name";
                             }
                           }),
-                          // onFieldSubmitted: (String value) {
-                          //   print(value);
-                          // },
                         ),
                       ),
                       SizedBox(
@@ -461,14 +400,6 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                               hintText: 'Enter a value',
                               labelText: 'Required Tests',
                               border: OutlineInputBorder()),
-
-                          // validator: ((val) {
-                          //   if (val!.length >= 15) {
-                          //     return null;
-                          //   } else {
-                          //     return "Enter required test";
-                          //   }
-                          // })
                         ),
                       ),
                       Padding(
@@ -526,28 +457,20 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                               if (_testEditingController.text.isNotEmpty) {
                                 tests_list.add(_testEditingController.text);
                                 _testEditingController.clear();
-                              } else {
-                                return test_alert();
                               }
 
                               if (dateEditingController.text.isNotEmpty) {
                                 date_list.add(dateEditingController.text);
                                 dateEditingController.clear();
-                              } else {
-                                return date_alert();
                               }
 
                               if (signatureEditingController.text.isNotEmpty) {
                                 signature_list
                                     .add(signatureEditingController.text);
                                 signatureEditingController.clear();
-                              } else {
-                                return signature_alert();
                               }
 
                               _showList = true;
-
-                              updateprescinfirestore();
                             });
                           },
                           child: Text('Submit Prescription'),
@@ -574,42 +497,201 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                           color: Colors.white.withOpacity(0),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: StreamBuilder<QuerySnapshot>(
-                            stream: subcollectionRef.snapshots(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<QuerySnapshot> snapshot) {
-                              return ListView.builder(
-                                itemCount: medicine_list.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Column(
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 8, left: 8.0, bottom: 3),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.account_circle_sharp),
+                                    Text(
+                                      " Doctor Name:" + fullName!,
+                                      style: TextStyle(fontSize: 17),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8.0),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.phone),
+                                    Text("" + phoneNumber!),
+                                    SizedBox(
+                                      width: 120,
+                                    ),
+                                    Text("Field:" + Field!,
+                                        style: TextStyle(fontSize: 17))
+                                  ],
+                                ),
+                              ),
+                              Divider(color: Colors.black),
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  child: StreamBuilder<QuerySnapshot>(
+                                      stream: subcollectionRef.snapshots(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<QuerySnapshot>
+                                              snapshot) {
+                                        return ListView.builder(
+                                          itemCount: medicine_list.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Column(
+                                              children: [
+                                                ListTile(
+                                                  title:
+                                                      Text(medicine_list[index],
+                                                          style: TextStyle(
+                                                            fontSize: 20,
+                                                          )),
+                                                  subtitle: Text(
+                                                      empty_dosage_list[index]),
+                                                  trailing: Text(
+                                                      empty_time_list[index]),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }),
+                                ),
+                              ),
+
+                              // Divider(color: Colors.black,),
+
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  child: StreamBuilder<QuerySnapshot>(
+                                      stream: subcollectionRef.snapshots(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<QuerySnapshot>
+                                              snapshot) {
+                                        return ListView.builder(
+                                          itemCount: tests_list.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return Column(
+                                              children: [
+                                                ListTile(
+                                                  title: Text("Required tests",
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                      )),
+                                                  subtitle: Text(
+                                                    tests_list[index],
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }),
+                                ),
+                              ),
+
+                              //Divider(color: Colors.black),
+
+                              Expanded(
+                                child: Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    //  crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      ListTile(
-                                        title: Text(medicine_list[index]),
-                                        subtitle:
-                                            Text(empty_dosage_list[index]),
-                                        trailing: Text(empty_time_list[index]),
-                                      ),
-                                      ListTile(
-                                        title: Text("Required tests",
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.bold)),
-                                        subtitle: Text(
-                                          tests_list[index],
-                                          style: TextStyle(fontSize: 18),
+                                      Expanded(
+                                        child: StreamBuilder<QuerySnapshot>(
+                                          stream: subcollectionRef.snapshots(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<QuerySnapshot>
+                                                  snapshot) {
+                                            return ListView.builder(
+                                              itemCount: date_list.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 15.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text("Date",
+                                                          style: TextStyle(
+                                                              fontSize: 19)),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                            date_list[index]),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
                                         ),
                                       ),
-                                      ListTile(
-                                        title: Text(
-                                          signature_list[index],
+                                      Expanded(
+                                        flex: 1,
+                                        child: StreamBuilder<QuerySnapshot>(
+                                          stream: subcollectionRef.snapshots(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<QuerySnapshot>
+                                                  snapshot) {
+                                            return ListView.builder(
+                                              itemCount: signature_list.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 15.0),
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      Text("Signature",
+                                                          style: TextStyle(
+                                                              fontSize: 19)),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                            signature_list[
+                                                                index]),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
                                         ),
-                                        trailing: Text(date_list[index]),
                                       ),
                                     ],
-                                  );
-                                },
-                              );
-                            }),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   ],

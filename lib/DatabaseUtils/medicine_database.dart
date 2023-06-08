@@ -12,9 +12,9 @@ class DatabaseUtilsmedicine {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Mymedicine.COLLECTION_NAME)
         .withConverter<Mymedicine>(
-            fromFirestore: (snapshot, s) =>
-                Mymedicine.fromjson(snapshot.data()!),
-            toFirestore: (medicine, sp) => medicine.tojson());
+        fromFirestore: (snapshot, s) =>
+            Mymedicine.fromjson(snapshot.data()!),
+        toFirestore: (medicine, sp) => medicine.tojson());
   }
 
   static CollectionReference<Mymedicine> getmedicineCollection() {
@@ -22,9 +22,9 @@ class DatabaseUtilsmedicine {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(Mymedicine.COLLECTION_NAME)
         .withConverter<Mymedicine>(
-            fromFirestore: (snapshot, s) =>
-                Mymedicine.fromjson(snapshot.data()!),
-            toFirestore: (medicine, sp) => medicine.tojson());
+        fromFirestore: (snapshot, s) =>
+            Mymedicine.fromjson(snapshot.data()!),
+        toFirestore: (medicine, sp) => medicine.tojson());
   }
 
   static Future<void> AddmedicineToFirestore(Mymedicine medicine) {
@@ -42,22 +42,22 @@ class DatabaseUtilsmedicine {
 
   static Future<Mymedicine?> readMedicineFromFiresore(String id) async {
     DocumentSnapshot<Mymedicine> user =
-        await getmedicineCollection().doc(id).get();
+    await getmedicineCollection().doc(id).get();
     var medicineDataBase = user.data();
     return medicineDataBase;
   }
 
   static Future<Mymedicine?> getMedicineCollectionFromId(String id) async {
     QuerySnapshot<Mymedicine> medicineCollction =
-        await DatabaseUtilspatient.getPatientsCollection()
-            .doc(id)
-            .collection(Mymedicine.COLLECTION_NAME)
-            .withConverter<Mymedicine>(
-              fromFirestore: (snapshot, options) =>
-                  Mymedicine.fromjson(snapshot.data()!),
-              toFirestore: (Mymedicine, options) => Mymedicine.tojson(),
-            )
-            .get();
+    await DatabaseUtilspatient.getPatientsCollection()
+        .doc(id)
+        .collection(Mymedicine.COLLECTION_NAME)
+        .withConverter<Mymedicine>(
+      fromFirestore: (snapshot, options) =>
+          Mymedicine.fromjson(snapshot.data()!),
+      toFirestore: (Mymedicine, options) => Mymedicine.tojson(),
+    )
+        .get();
 
     var medicineDataBase = medicineCollction.docs.first.data();
     return medicineDataBase;
@@ -69,8 +69,8 @@ CollectionReference<Mymedicine> getmedicineCollection() {
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(Mymedicine.COLLECTION_NAME)
       .withConverter<Mymedicine>(
-          fromFirestore: (snapshot, s) => Mymedicine.fromjson(snapshot.data()!),
-          toFirestore: (medicine, sp) => medicine.tojson());
+      fromFirestore: (snapshot, s) => Mymedicine.fromjson(snapshot.data()!),
+      toFirestore: (medicine, sp) => medicine.tojson());
 }
 
 Future<QuerySnapshot<Mymedicine>> getmedicinetofirestore() {

@@ -15,6 +15,7 @@ class MyPatient extends BaseData {
   String kidney;
   String liver;
   String blood_type;
+  String surgery;
 
   MyPatient({
     required this.id,
@@ -30,24 +31,26 @@ class MyPatient extends BaseData {
     required this.kidney,
     required this.liver,
     required this.blood_type,
+    required this.surgery,
   });
 
   MyPatient.fromjson(Map<String, dynamic> json)
       : this(
-          id: json["id"],
-          fullname: json["fullname"],
-          username: json["username"],
-          phonenumber: json["phonenumber"],
-          age: json["age"],
-          email: json["email"],
-          image: json["image"],
-          blood_sugar: json["blood_sugar"],
-          blood_pressure: json["blood_pressure"],
-          heart: json["heart"],
-          kidney: json["kidney"],
-          liver: json["liver"],
-          blood_type: json["blood_type"],
-        );
+    id: json["id"],
+    fullname: json["fullname"],
+    username: json["username"],
+    phonenumber: json["phonenumber"],
+    age: json["age"],
+    email: json["email"],
+    image: json["image"],
+    blood_sugar: json["blood_sugar"],
+    blood_pressure: json["blood_pressure"],
+    heart: json["heart"],
+    kidney: json["kidney"],
+    liver: json["liver"],
+    blood_type: json["blood_type"],
+    surgery: json["surgery"],
+  );
 
   Map<String, dynamic> tojson() {
     return {
@@ -64,6 +67,7 @@ class MyPatient extends BaseData {
       "kidney": kidney,
       "liver": liver,
       "blood_type": blood_type,
+      "surgery":surgery
     };
   }
 }

@@ -7,7 +7,6 @@ import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescript
 import 'package:grad_project/Home_layout/prescription/prescription_navbar.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
-import 'Allergies/chooose.dart';
 import 'family_history/familyhistory.dart';
 import 'medicine/medicine_screen.dart';
 
@@ -47,7 +46,7 @@ class _hometaskState extends State<home> {
     return Stack(children: [
       Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(152),
+          preferredSize: Size.fromHeight(138),
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,

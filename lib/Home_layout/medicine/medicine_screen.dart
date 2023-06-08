@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../DatabaseUtils/medicine_database.dart';
 import '../../models/my_medicine.dart';
+import '../home.dart';
+import '../reminder/reminder.dart';
 import 'medicine_items.dart';
 import 'medicine_viewmodel.dart';
 
@@ -20,6 +22,36 @@ class MedicineScreenState extends State<MedicineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // leading: IconButton(
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => home(),
+        //         ),
+        //       );
+        //     },
+        //     icon: Icon(Icons.arrow_back)),
+        title: Text('Medicine'),
+        centerTitle: true,
+        backgroundColor: Color(0xFF2C698D),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => reminder1(),
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.notification_add,
+                color: Colors.white,
+              )),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -56,7 +88,9 @@ class MedicineScreenState extends State<MedicineScreen> {
                               style:
                                   TextStyle(fontSize: 25, color: Colors.white),
                             ),
-                            SizedBox(height: 20,),
+                            SizedBox(
+                              height: 20,
+                            ),
                             Container(
                                 height: 37,
                                 child: Image.asset(
@@ -75,123 +109,6 @@ class MedicineScreenState extends State<MedicineScreen> {
         onPressed: () {
           _settingModalBottomSheet(context);
         },
-      ),
-    );
-  }
-
-  Widget buildMedicine() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 10,
-        left: 10,
-        right: 10,
-      ),
-      child: new ListView.builder(
-        itemCount: name.length,
-        itemBuilder: (context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 5.5),
-            child: new Dismissible(
-              key: UniqueKey(),
-              direction: DismissDirection.horizontal,
-              onDismissed: (direction) {
-                setState(() {
-                  deletedname = name[index];
-                  deleteddosage = dosage[index];
-                  name.removeAt(index);
-                  dosage.removeAt(index);
-                  //  Scaffold.of(context).showSnackBar(
-                });
-              },
-              //delete
-              background: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Container(
-                  color: Colors.red,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Delete",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              child: medicineList(index),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget medicineList(int index) {
-    // TextEditingController nameController = TextEditingController();
-    // TextEditingController dosageController = TextEditingController();
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        height: 70,
-        child: Center(
-          child: Row(
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Flexible(
-                        child: ListTile(
-                          title: Text(
-                            name[index],
-                            style: TextStyle(
-                              fontSize: 20.00,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          subtitle: Text(
-                            dosage[index],
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          trailing: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'images/medicinehome.png',
-                                color: Color(
-                                  0xFF2C698D,
-                                ),
-                              )),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

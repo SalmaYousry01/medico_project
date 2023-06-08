@@ -8,6 +8,7 @@ import 'package:grad_project/create_account/patient_nav.dart';
 import 'package:grad_project/create_account/patientsignup_viewmodel.dart';
 import 'package:provider/provider.dart';
 import '../login/patient_login.dart';
+import '../models/blood_type.dart';
 import '../myprovider.dart';
 
 class PatientSignup extends StatefulWidget {
@@ -58,7 +59,12 @@ class _PatientSignupState
 
   var bloodtypecontroller = TextEditingController();
 
+  var surgerycontroller = TextEditingController();
+
   patientsignupViewModel viewmodel = patientsignupViewModel();
+
+  var blood = BloodType.getCategories();
+  late BloodType blood_type;
 
   @override
   Widget build(BuildContext context) {
@@ -428,6 +434,320 @@ class _PatientSignupState
                         SizedBox(
                           height: 15,
                         ),
+                        TextButton(
+                          child: Text(
+                            'For Adding More Medical Info, Press Me!',
+                            style: TextStyle(
+                                color: Color(0xFF2C698D), fontSize: 15.5),
+                          ),
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        AlertDialog(
+                                          content: Container(
+                                            height: 695,
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Enter your previous surgeries",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xFF2C698D)),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  TextFormField(
+                                                    controller:
+                                                        surgerycontroller,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Add value here",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 9),
+                                                  Text(
+                                                    "Enter your blood pressure",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xFF2C698D)),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  TextFormField(
+                                                    controller:
+                                                        bloodpressurecontroller,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Add value here",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text("Enter your blood Sugar",
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Color(
+                                                              0xFF2C698D))),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  TextFormField(
+                                                    controller:
+                                                        bloodsugarcontroller,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Add value here",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                      "Do you have any Heart problems",
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Color(
+                                                              0xFF2C698D))),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  TextFormField(
+                                                    controller: heartcontroller,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Add value here",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                    "Blood type",
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color:
+                                                            Color(0xFF2C698D)),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Container(
+                                                    child:
+                                                        DropdownButtonFormField<
+                                                            BloodType>(
+                                                      value: blood_type,
+                                                      items: blood
+                                                          .map((cat) =>
+                                                              DropdownMenuItem<
+                                                                  BloodType>(
+                                                                value: cat,
+                                                                child: Row(
+                                                                  children: [
+                                                                    Padding(
+                                                                      padding: const EdgeInsets
+                                                                              .only(
+                                                                          left:
+                                                                              8.0),
+                                                                      child: Text(
+                                                                          cat.name),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ))
+                                                          .toList(),
+                                                      onChanged: (category) {
+                                                        setState(() {
+                                                          blood_type =
+                                                              category!;
+                                                        });
+                                                      },
+                                                    ),
+                                                    decoration: ShapeDecoration(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            style: BorderStyle
+                                                                .solid,
+                                                            color: Color(
+                                                                0xFF2C698D)),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    7.69)),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                    "Do you have any Kidney problems",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color:
+                                                            Color(0xFF2C698D)),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  TextFormField(
+                                                    controller:
+                                                        kidneycontroller,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Add value here",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 10),
+                                                  Text(
+                                                    "Do you have any Liver problems",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color:
+                                                            Color(0xFF2C698D)),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  TextFormField(
+                                                    controller: livercontroller,
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Add value here",
+                                                      border: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                      enabledBorder: OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      7.69),
+                                                          borderSide: BorderSide(
+                                                              color: Color(
+                                                                  0xFF2C698D))),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.pop(
+                                                              context);
+                                                        },
+                                                        child: Text(
+                                                          'Done',
+                                                          style: TextStyle(
+                                                              color: Color(
+                                                                  0xFF2C698D),
+                                                              fontSize: 18),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                });
+                          },
+                        ),
                         Container(
                             width: double.infinity,
                             height: 46.13,
@@ -457,7 +777,10 @@ class _PatientSignupState
                                               PatientLogin())); // navigator byn2l l page tanya
                                 });
                               }),
-                              child: Text('Log in'),
+                              child: Text(
+                                'Log in',
+                                style: TextStyle(color: Color(0xFF2C698D)),
+                              ),
                             ),
                           ],
                         )
@@ -487,7 +810,9 @@ class _PatientSignupState
           heartcontroller.text,
           kidneycontroller.text,
           livercontroller.text,
-          bloodtypecontroller.text);
+          // bloodtypecontroller.text,
+          blood_type.name,
+          surgerycontroller.text);
     }
   }
 
@@ -503,7 +828,9 @@ class _PatientSignupState
   void initState() {
     // TODO: implement initState
     super.initState();
+    // viewModel.navigator = this;
     viewModel.navigator = this;
+    blood_type = blood[0];
   }
 
   @override

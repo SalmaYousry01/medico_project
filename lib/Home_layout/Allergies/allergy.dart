@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/DatabaseUtils/allergy_database.dart';
-import 'package:grad_project/Home_layout/Allergies/chooose.dart';
 import 'package:grad_project/Home_layout/allergies/allergy.items.dart';
 import 'package:grad_project/Home_layout/allergies/allergy_viewmodel.dart';
 import 'package:grad_project/models/my_allergies.dart';
+
+import '../home.dart';
 
 class allergy1 extends StatefulWidget {
   @override
@@ -24,16 +25,22 @@ class _allergy1State extends State<allergy1> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // IconButton(
-            //     onPressed: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => chooose(),
-            //         ),
-            //       );
-            //     },
-            //     icon: Icon(Icons.arrow_back)),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => home(),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 30,
+                  )),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 20, top: 10),
               child: Row(
@@ -90,65 +97,6 @@ class _allergy1State extends State<allergy1> {
                   }),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget medicineList(int index) {
-    // TextEditingController nameController = TextEditingController();
-    // TextEditingController dosageController = TextEditingController();
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        height: 75,
-        child: Center(
-          child: Row(
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Flexible(
-                        child: ListTile(
-                          title: Text(
-                            food[index],
-                            style: TextStyle(
-                              fontSize: 20.00,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          subtitle: Text(
-                            chest[index],
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          // trailing: IconButton(
-                          //     onPressed: () {},
-                          //     icon: Image.asset(
-                          //       'icons/medicine.time2.png',
-                          //       color: Color(
-                          //         0xFF2C698D,
-                          //       ),
-                          //     )),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -314,7 +262,6 @@ class _allergy1State extends State<allergy1> {
                                 hintStyle: TextStyle(
                                   fontSize: 16,
                                   color: Colors.black45,
-                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                               onFieldSubmitted: (String value) {

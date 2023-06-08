@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import '../../DatabaseUtils/exported_prescription_database.dart';
 import '../../models/my_prescription__exported_pdf.dart';
-import 'prescription_exported_pdfs/doctor_uploaded_prescription.dart';
+import '../../view_only_patient/prescription_view/prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 
 class Prescreption_navbar extends StatefulWidget {
 

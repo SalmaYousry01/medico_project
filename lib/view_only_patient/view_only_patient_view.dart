@@ -3,7 +3,6 @@ import 'package:grad_project/view_only_patient/prescription_view/prescription_vi
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view_navbar.dart';
 import 'package:grad_project/view_only_patient/test_view/test_view.dart';
 import '../Home_layout/medicine/medicine_screen.dart';
-import '../doctor_layout/all_patients/All_Patient.dart';
 import '../models/my_patient.dart';
 import 'allergy_view/allergy_view.dart';
 import 'familyHistory_view/familyhistory_view.dart';
@@ -26,7 +25,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
     return Stack(children: [
       Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(152),
+          preferredSize: Size.fromHeight(138),
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -55,7 +54,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             title: Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Text(
-                "Hi username",
+                "Welcome Doctor!",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),

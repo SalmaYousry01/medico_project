@@ -59,6 +59,7 @@ dependencies:
   timezone: ^0.9.1
   pinput: ^2.2.31
   http:
+  internet_connection_checker: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

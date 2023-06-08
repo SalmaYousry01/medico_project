@@ -36,16 +36,15 @@ class PrescListPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => view(
-                                  url: x['fileUrl'],
-                                  // image: x["image"],
-                                )));
+                                      url: x['fileUrl'],
+                                    )));
                         // NetworkImage(image!);
                       },
                       child: Container(
                         margin:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),

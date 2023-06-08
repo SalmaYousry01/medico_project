@@ -39,13 +39,13 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
           ),
           title: Text('Patients'),
           centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                onPressed: () {
-                  showSearch<Object?>(context: context, delegate: sea());
-                },
-                icon: Icon(Icons.search))
-          ],
+          // actions: <Widget>[
+          //   IconButton(
+          //       onPressed: () {
+          //         showSearch<Object?>(context: context, delegate: sea());
+          //       },
+          //       icon: Icon(Icons.search))
+          // ],
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream: patientsStream,

@@ -12,10 +12,10 @@ class Myprescpdf {
 
   Myprescpdf.fromjson(Map<String, dynamic> json)
       : this(
-          id: json["id"],
-          num: json["num"],
-          fileUrl: json["fileUrl"],
-        );
+    id: json["id"],
+    num: json["num"],
+    fileUrl: json["fileUrl"],
+  );
 
   Myprescpdf.notFound() : this(num: "", fileUrl: "", id: "");
 

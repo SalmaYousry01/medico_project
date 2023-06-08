@@ -8,7 +8,7 @@ import '../models/my_prescription__exported_pdf.dart';
 
 class DatabaseUtilsMyprescpdf {
   static CollectionReference<Myprescpdf> getPrescCollection() {
-    return DatabaseUtilsdoctor.getDoctorsCollection()
+    return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyPatient.COLLECTION_NAME)
         .doc(FirebaseAuth.instance.currentUser!.uid)

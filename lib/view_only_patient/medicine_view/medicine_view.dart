@@ -57,7 +57,7 @@ class MedicineViewState extends State<MedicineView> {
               }
               var medicine =
                   snapshot.data?.docs.map((docs) => docs.data()).toList() ?? [];
-              if(medicine.isEmpty){
+              if (medicine.isEmpty) {
                 return const Center(
                   child: Text("This patient has no medicine"),
                 );

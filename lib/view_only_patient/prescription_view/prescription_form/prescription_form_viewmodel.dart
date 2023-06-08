@@ -39,22 +39,4 @@ class PrescriptionFormViewModel
       debugPrint(e.toString() + ">>>>>>>>>>>>>>>>>>>StackTrace: $stacktrace");
     }
   }
-
-  void UpdatePrescriptionFormToDB(String medicine, String dosage, String time,
-      String test, String prescription) {
-    // final credential = await auth.getRedirectResult();
-    Myprescriptionform prescriptionform = Myprescriptionform(
-        medicine: medicine,
-        dosage: dosage,
-        time: time,
-        test: test,
-        prescription: prescription
-        // id: credential.user?.uid ?? ""
-        );
-    DatabaseUtilsPrescriptionForm.UpdatePrescriptionFormToFirestore(
-            prescriptionform)
-        .then((value) {
-      print("Clinic updated");
-    }).catchError((error) {});
-  }
 }

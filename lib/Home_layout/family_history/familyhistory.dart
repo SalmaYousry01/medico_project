@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../DatabaseUtils/familyhistory_database.dart';
 import '../Allergies/chooose.dart';
+import '../home.dart';
 import 'familyhistory.items.dart';
 import '../../models/my_family.dart';
 import 'familyhistory_viewmodel.dart';
@@ -21,49 +22,55 @@ class _FamilyHistoryState extends State<FamilyHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Padding(
-        padding: const EdgeInsets.only(top: 30),
+        padding: const EdgeInsets.only(top:35),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // IconButton(
-            //     onPressed: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => chooose(),
-            //         ),
-            //       );
-            //     },
-            //     icon: Icon(Icons.arrow_back)),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Row(
-                children: [
-                  Text(
-                    " Family history",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C698D)),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  IconButton(
-                      icon: Icon(
-                        Icons.add_circle,
-                        size: 35,
+
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 20),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => home(),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_back,size: 30,)),
+                      Text(
+                        " Family history",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2C698D)),
                       ),
-                      onPressed: () {
-                        _settingModalBottomSheet(context);
-                      },
-                      color: Color(
-                        0xFF2C698D,
-                      )),
-                ],
-              ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      IconButton(
+                          icon: Icon(
+                            Icons.add_circle,
+                            size: 35,
+                          ),
+                          onPressed: () {
+                            _settingModalBottomSheet(context);
+                          },
+                          color: Color(
+                            0xFF2C698D,
+                          )),
+                    ],
+                  ),
+                ),
+              ],
             ),
             const Divider(
               color: Color(0xFF216B98),
@@ -80,8 +87,8 @@ class _FamilyHistoryState extends State<FamilyHistory> {
                       return Center(child: Text('Something went wrong'));
                     }
                     var familyhistory = snapshot.data?.docs
-                            .map((docs) => docs.data())
-                            .toList() ??
+                        .map((docs) => docs.data())
+                        .toList() ??
                         [];
                     return Expanded(
                       child: ListView.builder(
@@ -160,7 +167,7 @@ class _FamilyHistoryState extends State<FamilyHistory> {
 
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true,
+      //   isScrollControlled: true,
       elevation: 50,
       isDismissible: false,
       shape: RoundedRectangleBorder(
@@ -205,7 +212,7 @@ class _FamilyHistoryState extends State<FamilyHistory> {
                                   if (_formKey.currentState!.validate()) {
                                     setState(() {
                                       MyFamilyhistory familyhistory =
-                                          MyFamilyhistory(
+                                      MyFamilyhistory(
                                         details: detailsController.text,
                                         degree: degreeController.text,
                                       );

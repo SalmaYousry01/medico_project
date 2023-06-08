@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/DatabaseUtils/doctor_database.dart';
-import 'package:grad_project/DatabaseUtils/exported_prescription_database.dart';
 import 'package:grad_project/Home_layout/prescription/pateint_uploaded_prescriptions/patient_prescreption.dart';
 import 'package:grad_project/models/my_doctor.dart';
 import '../../../models/my_prescription__exported_pdf.dart';
@@ -11,10 +9,11 @@ class PrescListPage extends StatelessWidget {
   final Stream<QuerySnapshot<Myprescpdf>>? myPrescriptionStream;
 
   PrescListPage({required this.myPrescriptionStream});
-  // CollectionReference _firebaseFirestore = FirebaseFirestore.instance
-  //     .collection(DoctorDataBase.COLLECTION_NAME)
-  //     .doc(FirebaseAuth.instance.currentUser!.uid)
-  //     .collection(Myprescpdf.PRESC_PDF);
+
+  CollectionReference _firebaseFirestore = FirebaseFirestore.instance
+      .collection(DoctorDataBase.COLLECTION_NAME)
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection(Myprescpdf.PRESC_PDF);
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +30,8 @@ class PrescListPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: DatabaseUtilsMyprescpdf.getPrecscAsStream(),
-        // stream: _firebaseFirestore.snapshots().asBroadcastStream(),
+        // stream: DatabaseUtilsMyprescpdf.getPrecscAsStream(),
+        stream: _firebaseFirestore.snapshots().asBroadcastStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(

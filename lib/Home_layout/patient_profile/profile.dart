@@ -24,6 +24,7 @@ class _ProfileTabState extends State<ProfileTab> {
   var kidneycontroller = TextEditingController();
   var livercontroller = TextEditingController();
   var bloodcontroller = TextEditingController();
+  var surgerycontroller  = TextEditingController();
   var measurementsData;
   String? phonenumber = "";
   String? newnumber = "";
@@ -44,6 +45,8 @@ class _ProfileTabState extends State<ProfileTab> {
   String? newliver = "";
   String? blood_type = "";
   String? new_blood_type = "";
+  String? surgery="";
+  String? new_surgery="";
   final imagepicker = ImagePicker();
   String? image = "";
   File? imageXFile;
@@ -73,6 +76,7 @@ class _ProfileTabState extends State<ProfileTab> {
           heart = data["heart"];
           kidney = data["kidney"];
           liver = data["liver"];
+          surgery = data["surgery"];
         });
       }
     }
@@ -195,7 +199,7 @@ class _ProfileTabState extends State<ProfileTab> {
 
   void getfromgallery() async {
     final pickedimage =
-        await imagepicker.pickImage(source: ImageSource.gallery);
+    await imagepicker.pickImage(source: ImageSource.gallery);
     setState(() {
       imageXFile = File(pickedimage!.path);
       updateimageinfirestore();
@@ -211,7 +215,7 @@ class _ProfileTabState extends State<ProfileTab> {
         builder: (context) {
           return AlertDialog(
             shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             title: Text("Please choose an option"),
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -326,7 +330,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                   ? NetworkImage(image!) //already used image
                                   : Image.file(imageXFile!).image //updated one,
 
-                              ),
+                          ),
                         )),
                   ),
                   Text(
@@ -338,24 +342,7 @@ class _ProfileTabState extends State<ProfileTab> {
                         _displayTextInputDialog(context);
                       },
                       icon: Icon(Icons.edit)),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                    ),
-                    width: 80,
-                    height: 80,
-                    child: GestureDetector(
-                      // onTap: () {
-                      //   Navigator.pushReplacement(context,
-                      //       MaterialPageRoute(builder: (_) => QRCode()));
-                      // },
-                      child: Icon(
-                        Icons.qr_code,
-                        color: Colors.black.withOpacity(0.8),
-                        size: 80,
-                      ),
-                    ),
-                  )
+
                 ],
               ),
             ),
@@ -369,289 +356,325 @@ class _ProfileTabState extends State<ProfileTab> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                      Text(
-                        "Email Address",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        readOnly: true,
-                        decoration: InputDecoration(
-                            //disabledBorder: ,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("" + email!),
-                            prefixIcon: Icon(
-                              Icons.email_outlined,
-                              color: Color(0xFF22C698D),
-                            ),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Phone number",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        onChanged: (value) {
-                          setState(() {
-                            newnumber = value;
-                          });
-                        },
-                        controller: Mobilenumbercontroller,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("" + phonenumber!),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            prefixIcon:
+                          Text(
+                            "Email Address",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              //disabledBorder: ,
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("" + email!),
+                                prefixIcon: Icon(
+                                  Icons.email_outlined,
+                                  color: Color(0xFF22C698D),
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Phone number",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                newnumber = value;
+                              });
+                            },
+                            controller: Mobilenumbercontroller,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("" + phonenumber!),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                prefixIcon:
                                 Icon(Icons.phone, color: Color(0xFF22C698D)),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Age",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: agecontroller,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          setState(() {
-                            newage = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("" + age!),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Blood Type",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: bloodcontroller,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          setState(() {
-                            new_blood_type = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("" + blood_type!),
-                            prefixIcon: Icon(
-                              Icons.bloodtype,
-                              color: Color(0xFF22C698D),
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Pressure",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: bloodpressurecontroller,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          setState(() {
-                            new_blood_pressure = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("pressure:" + blood_pressure!),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Blood Sugar",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: bloodsugarcontroller,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          setState(() {
-                            new_blood_sugar = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("Sugar:" + blood_sugar!),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Heart",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        controller: heartcontroller,
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          setState(() {
-                            newheart = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("heart:" + heart!),
-                            prefixIcon: Icon(
-                              Icons.monitor_heart,
-                              color: Color(0xFF22C698D),
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Kidney",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        onChanged: (value) {
-                          setState(() {
-                            newkidney = value;
-                          });
-                        },
-                        controller: kidneycontroller,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("kidney:" + kidney!),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            border: OutlineInputBorder()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Liver",
-                        style: TextStyle(color: Color(0xFF22C698D)),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      TextFormField(
-                        onChanged: (value) {
-                          setState(() {
-                            liver = value;
-                          });
-                        },
-                        controller: livercontroller,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                              color: Color(0xFF22C698D),
-                            )),
-                            hintText: ("liver:" + liver!),
-                            suffixIcon: GestureDetector(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.black,
-                              ),
-                            ),
-                            border: OutlineInputBorder()),
-                      ),
-                    ]))),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Age",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: agecontroller,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {
+                                newage = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("" + age!),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Blood Type",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: bloodcontroller,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {
+                                new_blood_type = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("" + blood_type!),
+                                prefixIcon: Icon(
+                                  Icons.bloodtype,
+                                  color: Color(0xFF22C698D),
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Pressure",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: bloodpressurecontroller,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {
+                                new_blood_pressure = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("pressure:" + blood_pressure!),
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Blood Sugar",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: bloodsugarcontroller,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {
+                                new_blood_sugar = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("Sugar:" + blood_sugar!),
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+
+                          Text(
+                            "Previous surgeries",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: surgerycontroller,
+                            onChanged: (value) {
+                              setState(() {
+                                new_surgery = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("Surgeries:" + surgery!),
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+
+                          Text(
+                            "Heart",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            controller: heartcontroller,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) {
+                              setState(() {
+                                newheart = value;
+                              });
+                            },
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("heart:" + heart!),
+                                prefixIcon: Icon(
+                                  Icons.monitor_heart,
+                                  color: Color(0xFF22C698D),
+                                ),
+                                suffixIcon: Icon(
+                                  Icons.edit,
+                                  color: Colors.black,
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Kidney",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                newkidney = value;
+                              });
+                            },
+                            controller: kidneycontroller,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("kidney:" + kidney!),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Liver",
+                            style: TextStyle(color: Color(0xFF22C698D)),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          TextFormField(
+                            onChanged: (value) {
+                              setState(() {
+                                liver = value;
+                              });
+                            },
+                            controller: livercontroller,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF22C698D),
+                                    )),
+                                hintText: ("liver:" + liver!),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                border: OutlineInputBorder()),
+                          ),
+                        ]))),
             SizedBox(
               height: 10,
             ),
@@ -662,7 +685,7 @@ class _ProfileTabState extends State<ProfileTab> {
               child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStateColor.resolveWith(
-                          (states) => Color(0xFF22C698D))),
+                              (states) => Color(0xFF22C698D))),
                   onPressed: () {
                     setState(() {
                       _updatephone();
