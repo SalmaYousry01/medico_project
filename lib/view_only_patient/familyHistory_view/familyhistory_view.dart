@@ -5,6 +5,7 @@ import 'package:grad_project/view_only_patient/familyHistory_view/familyhistory_
 
 import '../../Home_layout/family_history/familyhistory.items.dart';
 import '../../models/my_family.dart';
+import '../view_only_patient_view.dart';
 
 class FamilyhistoryView extends StatefulWidget {
   @override
@@ -26,53 +27,106 @@ class FamilyhistoryViewState extends State<FamilyhistoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => ViewOnlyPatientView(),
-        //         ),
-        //       );
-        //     },
-        //     icon: Icon(Icons.arrow_back)),
-        title: Text(
-          " Family history",
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
+      // appBar: AppBar(
+      //   // leading: IconButton(
+      //   //     onPressed: () {
+      //   //       Navigator.push(
+      //   //         context,
+      //   //         MaterialPageRoute(
+      //   //           builder: (context) => ViewOnlyPatientView(),
+      //   //         ),
+      //   //       );
+      //   //     },
+      //   //     icon: Icon(Icons.arrow_back)),
+      //   title: Text(
+      //     " Family history",
+      //     style: TextStyle(
+      //       fontSize: 30,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   backgroundColor: Color(0xFF2C698D),
+      // ),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, top: 35),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ViewOnlyPatientView(),
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 28,
+                    ),
+                  ),
+                  Text(
+                    "Family History",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2C698D)),
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF2C698D),
-      ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: FutureBuilder<QuerySnapshot<MyFamilyhistory>>(
-            future:
-                DatabaseUtilsdoctor.getPatientFamilyHistory(widget.patientId!),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(child: Text('something went wrong'));
-              }
-              var familyhistory =
-                  snapshot.data?.docs.map((docs) => docs.data()).toList() ?? [];
-              if (familyhistory.isEmpty) {
-                return const Center(
-                  child: Text("There is no family history"),
-                );
-              }
-              return ListView.builder(
-                  itemCount: familyhistory.length,
-                  itemBuilder: (context, Index) {
-                    return FamilyhistoryContainer(familyhistory[Index]);
-                  });
-            }),
+          const Divider(
+            color: Color(0xFF216B98),
+            height: 37,
+          ),
+          Expanded(
+            flex: 8,
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: FutureBuilder<QuerySnapshot<MyFamilyhistory>>(
+                  future: DatabaseUtilsdoctor.getPatientFamilyHistory(
+                      widget.patientId!),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError) {
+                      return Center(child: Text('something went wrong'));
+                    }
+                    var familyhistory = snapshot.data?.docs
+                            .map((docs) => docs.data())
+                            .toList() ??
+                        [];
+                    if (familyhistory.isEmpty) {
+                      return const Center(
+                        child: Text(
+                          "There is no family history yet",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Color(0xFF2C698D)),
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                        itemCount: familyhistory.length,
+                        itemBuilder: (context, Index) {
+                          return FamilyhistoryContainer(familyhistory[Index]);
+                        });
+                  }),
+            ),
+          ),
+        ],
       ),
     );
   }

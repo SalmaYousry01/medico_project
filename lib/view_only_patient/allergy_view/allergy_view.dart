@@ -164,7 +164,7 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
                         [];
                     if (allergy.isEmpty) {
                       return Padding(
-                        padding: const EdgeInsets.only(top: 300),
+                        padding: const EdgeInsets.only(top: 375),
                         child: const Center(
                           child: Text(
                             "This patient has no allergy yet",
