@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:grad_project/DatabaseUtils/doctor_database.dart';
 import '../../Home_layout/medicine/medicine_items.dart';
 import '../../models/my_medicine.dart';
+import 'medicine_container.dart';
 
 class MedicineView extends StatefulWidget {
   @override
@@ -65,129 +66,13 @@ class MedicineViewState extends State<MedicineView> {
               return ListView.builder(
                   itemCount: medicine.length,
                   itemBuilder: (context, Index) {
-                    return MedicineItem(medicine[Index]);
+                    return MedicineContainer(medicine[Index]);
                   });
             }),
       ),
     );
   }
 
-  Widget buildMedicine() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 10,
-        left: 10,
-        right: 10,
-      ),
-      child: new ListView.builder(
-        itemCount: name.length,
-        itemBuilder: (context, int index) {
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 5.5),
-            child: new Dismissible(
-              key: UniqueKey(),
-              direction: DismissDirection.horizontal,
-              onDismissed: (direction) {
-                setState(() {
-                  deletedname = name[index];
-                  deleteddosage = dosage[index];
-                  name.removeAt(index);
-                  dosage.removeAt(index);
-                  //  Scaffold.of(context).showSnackBar(
-                });
-              },
-              //delete
-              background: ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Container(
-                  color: Colors.red,
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Delete",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              child: medicineList(index),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget medicineList(int index) {
-    // TextEditingController nameController = TextEditingController();
-    // TextEditingController dosageController = TextEditingController();
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        height: 70,
-        child: Center(
-          child: Row(
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Flexible(
-                        child: ListTile(
-                          title: Text(
-                            name[index],
-                            style: TextStyle(
-                              fontSize: 20.00,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          subtitle: Text(
-                            dosage[index],
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          trailing: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(
-                                'images/medicinehome.png',
-                                color: Color(
-                                  0xFF2C698D,
-                                ),
-                              )),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
 // @override
 // MedicineViewOnlyViewModel initViewModel() {
