@@ -309,11 +309,14 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                               color: Colors.white),
                           width: 135,
                           height: 135,
-                          child: Container(
-                            decoration: new BoxDecoration(
-                              image: new DecorationImage(
-                                image: new AssetImage(
-                                    "assets/images/allergies.png"),
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 24 , top: 18 ),
+                            child: Container(
+                              decoration: new BoxDecoration(
+                                image: new DecorationImage(
+                                  image: new AssetImage(
+                                      "assets/images/family.png"),
+                                ),
                               ),
                             ),
                           ),
