@@ -3,13 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/models/my_patient.dart';
 import 'package:grad_project/view_only_patient/allergy_view/allergies_navigator.dart';
-import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
 import '../../DatabaseUtils/allergy_database.dart';
 import '../../DatabaseUtils/doctor_database.dart';
-import '../../Home_layout/Allergies/allergy.items.dart';
 import '../../models/my_allergies.dart';
 import 'allergies_viewmodel.dart';
 import 'package:grad_project/basenavigator.dart';
+
+import 'allergy_container.dart';
 
 class AllergyView extends StatefulWidget {
   static const String routeName = 'allergyview';
@@ -111,36 +111,22 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 20),
-                  child: Row(
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ViewOnlyPatientView(),
-                              ),
-                            );
-                          },
-                          icon: Icon(Icons.arrow_back,size: 30,)),
-                      Text(
-                        " Allergies",
-                        style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFF2C698D)),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                    ],
+            Padding(
+              padding: const EdgeInsets.only(left: 20, top: 10),
+              child: Row(
+                children: [
+                  Text(
+                    " Allergies",
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2C698D)),
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 5,
+                  ),
+                ],
+              ),
             ),
             const Divider(
               color: Color(0xFF216B98),
@@ -149,7 +135,7 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
             Container(
               child: FutureBuilder<QuerySnapshot<MyAllergy>>(
                   future:
-                      DatabaseUtilsdoctor.getPatientAllegry(widget.patientId!),
+                  DatabaseUtilsdoctor.getPatientAllegry(widget.patientId!),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());
@@ -158,8 +144,8 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
                       return Center(child: Text('Something went wrong'));
                     }
                     var allergy = snapshot.data?.docs
-                            .map((docs) => docs.data())
-                            .toList() ??
+                        .map((docs) => docs.data())
+                        .toList() ??
                         [];
                     if (allergy.isEmpty) {
                       return const Center(
@@ -170,7 +156,7 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
                       child: ListView.builder(
                           itemCount: allergy.length,
                           itemBuilder: (context, Index) {
-                            return AllergyItem(allergy[Index]);
+                            return Allergycontainer(allergy[Index]);
                           }),
                     );
                   }),
