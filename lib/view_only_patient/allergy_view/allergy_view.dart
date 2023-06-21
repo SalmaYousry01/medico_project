@@ -167,7 +167,7 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
                         padding: const EdgeInsets.only(top: 300),
                         child: const Center(
                           child: Text(
-                            "This patient has no allergy",
+                            "This patient has no allergy yet",
                             style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Color(0xFF2C698D)),
 
                           ),
