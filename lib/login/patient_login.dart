@@ -1,9 +1,14 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_project/Home_layout/home.dart';
 import 'package:grad_project/login/patientlogin_navigator.dart';
 import 'package:grad_project/login/patientlogin_viewmolel.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:grad_project/Home_layout/navv.dart';
 import '../basenavigator.dart';
@@ -28,6 +33,35 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
   var emailController = TextEditingController();
 
   GlobalKey<FormState> formstate = new GlobalKey<FormState>();
+  late StreamSubscription subscription;
+  var isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  @override
+  void initState() {
+    getConnectivity();
+    super.initState();
+    viewModel.navigator = this;
+  }
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() {
+              isAlertSet = true;
+            });
+          }
+        },
+      );
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +104,7 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
                         ),
                         //email
                         Text(
-                          'Email/Phone number',
+                          'Email',
                           style: TextStyle(
                             color: Color(0xFF2C698D),
                             fontSize: 13,
@@ -95,7 +129,7 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
                               return "Please Enter Email";
                             }
                             final bool emailValid = RegExp(
-                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                 .hasMatch(text);
                             if (!emailValid) {
                               return "please Enter Valid email";
@@ -104,7 +138,7 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
                           },
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            hintText: 'Email/Phone number',
+                            hintText: 'Email',
                             prefixIcon: Icon(
                               Icons.email,
                               color: Color(0xFF2C698D),
@@ -197,9 +231,8 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
                                   //shadowColor: Colors.transparent,
                                 ),
                                 onPressed: () {
-                                  if(formstate.currentState!.validate()){
+                                  if (formstate.currentState!.validate()) {
                                     ValidateForm();
-                                    Navigator.pushNamed(context, home.routeName);
                                   }
                                 },
                                 child: Text("LOGIN"))),
@@ -210,7 +243,7 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(' Or Creat an account?'),
+                            Text(' Or Create an account? '),
                             TextButton(
                               onPressed: (() {
                                 setState(() {
@@ -221,7 +254,7 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
                                               PatientSignup())); // navigator byn2l l page tanya
                                 });
                               }),
-                              child: Text('Sing up'),
+                              child: Text('Sign up'),
                             ),
                           ],
                         )
@@ -248,15 +281,31 @@ class _PatientLoginState extends BaseView<PatientLogin, patientloginViewModel>
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    viewModel.navigator = this;
-  }
-
-  @override
   patientloginViewModel initViewModel() {
     // TODO: implement initViewModel
     return patientloginViewModel();
   }
+
+  showDialogBox() => showCupertinoDialog<String>(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+          title: const Text("No Connection"),
+          content: const Text("Please check your internet connectivity"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context, "Cancel");
+                setState(() => isAlertSet = false);
+                isDeviceConnected =
+                    await InternetConnectionChecker().hasConnection;
+                if (!isDeviceConnected) {
+                  showDialogBox();
+                  setState(() => isAlertSet = true);
+                }
+              },
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
 }

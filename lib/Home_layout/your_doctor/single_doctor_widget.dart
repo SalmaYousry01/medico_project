@@ -17,6 +17,9 @@ class SingleDoctortWidget extends StatelessWidget {
 
   // MyPatient patient;
 
+
+
+
   SingleDoctortWidget(this.doctor);
 
   @override
@@ -24,11 +27,12 @@ class SingleDoctortWidget extends StatelessWidget {
     return Container(
       child: ListTile(
         onTap: () {
+
           DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(doctor.id).then(
-              (clinic) => Navigator.pushNamed(
+                  (clinic) => Navigator.pushNamed(
                   context, SingleDoctorClinicProfile.routeName,
                   arguments:
-                      DoctorClinicModel(doctor: doctor, clinic: clinic!)));
+                  DoctorClinicModel(doctor: doctor, clinic: clinic!)));
         },
         leading: CircleAvatar(backgroundImage: NetworkImage(doctor.image)),
         title: Text(doctor.fullName),
@@ -40,50 +44,77 @@ class SingleDoctortWidget extends StatelessWidget {
           onPressed: () async {
             // controller.addOrRemoveDoctor(doctor);
             // controller.addDoctor(doctor);
-            DoctorDataBase yourdoctor = DoctorDataBase(
-                Field: doctor.Field,
-                email: doctor.email,
-                fullName: doctor.fullName,
-                image: doctor.image,
-                id: doctor.id,
-                nationalID: doctor.nationalID,
-                phoneNumber: doctor.phoneNumber);
-            await Future.wait([
-              DatabaseUtilsDoctorPatient.addPatientDoctorToFirestore(yourdoctor),
-              DatabaseUtilspatient.readPateintFromFiresore(FirebaseAuth.instance.currentUser!.uid).then((value) {
-                print(">>>>>>>>>>>>>>>>>>> Doctor ID : ${yourdoctor.id}");
-                DatabaseUtilsDoctorPatient.addPetientToDoctorFirestore(yourdoctor, value!);
-                print("Success!!!");
-              }
-              ),
-            ],);
-            // MyPatient mypatient = MyPatient(
-            //     id: patient.id,
-            //     email: patient.email,
-            //     username: patient.username,
-            //     fullname: patient.fullname,
-            //     phonenumber: patient.phonenumber,
-            //     age: patient.age,
-            //     image: patient.image,
-            //     qrcode: patient.qrcode,
-            //     blood_sugar: patient.blood_sugar,
-            //     blood_pressure: patient.blood_pressure,
-            //     heart: patient.heart,
-            //     kidney: patient.kidney,
-            //     liver: patient.liver,
-            //     blood_type: patient.blood_type);
-            // DatabaseUtilsPateintAddedToDatabase.AddAddedPatientToFirestore(mypatient);
-            // controller.addDoctor();
-            // widget.doctorController.addDoctor(widget.doctor);
-            // Get.to(() => YourDoctors());
+
+
+
           },
           icon: CircleAvatar(
             backgroundColor: Color(0xFF2C698D),
             radius: 10.0,
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-              size: 20.0,
+            child: GestureDetector(
+              onTap: (){
+                // QuickAlert.show(
+                //   context: context,
+                //   type: QuickAlertType.confirm,
+                //   title: "Notice",
+                //   text: "if you pressed okay this doctor will be able to view all your medical data");
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context){
+                      return AlertDialog(
+                        title: Text("Notice",),
+                        content: Text( "if you pressed okay this doctor will be able to view all your medical data"),
+                        actions: [
+
+                          // IconButton(
+                          //     color:Colors.white ,
+                          //     onPressed: (){
+                          //       Navigator.pop(context);
+                          //     }
+                          //     , icon: Icon(Icons.cancel_outlined, color: Color(0xFF22C698D),)),
+                          TextButton(onPressed: (){
+                            Navigator.pop(context);
+                          },
+                              child: Text("Cancel",style: TextStyle(color: Color(0xFF2C698D),),)),
+
+                          TextButton(
+                              onPressed: (){
+
+
+                                DoctorDataBase yourdoctor = DoctorDataBase(
+                                    Field: doctor.Field,
+                                    email: doctor.email,
+                                    fullName: doctor.fullName,
+                                    image: doctor.image,
+                                    id: doctor.id,
+                                    nationalID: doctor.nationalID,
+                                    phoneNumber: doctor.phoneNumber);
+                                Future.wait([
+                                  DatabaseUtilsDoctorPatient.addPatientDoctorToFirestore(yourdoctor),
+                                  DatabaseUtilspatient.readPateintFromFiresore(FirebaseAuth.instance.currentUser!.uid).then((value) {
+                                    print(">>>>>>>>>>>>>>>>>>> Doctor ID : ${yourdoctor.id}");
+                                    DatabaseUtilsDoctorPatient.addPetientToDoctorFirestore(yourdoctor, value!);
+                                    print("Success!!!");
+                                  }
+                                  ),
+                                ],);
+                                Navigator.pop(context);
+                              },
+                              // color: Color(0xFF22C698D),
+                              //icon: Icon(Icons.done)
+                              child: Text("Confirm",style: TextStyle( color: Color(0xFF2C698D),),)
+                          ),
+
+
+                        ],
+                      );
+                    });
+              },
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
+                size: 20.0,
+              ),
             ),
           ),
         ),
