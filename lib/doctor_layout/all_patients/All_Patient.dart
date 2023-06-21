@@ -39,13 +39,13 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
           ),
           title: Text('Patients'),
           centerTitle: true,
-          // actions: <Widget>[
-          //   IconButton(
-          //       onPressed: () {
-          //         showSearch<Object?>(context: context, delegate: sea());
-          //       },
-          //       icon: Icon(Icons.search))
-          // ],
+          actions: <Widget>[
+            IconButton(
+                onPressed: () {
+                  showSearch<Object?>(context: context, delegate: sea());
+                },
+                icon: Icon(Icons.search))
+          ],
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream: patientsStream,
@@ -65,22 +65,22 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                         padding:
-                            const EdgeInsets.only(left: 15.00, right: 15.00),
+                        const EdgeInsets.only(left: 15.00, right: 15.00),
                         child: ListTile(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (_) => ViewOnlyPatientView(
-                                      patient: myPatients[index],
-                                    )));
+                                  patient: myPatients[index],
+                                )));
                           },
                           leading: CircleAvatar(
                             backgroundImage: NetworkImage(
                                 "${snapshot.data?.docs[index]['image']}"),
                           ),
                           title:
-                              Text("${snapshot.data?.docs[index]['fullname']}"),
+                          Text("${snapshot.data?.docs[index]['fullname']}"),
                           subtitle:
-                              Text("${snapshot.data?.docs[index]['username']}"),
+                          Text("${snapshot.data?.docs[index]['username']}"),
                         ));
                   },
                 );

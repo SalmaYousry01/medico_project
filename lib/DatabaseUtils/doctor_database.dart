@@ -7,7 +7,6 @@ import '../models/my_family.dart';
 import '../models/my_medicine.dart';
 import '../models/my_patient.dart';
 import '../models/my_prescription.dart';
-import '../models/my_prescription__exported_pdf.dart';
 import '../models/my_test.dart';
 
 class DatabaseUtilsdoctor {
@@ -15,34 +14,21 @@ class DatabaseUtilsdoctor {
     return FirebaseFirestore.instance
         .collection(DoctorDataBase.COLLECTION_NAME)
         .withConverter<DoctorDataBase>(
-          fromFirestore: (snapshot, options) =>
-              DoctorDataBase.fromJson(snapshot.data()!),
-          toFirestore: (value, options) => value.tojson(),
-        );
+      fromFirestore: (snapshot, options) =>
+          DoctorDataBase.fromJson(snapshot.data()!),
+      toFirestore: (value, options) => value.tojson(),
+    );
   }
 
   static CollectionReference<DoctorDataBase> getPatientsCollection() {
     return FirebaseFirestore.instance
         .collection(MyPatient.COLLECTION_NAME)
         .withConverter<DoctorDataBase>(
-          fromFirestore: (snapshot, options) =>
-              DoctorDataBase.fromJson(snapshot.data()!),
-          toFirestore: (value, options) => value.tojson(),
-        );
+      fromFirestore: (snapshot, options) =>
+          DoctorDataBase.fromJson(snapshot.data()!),
+      toFirestore: (value, options) => value.tojson(),
+    );
   }
-
-  // static CollectionReference<DoctorDataBase>
-  //     getPatientsPrescriptionListCollection() {
-  //   return FirebaseFirestore.instance
-  //       .collection(MyPatient.COLLECTION_NAME)
-  //       .doc()
-  //       .collection(Myprescpdf.PRESC_PDF)
-  //       .withConverter<DoctorDataBase>(
-  //         fromFirestore: (snapshot, options) =>
-  //             DoctorDataBase.fromJson(snapshot.data()!),
-  //         toFirestore: (value, options) => value.tojson(),
-  //       );
-  // }
 
   static CollectionReference<Mymedicine> getMedicineCollection(
       String patientId) {
@@ -50,9 +36,9 @@ class DatabaseUtilsdoctor {
         .doc(patientId)
         .collection(Mymedicine.COLLECTION_NAME)
         .withConverter<Mymedicine>(
-            fromFirestore: (snapshot, s) =>
-                Mymedicine.fromjson(snapshot.data()!),
-            toFirestore: (medicine, sp) => medicine.tojson());
+        fromFirestore: (snapshot, s) =>
+            Mymedicine.fromjson(snapshot.data()!),
+        toFirestore: (medicine, sp) => medicine.tojson());
   }
 
   static CollectionReference<Myprescription> getPrescriptionCollection(
@@ -61,30 +47,20 @@ class DatabaseUtilsdoctor {
         .doc(patientId)
         .collection(Myprescription.PRESCRIPTION)
         .withConverter<Myprescription>(
-            fromFirestore: (snapshot, s) =>
-                Myprescription.fromjson(snapshot.data()!),
-            toFirestore: (prescription, sp) => prescription.tojson());
+        fromFirestore: (snapshot, s) =>
+            Myprescription.fromjson(snapshot.data()!),
+        toFirestore: (prescription, sp) => prescription.tojson());
   }
 
-  // static CollectionReference<Myprescpdf> getMyPrescriptionPdfCollection(
-  //     String patientId) {
-  //   return getPatientsCollection()
-  //       .doc(patientId)
-  //       .collection(Myprescpdf.PRESC_PDF)
-  //       .withConverter<Myprescpdf>(
-  //           fromFirestore: (snapshot, s) =>
-  //               Myprescpdf.fromjson(snapshot.data()!),
-  //           toFirestore: (prescriptionPdf, sp) => prescriptionPdf.tojson());
-  // }
 
   static CollectionReference<MyAllergy> getAllergyCollection(String patientId) {
     return getPatientsCollection()
         .doc(patientId)
         .collection(MyAllergy.COLLECTION_NAME)
         .withConverter<MyAllergy>(
-            fromFirestore: (snapshot, s) =>
-                MyAllergy.fromjson(snapshot.data()!),
-            toFirestore: (allergy1, sp) => allergy1.tojson());
+        fromFirestore: (snapshot, s) =>
+            MyAllergy.fromjson(snapshot.data()!),
+        toFirestore: (allergy1, sp) => allergy1.tojson());
   }
 
   static CollectionReference<MyTest> getTestCollection(String patientId) {
@@ -92,8 +68,8 @@ class DatabaseUtilsdoctor {
         .doc(patientId)
         .collection(MyTest.TEST)
         .withConverter<MyTest>(
-            fromFirestore: (snapshot, s) => MyTest.fromjson(snapshot.data()!),
-            toFirestore: (test, sp) => test.tojson());
+        fromFirestore: (snapshot, s) => MyTest.fromjson(snapshot.data()!),
+        toFirestore: (test, sp) => test.tojson());
   }
 
   static CollectionReference<MyFamilyhistory> getFamilyHistoryCollection(
@@ -102,9 +78,29 @@ class DatabaseUtilsdoctor {
         .doc(patientId)
         .collection(MyFamilyhistory.COLLECTION_NAME)
         .withConverter<MyFamilyhistory>(
-            fromFirestore: (snapshot, s) =>
-                MyFamilyhistory.fromjson(snapshot.data()!),
-            toFirestore: (familyhistory, sp) => familyhistory.tojson());
+        fromFirestore: (snapshot, s) =>
+            MyFamilyhistory.fromjson(snapshot.data()!),
+        toFirestore: (familyhistory, sp) => familyhistory.tojson());
+  }
+//new
+  static CollectionReference<MyPatient> getEditProfileCollection(
+      String patientId) {
+    return getPatientsCollection()
+        .doc(patientId)
+        .collection(MyPatient.COLLECTION_NAME)
+        .withConverter<MyPatient>(
+        fromFirestore: (snapshot, s) =>
+            MyPatient.fromjson(snapshot.data()!),
+        toFirestore: (EditProfile, sp) => EditProfile.tojson());
+  }
+//new
+  static Stream<QuerySnapshot<MyPatient>> getEditPatientAsStream(String patientId) {
+    return getEditProfileCollection(patientId).snapshots();
+  }
+
+//new
+  static Future<QuerySnapshot<MyPatient>> getEditPatient(String patientId) {
+    return getEditProfileCollection(patientId).get();
   }
 
   static Future<QuerySnapshot<MyFamilyhistory>> getPatientFamilyHistory(
@@ -115,11 +111,6 @@ class DatabaseUtilsdoctor {
   static Stream<QuerySnapshot<MyTest>> getTestAsStream(String patientId) {
     return getTestCollection(patientId).snapshots();
   }
-
-  // static Stream<QuerySnapshot<Myprescpdf>> getMyPrescriptionPdfAsStream(
-  //     String patientId) {
-  //   return getMyPrescriptionPdfCollection(patientId).snapshots();
-  // }
 
   static Stream<QuerySnapshot<Myprescription>> getPrescriptionAsStream(
       String patientId) {
@@ -135,10 +126,10 @@ class DatabaseUtilsdoctor {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(DatabaseUtilsDoctorPatient.doctorPatientsCollection)
         .withConverter(
-          fromFirestore: (snapshot, options) =>
-              MyPatient.fromjson(snapshot.data()!),
-          toFirestore: (value, options) => value.tojson(),
-        );
+      fromFirestore: (snapshot, options) =>
+          MyPatient.fromjson(snapshot.data()!),
+      toFirestore: (value, options) => value.tojson(),
+    );
   }
 
   static Future<QuerySnapshot<Mymedicine>> getPatientMedicines(
@@ -147,7 +138,7 @@ class DatabaseUtilsdoctor {
   }
 
   static Stream<QuerySnapshot<MyPatient>>
-      getDoctorPatientsCollectionAsStream() {
+  getDoctorPatientsCollectionAsStream() {
     return getDoctorPatientsCollection().snapshots();
   }
 
@@ -157,7 +148,7 @@ class DatabaseUtilsdoctor {
 
   static Future<DoctorDataBase?> readUserFromFiresore(String id) async {
     DocumentSnapshot<DoctorDataBase> user =
-        await getDoctorsCollection().doc(id).get();
+    await getDoctorsCollection().doc(id).get();
     var doctorDataBase = user.data();
     return doctorDataBase;
   }
@@ -165,7 +156,7 @@ class DatabaseUtilsdoctor {
   static Future<DocumentSnapshot<DoctorDataBase>> readUserDocumentFromFiresore(
       String id) async {
     DocumentSnapshot<DoctorDataBase> user =
-        await getDoctorsCollection().doc(id).get();
+    await getDoctorsCollection().doc(id).get();
     return user;
   }
 

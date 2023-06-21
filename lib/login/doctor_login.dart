@@ -72,7 +72,7 @@ class _DoctortLoginState extends BaseView<DoctortLogin, doctorloginViewModel>
                         ),
                         //email
                         Text(
-                          'Email/Phone number',
+                          'Email',
                           style: TextStyle(
                             color: Color(0xFF2C698D),
                             fontSize: 13,
@@ -106,7 +106,7 @@ class _DoctortLoginState extends BaseView<DoctortLogin, doctorloginViewModel>
                           },
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
-                            hintText: 'Email/Phone number',
+                            hintText: 'Email',
                             prefixIcon: Icon(
                               Icons.email,
                               color: Color(0xFF2C698D),

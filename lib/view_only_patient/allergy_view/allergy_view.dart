@@ -105,33 +105,54 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // leading: IconButton(
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => ViewOnlyPatientView(),
+        //         ),
+        //       );
+        //     },
+        //     icon: Icon(Icons.arrow_back)),
+        title: Text(
+          "Allergies",
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFF2C698D),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(top: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Row(
-                children: [
-                  Text(
-                    " Allergies",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C698D)),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                ],
-              ),
-            ),
-            const Divider(
-              color: Color(0xFF216B98),
-              height: 37,
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20, top: 10),
+            //   child: Row(
+            //     children: [
+            //       Text(
+            //         " Allergies",
+            //         style: TextStyle(
+            //             fontSize: 30,
+            //             fontWeight: FontWeight.bold,
+            //             color: Color(0xFF2C698D)),
+            //       ),
+            //       SizedBox(
+            //         width: 5,
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // const Divider(
+            //   color: Color(0xFF216B98),
+            //   height: 37,
+            // ),
             Container(
               child: FutureBuilder<QuerySnapshot<MyAllergy>>(
                   future:

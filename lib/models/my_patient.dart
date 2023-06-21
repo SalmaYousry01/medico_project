@@ -31,7 +31,7 @@ class MyPatient extends BaseData {
     required this.kidney,
     required this.liver,
     required this.blood_type,
-    required this.surgery,
+    required this.surgery
   });
 
   MyPatient.fromjson(Map<String, dynamic> json)
