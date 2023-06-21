@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grad_project/view_only_patient/patient_profile.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view_navbar.dart';
 import 'package:grad_project/view_only_patient/test_view/test_view.dart';
@@ -25,7 +26,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
     return Stack(children: [
       Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(138),
+          preferredSize: Size.fromHeight(152),
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -54,7 +55,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             title: Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Text(
-                "Welcome Doctor!",
+                "Hi username",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
@@ -63,14 +64,15 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                 padding:
                     const EdgeInsets.only(right: 40.0, bottom: 50, top: 50),
                 child: GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => ProfileTab(),
-                    //   ),
-                    // );
-                  },
+                  onTap: (() {
+                    setState(() {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileView(widget.patient!
+                                  .id))); // navigator byn2l l page tanya
+                    });
+                  }),
                   child: Container(
                     width: 90,
                     height: 40,

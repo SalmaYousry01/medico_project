@@ -25,49 +25,47 @@ class _allergy1State extends State<allergy1> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => home(),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 20),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => home(),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_back,size: 30,)),
+                      Text(
+                        " Allergies",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2C698D)),
                       ),
-                    );
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    size: 30,
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Row(
-                children: [
-                  Text(
-                    " Allergies",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C698D)),
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  IconButton(
-                      icon: Icon(
-                        Icons.add_circle,
-                        size: 35,
+                      SizedBox(
+                        width: 5,
                       ),
-                      onPressed: () {
-                        _settingModalBottomSheet(context);
-                      },
-                      color: Color(
-                        0xFF2C698D,
-                      )),
-                ],
-              ),
+                      IconButton(
+                          icon: Icon(
+                            Icons.add_circle,
+                            size: 35,
+                          ),
+                          onPressed: () {
+                            _settingModalBottomSheet(context);
+                          },
+                          color: Color(
+                            0xFF2C698D,
+                          )),
+                    ],
+                  ),
+                ),
+              ],
             ),
             const Divider(
               color: Color(0xFF216B98),

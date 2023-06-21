@@ -38,7 +38,7 @@ implements TestNavigator {
             bottom: Radius.circular(30),
           ),
         ),
-        title: Text('Test'),
+        title: Text('Tests'),
         centerTitle: true,
         // leading: GestureDetector(
         //   onTap: () {

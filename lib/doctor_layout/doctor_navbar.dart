@@ -39,9 +39,8 @@ class _navdocState extends State<navdoc> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/patients.png'),
-            ),
+            icon:
+              Icon(Icons.people_outline_sharp,color: Color(0xFF2C698D),),
             label: 'All Patients',
           ),
           // BottomNavigationBarItem(

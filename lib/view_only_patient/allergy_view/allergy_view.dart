@@ -111,22 +111,36 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 20, top: 10),
-              child: Row(
-                children: [
-                  Text(
-                    " Allergies",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C698D)),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 20),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ViewOnlyPatientView(),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.arrow_back,size: 30,)),
+                      Text(
+                        " Allergies",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2C698D)),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
             const Divider(
               color: Color(0xFF216B98),

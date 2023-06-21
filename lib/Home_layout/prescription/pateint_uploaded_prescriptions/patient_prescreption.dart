@@ -182,6 +182,7 @@ class view extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("PDF view"),
+        backgroundColor: Color(0xFF2C698D),
       ),
       body: SfPdfViewer.network(
         url,

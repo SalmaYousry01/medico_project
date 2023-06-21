@@ -24,7 +24,7 @@ class _ProfileTabState extends State<ProfileTab> {
   var kidneycontroller = TextEditingController();
   var livercontroller = TextEditingController();
   var bloodcontroller = TextEditingController();
-  var surgerycontroller  = TextEditingController();
+  var surgerycontroller = TextEditingController();
   var measurementsData;
   String? phonenumber = "";
   String? newnumber = "";
@@ -45,8 +45,8 @@ class _ProfileTabState extends State<ProfileTab> {
   String? newliver = "";
   String? blood_type = "";
   String? new_blood_type = "";
-  String? surgery="";
-  String? new_surgery="";
+  String? surgery = "";
+  String? new_surgery = "";
   final imagepicker = ImagePicker();
   String? image = "";
   File? imageXFile;
@@ -66,7 +66,7 @@ class _ProfileTabState extends State<ProfileTab> {
       if (data != null) {
         setState(() {
           email = data["email"];
-          //phonenumber = data["phonenumber"];
+          phonenumber = data["phonenumber"];
           username = data["username"];
           image = data["image"];
           age = data["age"];
@@ -149,6 +149,14 @@ class _ProfileTabState extends State<ProfileTab> {
         .collection("Patients")
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .update({"blood_sugar": new_blood_sugar});
+  }
+
+
+  Future _updatesurgery() async {
+    await FirebaseFirestore.instance
+        .collection("Patients")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .update({"surgery": new_surgery});
   }
 
   _displayTextInputDialog(BuildContext context) async {
@@ -333,6 +341,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                         )),
                   ),
+                  SizedBox(width: 10,),
                   Text(
                     "" + username!,
                     style: TextStyle(color: Colors.white, fontSize: 25),
@@ -437,6 +446,14 @@ class _ProfileTabState extends State<ProfileTab> {
                                       color: Color(0xFF22C698D),
                                     )),
                                 hintText: ("" + age!),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(9.0),
+                                  child: ImageIcon(
+                                    AssetImage('assets/images/agee.png'),
+                                    size: 5,
+                                    color: Color(0xFF2C698D),
+                                  ),
+                                ),
                                 suffixIcon: GestureDetector(
                                   onTap: () {},
                                   child: Icon(
@@ -458,7 +475,7 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                           TextFormField(
                             controller: bloodcontroller,
-                            keyboardType: TextInputType.number,
+
                             onChanged: (value) {
                               setState(() {
                                 new_blood_type = value;
@@ -473,6 +490,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                 prefixIcon: Icon(
                                   Icons.bloodtype,
                                   color: Color(0xFF22C698D),
+                                  size: 26,
                                 ),
                                 suffixIcon: GestureDetector(
                                   onTap: () {},
@@ -502,16 +520,24 @@ class _ProfileTabState extends State<ProfileTab> {
                               });
                             },
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFF22C698D),
-                                    )),
-                                hintText: ("pressure:" + blood_pressure!),
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                  color: Colors.black,
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF22C698D),
+                                  )),
+                              hintText: ("" + blood_pressure!),
+                              border: OutlineInputBorder(),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.all(11.0),
+                                child: ImageIcon(
+                                  AssetImage('assets/images/blood-pressure.png'),
+
+                                  color: Color(0xFF2C698D),
                                 ),
-                                border: OutlineInputBorder()),
+                              ),
+                              suffixIcon: Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),),
                           ),
                           SizedBox(
                             height: 10,
@@ -532,23 +558,31 @@ class _ProfileTabState extends State<ProfileTab> {
                               });
                             },
                             decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0xFF22C698D),
-                                    )),
-                                hintText: ("Sugar:" + blood_sugar!),
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                  color: Colors.black,
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF22C698D),
+                                  )),
+                              hintText: ("" + blood_sugar!),
+                              border: OutlineInputBorder(),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ImageIcon(
+                                  AssetImage('assets/images/sugar.png'),
+
+                                  color: Color(0xFF2C698D),
                                 ),
-                                border: OutlineInputBorder()),
+                              ),
+                              suffixIcon: Icon(
+                                Icons.edit,
+                                color: Colors.black,
+                              ),),
+
                           ),
                           SizedBox(
                             height: 10,
                           ),
-
                           Text(
-                            "Previous surgeries",
+                            "Previous Surgeries",
                             style: TextStyle(color: Color(0xFF22C698D)),
                           ),
                           SizedBox(
@@ -556,9 +590,10 @@ class _ProfileTabState extends State<ProfileTab> {
                           ),
                           TextFormField(
                             controller: surgerycontroller,
+                            keyboardType: TextInputType.number,
                             onChanged: (value) {
                               setState(() {
-                                new_surgery = value;
+                                //  new_surgery = value;
                               });
                             },
                             decoration: InputDecoration(
@@ -566,17 +601,24 @@ class _ProfileTabState extends State<ProfileTab> {
                                     borderSide: BorderSide(
                                       color: Color(0xFF22C698D),
                                     )),
-                                hintText: ("Surgeries:" + surgery!),
-                                suffixIcon: Icon(
-                                  Icons.edit,
-                                  color: Colors.black,
+                                hintText: ("" + surgery!),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(9.0),
+                                  child: ImageIcon(
+                                    AssetImage('assets/images/surgery.png'),
+                                    color: Color(0xFF2C698D),
+                                  ),
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {},
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 border: OutlineInputBorder()),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-
+                          SizedBox(height: 10,),
                           Text(
                             "Heart",
                             style: TextStyle(color: Color(0xFF22C698D)),
@@ -597,7 +639,7 @@ class _ProfileTabState extends State<ProfileTab> {
                                     borderSide: BorderSide(
                                       color: Color(0xFF22C698D),
                                     )),
-                                hintText: ("heart:" + heart!),
+                                hintText: ("" + heart!),
                                 prefixIcon: Icon(
                                   Icons.monitor_heart,
                                   color: Color(0xFF22C698D),
@@ -631,7 +673,14 @@ class _ProfileTabState extends State<ProfileTab> {
                                     borderSide: BorderSide(
                                       color: Color(0xFF22C698D),
                                     )),
-                                hintText: ("kidney:" + kidney!),
+                                hintText: ("" + kidney!),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(9.0),
+                                  child: ImageIcon(
+                                    AssetImage('assets/images/kidneys.png'),
+                                    color: Color(0xFF2C698D),
+                                  ),
+                                ),
                                 suffixIcon: GestureDetector(
                                   onTap: () {},
                                   child: Icon(
@@ -664,7 +713,15 @@ class _ProfileTabState extends State<ProfileTab> {
                                     borderSide: BorderSide(
                                       color: Color(0xFF22C698D),
                                     )),
-                                hintText: ("liver:" + liver!),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ImageIcon(
+                                    AssetImage('assets/images/liver.png'),
+                                    size: 5,
+                                    color: Color(0xFF2C698D),
+                                  ),
+                                ),
+                                hintText: ("" + liver!),
                                 suffixIcon: GestureDetector(
                                   onTap: () {},
                                   child: Icon(

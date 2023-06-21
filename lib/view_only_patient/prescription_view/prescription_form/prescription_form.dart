@@ -349,8 +349,8 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                               style: TextStyle(fontSize: 18),
                             ),
                             Container(
-                              height: 30,
-                              width: 120,
+                              height: 33,
+                              width: 135,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.black.withOpacity(0.2))),
@@ -364,10 +364,10 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                 items: time_list
                                     .map<DropdownMenuItem<String>>(
                                         (String value) =>
-                                            DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            ))
+                                        DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        ))
                                     .toList(),
                               ),
                             ),
