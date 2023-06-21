@@ -23,16 +23,16 @@ class MedicineScreenState extends State<MedicineScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => home(),
-        //         ),
-        //       );
-        //     },
-        //     icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => home(),
+                ),
+              );
+            },
+            icon: Icon(Icons.arrow_back)),
         title: Text('Medicine'),
         centerTitle: true,
         backgroundColor: Color(0xFF2C698D),
