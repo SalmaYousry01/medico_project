@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/DatabaseUtils/doctor_database.dart';
+import 'package:grad_project/view_only_patient/familyHistory_view/familyhistory_container.dart';
 
 import '../../Home_layout/family_history/familyhistory.items.dart';
 import '../../models/my_family.dart';
@@ -69,7 +70,7 @@ class FamilyhistoryViewState extends State<FamilyhistoryView> {
               return ListView.builder(
                   itemCount: familyhistory.length,
                   itemBuilder: (context, Index) {
-                    return FamilyhistoryItem(familyhistory[Index]);
+                    return FamilyhistoryContainer(familyhistory[Index]);
                   });
             }),
       ),

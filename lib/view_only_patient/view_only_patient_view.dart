@@ -4,6 +4,7 @@ import 'package:grad_project/view_only_patient/prescription_view/prescription_vi
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view_navbar.dart';
 import 'package:grad_project/view_only_patient/test_view/test_view.dart';
 import '../Home_layout/medicine/medicine_screen.dart';
+import '../doctor_layout/all_patients/All_Patient.dart';
 import '../models/my_patient.dart';
 import 'allergy_view/allergy_view.dart';
 import 'familyHistory_view/familyhistory_view.dart';
@@ -31,16 +32,16 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 180,
-            // leading: IconButton(
-            //   onPressed: () {
-            //     // FirebaseAuth.instance.signOut();
-            //     // Navigator.pushNamed(context, PatientLogin.routeName);
-            //     Navigator.push(context,
-            //         MaterialPageRoute(builder: (context) => AllPatient()));
-            //   },
-            //   icon: Icon(Icons.arrow_back_outlined),
-            //   color: Colors.black,
-            // ),
+            leading: IconButton(
+              onPressed: () {
+                // FirebaseAuth.instance.signOut();
+                // Navigator.pushNamed(context, PatientLogin.routeName);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AllPatient()));
+              },
+              icon: Icon(Icons.arrow_back_outlined),
+              color: Colors.black,
+            ),
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,
