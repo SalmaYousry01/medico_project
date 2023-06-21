@@ -114,13 +114,7 @@ class _PatientPrescriptionState
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      //showLoading(context,'Deleting');
-
-                                      // DatabaseUtilsMyPrescription
-                                      //     .deleteprescriptiontofirestore(
-                                      //         Myprescription(
-                                      //             fileUrl: x['fileUrl'],
-                                      //             num: x['num']));
+                                      x.reference.delete();
                                     },
                                     child: Container(
                                       padding:
