@@ -45,7 +45,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,
-                height: 300,
+                height: 250,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
@@ -54,16 +54,16 @@ class _hometaskState extends State<ViewOnlyPatientView> {
               ),
             ),
             title: Padding(
-              padding: const EdgeInsets.only(left: 40.0),
+              padding: const EdgeInsets.only(left: 30.0),
               child: Text(
-                "Hi Doctor",
+                "Hi username",
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
             actions: [
               Padding(
                 padding:
-                    const EdgeInsets.only(right: 70.0, bottom: 40, top: 30),
+                    const EdgeInsets.only(right: 40.0, bottom: 50, top: 50),
                 child: GestureDetector(
                   onTap: (() {
                     setState(() {
@@ -76,7 +76,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                   }),
                   child: Container(
                     width: 90,
-                    height: 90,
+                    height: 40,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
