@@ -211,7 +211,7 @@ class _DoctortLoginState extends BaseView<DoctortLogin, doctorloginViewModel>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(' Or Creat an account?'),
+                            Text(' Or Create an account?'),
                             TextButton(
                               onPressed: (() {
                                 setState(() {
@@ -222,7 +222,7 @@ class _DoctortLoginState extends BaseView<DoctortLogin, doctorloginViewModel>
                                               DoctorSignup())); // navigator byn2l l page tanya
                                 });
                               }),
-                              child: Text('Sing up'),
+                              child: Text('Sign up'),
                             ),
                           ],
                         )
