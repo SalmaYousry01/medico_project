@@ -29,11 +29,11 @@ class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
     return Container(
       child: ListTile(
         onTap: () {
-          DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(widget.doctor.id)
-              .then((clinic) => Navigator.pushNamed(
-                  context, SingleDoctorClinicProfile.routeName,
-                  arguments: DoctorClinicModel(
-                      doctor: widget.doctor, clinic: clinic!)));
+          // DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(widget.doctor.id)
+          //     .then((clinic) => Navigator.pushNamed(
+          //         context, SingleDoctorClinicProfile.routeName,
+          //         arguments: DoctorClinicModel(
+          //             doctor: widget.doctor, clinic: clinic!)));
         },
         leading:
             CircleAvatar(backgroundImage: NetworkImage(widget.doctor.image)),
