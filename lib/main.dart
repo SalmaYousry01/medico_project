@@ -14,6 +14,7 @@ import 'package:grad_project/Profile/clinicProfile.dart';
 import 'package:grad_project/Home_layout/test/test_screen.dart';
 import 'package:grad_project/doctor_layout/all_patients/All_Patient.dart';
 import 'package:grad_project/doctor_layout/doctor_navbar.dart';
+import 'package:grad_project/first_screen/splash_screen.dart';
 import 'package:grad_project/view_only_patient/allergy_view/allergy_view.dart';
 import 'package:grad_project/view_only_patient/medicine_view/medicine_view.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
@@ -88,9 +89,10 @@ class MyApp extends StatelessWidget {
         // ignore: deprecated_member_use
         androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
       ),
-      initialRoute: Firstpage.routeName,
+      initialRoute: SplashScreen.routeName,
       onGenerateRoute: (settings) {
         var routes = <String, WidgetBuilder>{
+          SplashScreen.routeName:(context) => SplashScreen(),
           PatientSignup.routeName: (context) => PatientSignup(),
           DoctorSignup.routeName: (context) => DoctorSignup(),
           Firstpage.routeName: (context) => Firstpage(),

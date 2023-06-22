@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:grad_project/Home_layout/your_doctor/All_Doctor.dart';
+import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
 import 'package:grad_project/Home_layout/your_doctor/single_doctor_clinic_profile.dart';
 import '../../DatabaseUtils/yourDoctor_database.dart';
 import '../../models/my_clinic.dart';
@@ -15,7 +17,8 @@ class SingleDoctorWithoutPlus extends StatefulWidget {
   SingleDoctorWithoutPlus(this.doctor);
 
   @override
-  State<SingleDoctorWithoutPlus> createState() => _SingleDoctorWithoutPlusState();
+  State<SingleDoctorWithoutPlus> createState() =>
+      _SingleDoctorWithoutPlusState();
 }
 
 class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
@@ -26,20 +29,21 @@ class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
     return Container(
       child: ListTile(
         onTap: () {
-          DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(widget.doctor.id).then(
-              (clinic) => Navigator.pushNamed(
+          DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(widget.doctor.id)
+              .then((clinic) => Navigator.pushNamed(
                   context, SingleDoctorClinicProfile.routeName,
-                  arguments:
-                      DoctorClinicModel(doctor: widget.doctor, clinic: clinic!)));
+                  arguments: DoctorClinicModel(
+                      doctor: widget.doctor, clinic: clinic!)));
         },
-        leading: CircleAvatar(backgroundImage: NetworkImage(widget.doctor.image)),
+        leading:
+            CircleAvatar(backgroundImage: NetworkImage(widget.doctor.image)),
         title: Text(widget.doctor.fullName),
         subtitle: Text(widget.doctor.Field),
         trailing: IconButton(
           highlightColor: Colors.transparent,
           splashColor: Color.fromARGB(0, 63, 36, 36),
           padding: EdgeInsets.zero,
-          onPressed: () async{
+          onPressed: () async {
             // controller.addOrRemoveDoctor(doctor);
             // controller.addDoctor(doctor);
             DoctorDataBase yourdoctor = DoctorDataBase(
@@ -52,9 +56,7 @@ class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
                 phoneNumber: widget.doctor.phoneNumber);
             await DatabaseUtilsDoctorPatient.deleteDoctorFirestore(yourdoctor);
 
-            setState(() {
-
-            });
+            setState(() {});
             // controller.addDoctor();
             // widget.doctorController.addDoctor(widget.doctor);
             // Get.to(() => YourDoctors());

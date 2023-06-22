@@ -46,7 +46,7 @@ class _hometaskState extends State<home> {
     return Stack(children: [
       Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(138),
+          preferredSize: Size.fromHeight(151),
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -71,7 +71,7 @@ class _hometaskState extends State<home> {
               ),
             ),
             title: Padding(
-              padding: const EdgeInsets.only(left: 30.0),
+              padding: const EdgeInsets.only(left: 20.0),
               child: Text(
                 "Hi " + username!,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
@@ -80,7 +80,7 @@ class _hometaskState extends State<home> {
             actions: [
               Padding(
                 padding:
-                    const EdgeInsets.only(right: 40.0, bottom: 50, top: 50),
+                    const EdgeInsets.only(right: 40.0, bottom: 50, top: 20),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -109,7 +109,7 @@ class _hometaskState extends State<home> {
         ),
         body: Padding(
           padding:
-              const EdgeInsets.only(top: 30, right: 15, left: 15, bottom: 20),
+              const EdgeInsets.only(top: 10, right: 15, left: 15, bottom: 20),
           child: ListView(
             children: [
               Row(
