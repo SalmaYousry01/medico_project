@@ -254,7 +254,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 8, left: 8.0, bottom: 3),
+                        const EdgeInsets.only(top: 8, left: 2.0, bottom: 3),
                         child: Row(
                           children: [
                             Icon(Icons.account_circle_sharp),
@@ -264,7 +264,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 3, left: 6.0, bottom: 3),
+                        const EdgeInsets.only(top: 3, left: 2.0, bottom: 3),
                         child: Row(
                           children: [
                             Icon(Icons.phone),
@@ -280,7 +280,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                         height: 3,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
+                        padding: const EdgeInsets.only(left: 2.0),
                         child: Text(
                           "Medicine Name",
                           style: TextStyle(fontSize: 17.5),
@@ -288,7 +288,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 16.0,
+                          left: 2.0,
                           top: 5,
                           bottom: 5,
                         ),
@@ -311,7 +311,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                         height: 3,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 20.0),
+                        padding: const EdgeInsets.only(left: 2.0),
                         child: Row(
                           children: [
                             Text(
@@ -320,7 +320,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                             ),
                             Container(
                               height: 30,
-                              width: 58,
+                              width: 60,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.black.withOpacity(0.2))),
@@ -334,23 +334,23 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                 items: dosage_list
                                     .map<DropdownMenuItem<String>>(
                                         (String value) =>
-                                            DropdownMenuItem<String>(
-                                              value: value,
-                                              child: Text(value),
-                                            ))
+                                        DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        ))
                                     .toList(),
                               ),
                             ),
                             SizedBox(
-                              width: 20,
+                              width: 10,
                             ),
                             Text(
                               "Time   ",
                               style: TextStyle(fontSize: 18),
                             ),
                             Container(
-                              height: 33,
-                              width: 135,
+                              height: 30,
+                              width: 131,
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.black.withOpacity(0.2))),
@@ -379,7 +379,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 16.0,
+                          left: 2.0,
                           top: 3,
                           bottom: 3,
                         ),
@@ -390,7 +390,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
-                          left: 16.0,
+                          left: 2.0,
                           top: 3,
                           bottom: 3,
                         ),
@@ -403,7 +403,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                         ),
                       ),
                       Padding(
-                          padding: const EdgeInsets.only(left: 16.0, bottom: 3),
+                          padding: const EdgeInsets.only(left: 2.0, bottom: 3),
                           child: Row(
                             children: [
                               Flexible(
@@ -432,8 +432,8 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
-                            Color(0xFF22C698D),
-                          )),
+                                Color(0xFF22C698D),
+                              )),
                           onPressed: () {
                             setState(() {
                               _addData();
@@ -535,7 +535,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                       stream: subcollectionRef.snapshots(),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<QuerySnapshot>
-                                              snapshot) {
+                                          snapshot) {
                                         return ListView.builder(
                                           itemCount: medicine_list.length,
                                           itemBuilder: (BuildContext context,
@@ -544,10 +544,10 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                               children: [
                                                 ListTile(
                                                   title:
-                                                      Text(medicine_list[index],
-                                                          style: TextStyle(
-                                                            fontSize: 20,
-                                                          )),
+                                                  Text(medicine_list[index],
+                                                      style: TextStyle(
+                                                        fontSize: 20,
+                                                      )),
                                                   subtitle: Text(
                                                       empty_dosage_list[index]),
                                                   trailing: Text(
@@ -570,7 +570,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                       stream: subcollectionRef.snapshots(),
                                       builder: (BuildContext context,
                                           AsyncSnapshot<QuerySnapshot>
-                                              snapshot) {
+                                          snapshot) {
                                         return ListView.builder(
                                           itemCount: tests_list.length,
                                           itemBuilder: (BuildContext context,
@@ -585,7 +585,7 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                                   subtitle: Text(
                                                     tests_list[index],
                                                     style:
-                                                        TextStyle(fontSize: 18),
+                                                    TextStyle(fontSize: 18),
                                                   ),
                                                 ),
                                               ],
@@ -609,30 +609,30 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                           stream: subcollectionRef.snapshots(),
                                           builder: (BuildContext context,
                                               AsyncSnapshot<QuerySnapshot>
-                                                  snapshot) {
+                                              snapshot) {
                                             return ListView.builder(
                                               itemCount: date_list.length,
                                               itemBuilder:
                                                   (BuildContext context,
-                                                      int index) {
+                                                  int index) {
                                                 return Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15.0),
+                                                  const EdgeInsets.only(
+                                                      left: 15.0),
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                    MainAxisAlignment.start,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                    CrossAxisAlignment
+                                                        .start,
                                                     children: [
                                                       Text("Date",
                                                           style: TextStyle(
                                                               fontSize: 19)),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
+                                                        const EdgeInsets
+                                                            .all(8.0),
                                                         child: Text(
                                                             date_list[index]),
                                                       ),
@@ -650,32 +650,32 @@ class PrescriptionFormState extends State<PrescriptionForm> {
                                           stream: subcollectionRef.snapshots(),
                                           builder: (BuildContext context,
                                               AsyncSnapshot<QuerySnapshot>
-                                                  snapshot) {
+                                              snapshot) {
                                             return ListView.builder(
                                               itemCount: signature_list.length,
                                               itemBuilder:
                                                   (BuildContext context,
-                                                      int index) {
+                                                  int index) {
                                                 return Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          right: 15.0),
+                                                  const EdgeInsets.only(
+                                                      right: 15.0),
                                                   child: Column(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.end,
+                                                    MainAxisAlignment.end,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
+                                                    CrossAxisAlignment.end,
                                                     children: [
                                                       Text("Signature",
                                                           style: TextStyle(
                                                               fontSize: 19)),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
+                                                        const EdgeInsets
+                                                            .all(8.0),
                                                         child: Text(
                                                             signature_list[
-                                                                index]),
+                                                            index]),
                                                       ),
                                                     ],
                                                   ),

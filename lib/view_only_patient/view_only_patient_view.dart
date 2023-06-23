@@ -32,16 +32,16 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 180,
-            leading: IconButton(
-              onPressed: () {
-                // FirebaseAuth.instance.signOut();
-                // Navigator.pushNamed(context, PatientLogin.routeName);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AllPatient()));
-              },
-              icon: Icon(Icons.arrow_back_outlined),
-              color: Colors.black,
-            ),
+            // leading: IconButton(
+            //   onPressed: () {
+            //     // FirebaseAuth.instance.signOut();
+            //     // Navigator.pushNamed(context, PatientLogin.routeName);
+            //     Navigator.push(context,
+            //         MaterialPageRoute(builder: (context) => AllPatient()));
+            //   },
+            //   icon: Icon(Icons.arrow_back_outlined),
+            //   color: Colors.black,
+            // ),
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,
@@ -63,7 +63,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             actions: [
               Padding(
                 padding:
-                    const EdgeInsets.only(right: 40.0, bottom: 50, top: 50),
+                    const EdgeInsets.only(right: 40.0, bottom: 50, top: 20),
                 child: GestureDetector(
                   onTap: (() {
                     setState(() {
@@ -311,7 +311,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                           width: 135,
                           height: 135,
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 24 , top: 18 ),
+                            padding: const EdgeInsets.only(bottom: 24, top: 18),
                             child: Container(
                               decoration: new BoxDecoration(
                                 image: new DecorationImage(

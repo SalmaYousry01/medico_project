@@ -354,7 +354,8 @@ class _hometaskState extends State<home> {
                               );
                             },
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 24 , top: 18 ),
+                              padding:
+                                  const EdgeInsets.only(bottom: 24, top: 18),
                               child: Container(
                                 decoration: new BoxDecoration(
                                   image: new DecorationImage(
@@ -503,7 +504,9 @@ class _hometaskState extends State<home> {
                       Text(
                         "Allergies",
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF2C698D)),
                       )
                     ],
                   ),
