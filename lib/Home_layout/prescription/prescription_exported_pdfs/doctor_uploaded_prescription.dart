@@ -30,7 +30,6 @@ class PrescListPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        // stream: DatabaseUtilsMyprescpdf.getPrecscAsStream(),
         stream: _firebaseFirestore.snapshots().asBroadcastStream(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {

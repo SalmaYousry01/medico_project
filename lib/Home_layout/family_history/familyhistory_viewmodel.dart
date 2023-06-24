@@ -15,7 +15,6 @@ class FamilyhistoryViewModel extends BaseViewModel<FamilyhistoryNavigator> {
     String details,
     String degree,
   ) async {
-    // final credential = await auth.getRedirectResult();
     try {
       var col =
           await DatabaseUtilsFamilyhistory.getFamilyhistoryCollection().get();
@@ -46,13 +45,11 @@ class FamilyhistoryViewModel extends BaseViewModel<FamilyhistoryNavigator> {
     String details,
     String degree,
   ) {
-    // final credential = await auth.getRedirectResult();
     MyFamilyhistory familyhistory = MyFamilyhistory(
       id: id,
       details: details,
       degree: degree,
     );
-    // id: credential.user?.uid ?? ""
 
     DatabaseUtilsFamilyhistory.AddFamilyhistoryToFirestore(familyhistory)
         .then((value) {

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:grad_project/Profile/clinicProfile.dart';
 import 'package:grad_project/basenavigator.dart';
 import 'package:grad_project/create_account/doctor_signup.dart';
 import 'package:grad_project/doctor_layout/doctor_navbar.dart';

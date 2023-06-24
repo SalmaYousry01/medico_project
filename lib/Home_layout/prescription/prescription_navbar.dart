@@ -6,7 +6,6 @@ import '../../models/my_prescription__exported_pdf.dart';
 import '../../view_only_patient/prescription_view/prescription_exported_pdfs/doctor_uploaded_prescription.dart';
 
 class Prescreption_navbar extends StatefulWidget {
-
   static const String routeName = 'Prescription_navbar';
 
   @override
@@ -51,7 +50,6 @@ class Prescreption_navbarState extends State<Prescreption_navbar> {
                   size: 30,
                 ),
                 label: 'Patient Prescription'),
-            //  BottomNavigationBarItem(icon: Icon(Icons.person, size: 30), label: 'Doctor Prescription'),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,

@@ -5,27 +5,14 @@ import '../models/my_family.dart';
 import 'Patient_Database.dart';
 
 class DatabaseUtilsFamilyhistory {
-  //CollectionReference<MyReminder> getNotesCollection() {
-  //return FirebaseFirestore.instance
-  //  .collection(MyReminder.COLLECTION_NAME)
-  //.withConverter<MyReminder>(
-  //fromFirestore: (snapshot, options) =>
-  //  MyReminder.fromjson(snapshot.data()!),
-  //toFirestore: (value, options) => value.tojson(),
-  //);
-  //}
-
-  //Future<void> AddNotesToFirestore(MyReminder note) {
-  //return getNotesCollection().doc(note.id).set(note);
-  //}
   static CollectionReference<MyFamilyhistory> getUsersCollection() {
     return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyFamilyhistory.COLLECTION_NAME)
         .withConverter<MyFamilyhistory>(
-        fromFirestore: (snapshot, s) =>
-            MyFamilyhistory.fromjson(snapshot.data()!),
-        toFirestore: (familyhistory, sp) => familyhistory.tojson());
+            fromFirestore: (snapshot, s) =>
+                MyFamilyhistory.fromjson(snapshot.data()!),
+            toFirestore: (familyhistory, sp) => familyhistory.tojson());
   }
 
   static CollectionReference<MyFamilyhistory> getFamilyhistoryCollection() {
@@ -33,21 +20,13 @@ class DatabaseUtilsFamilyhistory {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(MyFamilyhistory.COLLECTION_NAME)
         .withConverter<MyFamilyhistory>(
-        fromFirestore: (snapshot, s) =>
-            MyFamilyhistory.fromjson(snapshot.data()!),
-        toFirestore: (Familyhistory, sp) => Familyhistory.tojson());
+            fromFirestore: (snapshot, s) =>
+                MyFamilyhistory.fromjson(snapshot.data()!),
+            toFirestore: (Familyhistory, sp) => Familyhistory.tojson());
   }
 
-//Future<void>addnotetofirestore(MyReminder note){
-  //   return  getNotesCollection().doc(note.id).set(note);
-
-//}
   static Future<void> AddFamilyhistoryToFirestore(
       MyFamilyhistory familyhistory) {
-    // var collection=getClinicsCollection();
-    // var docRef=collection.doc();
-    // clinic.catId=docRef.id;
-    // return docRef.set(clinic);
     return getFamilyhistoryCollection()
         .doc(familyhistory.id)
         .set(familyhistory);
@@ -67,7 +46,7 @@ class DatabaseUtilsFamilyhistory {
 
   static Future<MyFamilyhistory?> readUserFromFiresore(String id) async {
     DocumentSnapshot<MyFamilyhistory> user =
-    await getFamilyhistoryCollection().doc(id).get();
+        await getFamilyhistoryCollection().doc(id).get();
     var FamilyhistoryDataBase = user.data();
     return FamilyhistoryDataBase;
   }
@@ -78,9 +57,9 @@ CollectionReference<MyFamilyhistory> getFamilyhistoryCollection() {
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(MyFamilyhistory.COLLECTION_NAME)
       .withConverter<MyFamilyhistory>(
-      fromFirestore: (snapshot, s) =>
-          MyFamilyhistory.fromjson(snapshot.data()!),
-      toFirestore: (familyhistory, sp) => familyhistory.tojson());
+          fromFirestore: (snapshot, s) =>
+              MyFamilyhistory.fromjson(snapshot.data()!),
+          toFirestore: (familyhistory, sp) => familyhistory.tojson());
 }
 
 Future<QuerySnapshot<MyFamilyhistory>> getFamilyhistorytofirestore() {

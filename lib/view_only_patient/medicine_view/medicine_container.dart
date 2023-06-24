@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:grad_project/DatabaseUtils/medicine_database.dart';
 import 'package:grad_project/models/my_medicine.dart';
-
-import '../../Home_layout/medicine/medicine_screen.dart';
-
 
 class MedicineContainer extends StatelessWidget {
   Mymedicine medicine;
-  int _selectedItem = -1;
 
   MedicineContainer(
-      this.medicine,
-      );
+    this.medicine,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +20,6 @@ class MedicineContainer extends StatelessWidget {
       child: Container(
         child: Row(
           children: [
-
             SizedBox(
               width: 20,
             ),
@@ -33,15 +27,11 @@ class MedicineContainer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    medicine.name,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
+                  Text(medicine.name),
                   SizedBox(
                     height: 15,
                   ),
-                  Text(medicine.dosage,
-                      style: Theme.of(context).textTheme.subtitle1)
+                  Text(medicine.dosage)
                 ],
               ),
             ),

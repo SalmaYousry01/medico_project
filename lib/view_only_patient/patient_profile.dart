@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:grad_project/DatabaseUtils/doctor_database.dart';
 import 'package:grad_project/Home_layout/home.dart';
 import 'package:grad_project/models/my_doctor.dart';
 import 'package:grad_project/models/my_patient.dart';
@@ -43,36 +42,6 @@ class _ProfileViewState extends State<ProfileView> {
   String? image = "";
   File? imageXFile;
   String? imageurl;
-
-  // Future<void> _getDataFromDatabase() async {
-  //   final currentUser = FirebaseAuth.instance.currentUser;
-  //   if (currentUser == null) {
-  //     return;
-  //   }
-  //   final snapshot = await FirebaseFirestore.instance
-  //       .collection(DoctorDataBase.COLLECTION_NAME)
-  //       .doc(currentUser.uid)
-  //       .collection(MyPatient.COLLECTION_NAME)
-  //       .doc(currentUser.uid)
-  //       .get();
-  //   if (snapshot.exists) {
-  //     final data = snapshot.data();
-  //     if (data != null) {
-  //       setState(() {
-  //         phonenumber = data["phonenumber"];
-  //         username = data["username"];
-  //         image = data["image"];
-  //         age = data["age"];
-  //         blood_type = data["blood_type"];
-  //         blood_pressure = data["blood_pressure"];
-  //         blood_sugar = data["blood_sugar"];
-  //         heart = data["heart"];
-  //         kidney = data["kidney"];
-  //         liver = data["liver"];
-  //       });
-  //     }
-  //   }
-  // }
 
   Future<void> _getDataFromDatabase() async {
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -227,11 +196,6 @@ class _ProfileViewState extends State<ProfileView> {
                             SizedBox(
                               height: 5,
                             ),
-                            // FutureBuilder<QuerySnapshot<MyPatient>>(
-                            //   future: DatabaseUtilsdoctor.getEditPatient(widget.patientId!),
-                            //   builder: (context, snapshot) {
-                            //  if (snapshot.hasData) {
-                            //    final age = snapshot.data!.docs.first.get('age') ;
                             TextFormField(
                               controller: agecontroller,
                               keyboardType: TextInputType.number,
@@ -253,7 +217,6 @@ class _ProfileViewState extends State<ProfileView> {
                                 ),
                               ),
                             ),
-
                             SizedBox(
                               height: 10,
                             ),
@@ -264,12 +227,6 @@ class _ProfileViewState extends State<ProfileView> {
                             SizedBox(
                               height: 5,
                             ),
-
-                            // StreamBuilder(
-                            //     stream: myEditPatientStream,
-                            //     builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            //       if (snapshot.hasData) {
-                            //         final blood_type = snapshot.data!.docs[0]['blood_type'];
                             TextFormField(
                               controller: bloodcontroller,
                               keyboardType: TextInputType.number,
@@ -286,12 +243,6 @@ class _ProfileViewState extends State<ProfileView> {
                                   ),
                                   border: OutlineInputBorder()),
                             ),
-                            //       }
-                            //     else {
-                            //       return Text("error");}
-                            //     }
-                            //
-                            // ),
                             SizedBox(
                               height: 10,
                             ),
@@ -351,7 +302,6 @@ class _ProfileViewState extends State<ProfileView> {
                                 ),
                               ),
                             ),
-
                             SizedBox(
                               height: 10,
                             ),
@@ -470,9 +420,6 @@ class _ProfileViewState extends State<ProfileView> {
                               ),
                             ),
                           ]))),
-                  SizedBox(
-                    height: 10,
-                  ),
                 ]);
               }),
         ));

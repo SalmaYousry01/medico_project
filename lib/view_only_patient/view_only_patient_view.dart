@@ -3,8 +3,6 @@ import 'package:grad_project/view_only_patient/patient_profile.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view/prescription_view.dart';
 import 'package:grad_project/view_only_patient/prescription_view/prescription_view_navbar.dart';
 import 'package:grad_project/view_only_patient/test_view/test_view.dart';
-import '../Home_layout/medicine/medicine_screen.dart';
-import '../doctor_layout/all_patients/All_Patient.dart';
 import '../models/my_patient.dart';
 import 'allergy_view/allergy_view.dart';
 import 'familyHistory_view/familyhistory_view.dart';
@@ -32,16 +30,6 @@ class _hometaskState extends State<ViewOnlyPatientView> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 180,
-            // leading: IconButton(
-            //   onPressed: () {
-            //     // FirebaseAuth.instance.signOut();
-            //     // Navigator.pushNamed(context, PatientLogin.routeName);
-            //     Navigator.push(context,
-            //         MaterialPageRoute(builder: (context) => AllPatient()));
-            //   },
-            //   icon: Icon(Icons.arrow_back_outlined),
-            //   color: Colors.black,
-            // ),
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,
@@ -360,7 +348,7 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        MedicineScreen())); // navigator byn2l l page tanya
+                                        MedicineView(widget.patient!.id))); // navigator byn2l l page tanya
                           });
                         }),
                         child: Container(
@@ -484,73 +472,6 @@ class _hometaskState extends State<ViewOnlyPatientView> {
                       ),
                     ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  // Column(
-                  //   children: [
-                  //     Container(
-                  //       decoration: BoxDecoration(
-                  //           boxShadow: [
-                  //             BoxShadow(
-                  //               color: Colors.grey.withOpacity(0.5),
-                  //               spreadRadius: 3,
-                  //               blurRadius: 7,
-                  //               offset:
-                  //                   Offset(4, 4), // changes position of shadow
-                  //             ),
-                  //           ],
-                  //           borderRadius: BorderRadius.all(Radius.circular(70)),
-                  //           color: Colors.white),
-                  //       width: 135,
-                  //       height: 135,
-                  //       child: InkWell(
-                  //         onTap: () {
-                  //           Navigator.push(
-                  //             context,
-                  //             MaterialPageRoute(
-                  //               builder: (context) =>
-                  //                   PrescListPage(myPrescriptionStream: myPrescriptionStream),
-                  //             ),
-                  //           );
-                  //         },
-                  //         child: Container(
-                  //           decoration: new BoxDecoration(
-                  //             image: new DecorationImage(
-                  //               image: new AssetImage(
-                  //                 "assets/images/prescreption.png",
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     TextButton(
-                  //       onPressed: (() {
-                  //         setState(() {
-                  //           Navigator.push(
-                  //               context,
-                  //               MaterialPageRoute(
-                  //                   builder: (context) =>
-                  //                       DoctorUploadedPrescription(widget
-                  //                           .patient!
-                  //                           .id))); // navigator byn2l l page tanya
-                  //         });
-                  //       }),
-                  //       child: Text(
-                  //         'Exported Prescriptions',
-                  //         style: TextStyle(
-                  //             fontSize: 20,
-                  //             fontWeight: FontWeight.bold,
-                  //             color: Color(0xFF2C698D)),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
                 ],
               ),
             ],

@@ -26,15 +26,5 @@ class DoctorController extends GetxController {
         snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
   }
 
-  // void addOrRemoveDoctor(DoctorDataBase doctor) {
-  //   if (_doctors.containsKey(doctor)) {
-  //     _doctors.removeWhere((key, value) => key == doctor);
-  //     Get.snackbar('${doctor.fullName}', ' was removed to your doctors');
-  //   } else {
-  //     _doctors[doctor] = 1;
-  //     Get.snackbar('${doctor.fullName}', ' was added to your doctors');
-  //   }
-  // }
-
   get doctors => _doctors;
 }

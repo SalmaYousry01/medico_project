@@ -7,15 +7,9 @@ import 'package:grad_project/basenavigator.dart';
 
 import '../../models/my_allergies.dart';
 
-
-
-
 class AllergyViewModel extends BaseViewModel<AllergyNavigator> {
-  // var auth = FirebaseAuth.instance;
-
-  Future<void> AddOrUpdateAllergyToDB(String chest
-      , String nasal,String substance,String food , String skin) async {
-    // final credential = await auth.getRedirectResult();
+  Future<void> AddOrUpdateAllergyToDB(String chest, String nasal,
+      String substance, String food, String skin) async {
     try {
       var col = await DatabaseUtilsAllergy.getAllergyCollection().get();
       if (col.docs.isEmpty) {
@@ -28,7 +22,6 @@ class AllergyViewModel extends BaseViewModel<AllergyNavigator> {
           substance: substance,
           food: food,
           skin: skin,
-
         );
         await DatabaseUtilsAllergy.AddAllergyToFirestore(allergy);
       } else {
@@ -41,9 +34,8 @@ class AllergyViewModel extends BaseViewModel<AllergyNavigator> {
     }
   }
 
-  void UpdateAllergyToDB(String id, String name,String dosage,String chest , String nasal ,String substance
-      ,String food , String skin) {
-    // final credential = await auth.getRedirectResult();
+  void UpdateAllergyToDB(String id, String name, String dosage, String chest,
+      String nasal, String substance, String food, String skin) {
     MyAllergy allergy = MyAllergy(
       id: id,
       chest: chest,
@@ -51,10 +43,7 @@ class AllergyViewModel extends BaseViewModel<AllergyNavigator> {
       substance: substance,
       food: food,
       skin: skin,
-
-
     );
-    // id: credential.user?.uid ?? ""
 
     DatabaseUtilsAllergy.AddAllergyToFirestore(allergy).then((value) {
       print("Clinic updated");

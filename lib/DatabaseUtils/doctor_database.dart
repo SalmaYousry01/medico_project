@@ -7,7 +7,6 @@ import '../models/my_family.dart';
 import '../models/my_medicine.dart';
 import '../models/my_patient.dart';
 import '../models/my_prescription.dart';
-import '../models/my_prescription__exported_pdf.dart';
 import '../models/my_test.dart';
 
 class DatabaseUtilsdoctor {
@@ -31,19 +30,6 @@ class DatabaseUtilsdoctor {
         );
   }
 
-  // static CollectionReference<DoctorDataBase>
-  //     getPatientsPrescriptionListCollection() {
-  //   return FirebaseFirestore.instance
-  //       .collection(MyPatient.COLLECTION_NAME)
-  //       .doc()
-  //       .collection(Myprescpdf.PRESC_PDF)
-  //       .withConverter<DoctorDataBase>(
-  //         fromFirestore: (snapshot, options) =>
-  //             DoctorDataBase.fromJson(snapshot.data()!),
-  //         toFirestore: (value, options) => value.tojson(),
-  //       );
-  // }
-
   static CollectionReference<Mymedicine> getMedicineCollection(
       String patientId) {
     return getPatientsCollection()
@@ -65,17 +51,6 @@ class DatabaseUtilsdoctor {
                 Myprescription.fromjson(snapshot.data()!),
             toFirestore: (prescription, sp) => prescription.tojson());
   }
-
-  // static CollectionReference<Myprescpdf> getMyPrescriptionPdfCollection(
-  //     String patientId) {
-  //   return getPatientsCollection()
-  //       .doc(patientId)
-  //       .collection(Myprescpdf.PRESC_PDF)
-  //       .withConverter<Myprescpdf>(
-  //           fromFirestore: (snapshot, s) =>
-  //               Myprescpdf.fromjson(snapshot.data()!),
-  //           toFirestore: (prescriptionPdf, sp) => prescriptionPdf.tojson());
-  // }
 
   static CollectionReference<MyAllergy> getAllergyCollection(String patientId) {
     return getPatientsCollection()
@@ -115,11 +90,6 @@ class DatabaseUtilsdoctor {
   static Stream<QuerySnapshot<MyTest>> getTestAsStream(String patientId) {
     return getTestCollection(patientId).snapshots();
   }
-
-  // static Stream<QuerySnapshot<Myprescpdf>> getMyPrescriptionPdfAsStream(
-  //     String patientId) {
-  //   return getMyPrescriptionPdfCollection(patientId).snapshots();
-  // }
 
   static Stream<QuerySnapshot<Myprescription>> getPrescriptionAsStream(
       String patientId) {

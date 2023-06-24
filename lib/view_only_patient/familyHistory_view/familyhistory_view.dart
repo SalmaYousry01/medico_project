@@ -27,27 +27,6 @@ class FamilyhistoryViewState extends State<FamilyhistoryView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   // leading: IconButton(
-      //   //     onPressed: () {
-      //   //       Navigator.push(
-      //   //         context,
-      //   //         MaterialPageRoute(
-      //   //           builder: (context) => ViewOnlyPatientView(),
-      //   //         ),
-      //   //       );
-      //   //     },
-      //   //     icon: Icon(Icons.arrow_back)),
-      //   title: Text(
-      //     " Family history",
-      //     style: TextStyle(
-      //       fontSize: 30,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   backgroundColor: Color(0xFF2C698D),
-      // ),
       body: Column(
         children: [
           Expanded(
@@ -152,7 +131,6 @@ class FamilyhistoryViewState extends State<FamilyhistoryView> {
                   deleteddegree = degree[index];
                   details.removeAt(index);
                   degree.removeAt(index);
-                  //  Scaffold.of(context).showSnackBar(
                 });
               },
               child: familyhistoryList(index),
@@ -164,9 +142,6 @@ class FamilyhistoryViewState extends State<FamilyhistoryView> {
   }
 
   Widget familyhistoryList(int index) {
-    // TextEditingController nameController = TextEditingController();
-    // TextEditingController dosageController = TextEditingController();
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(50),
       child: Container(
@@ -213,9 +188,4 @@ class FamilyhistoryViewState extends State<FamilyhistoryView> {
       ),
     );
   }
-
-// @override
-// MedicineViewOnlyViewModel initViewModel() {
-//   return MedicineViewOnlyViewModel();
-// }
 }

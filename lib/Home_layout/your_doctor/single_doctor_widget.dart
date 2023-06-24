@@ -15,11 +15,6 @@ class SingleDoctortWidget extends StatelessWidget {
   final controller = Get.put(DoctorController());
   DoctorDataBase doctor;
 
-  // MyPatient patient;
-
-
-
-
   SingleDoctortWidget(this.doctor);
 
   @override
@@ -27,12 +22,11 @@ class SingleDoctortWidget extends StatelessWidget {
     return Container(
       child: ListTile(
         onTap: () {
-
           DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(doctor.id).then(
-                  (clinic) => Navigator.pushNamed(
+              (clinic) => Navigator.pushNamed(
                   context, SingleDoctorClinicProfile.routeName,
                   arguments:
-                  DoctorClinicModel(doctor: doctor, clinic: clinic!)));
+                      DoctorClinicModel(doctor: doctor, clinic: clinic!)));
         },
         leading: CircleAvatar(backgroundImage: NetworkImage(doctor.image)),
         title: Text(doctor.fullName),
@@ -41,46 +35,34 @@ class SingleDoctortWidget extends StatelessWidget {
           highlightColor: Colors.transparent,
           splashColor: Color.fromARGB(0, 63, 36, 36),
           padding: EdgeInsets.zero,
-          onPressed: () async {
-            // controller.addOrRemoveDoctor(doctor);
-            // controller.addDoctor(doctor);
-
-
-
-          },
+          onPressed: () async {},
           icon: CircleAvatar(
             backgroundColor: Color(0xFF2C698D),
             radius: 10.0,
             child: GestureDetector(
-              onTap: (){
-                // QuickAlert.show(
-                //   context: context,
-                //   type: QuickAlertType.confirm,
-                //   title: "Notice",
-                //   text: "if you pressed okay this doctor will be able to view all your medical data");
+              onTap: () {
                 showDialog(
                     context: context,
-                    builder: (BuildContext context){
+                    builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("Notice",),
-                        content: Text( "if you pressed okay this doctor will be able to view all your medical data"),
+                        title: Text(
+                          "Notice",
+                        ),
+                        content: Text(
+                            "if you pressed okay this doctor will be able to view all your medical data"),
                         actions: [
-
-                          // IconButton(
-                          //     color:Colors.white ,
-                          //     onPressed: (){
-                          //       Navigator.pop(context);
-                          //     }
-                          //     , icon: Icon(Icons.cancel_outlined, color: Color(0xFF22C698D),)),
-                          TextButton(onPressed: (){
-                            Navigator.pop(context);
-                          },
-                              child: Text("Cancel",style: TextStyle(color: Color(0xFF2C698D),),)),
-
                           TextButton(
-                              onPressed: (){
-
-
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(
+                                  color: Color(0xFF2C698D),
+                                ),
+                              )),
+                          TextButton(
+                              onPressed: () {
                                 DoctorDataBase yourdoctor = DoctorDataBase(
                                     Field: doctor.Field,
                                     email: doctor.email,
@@ -89,23 +71,33 @@ class SingleDoctortWidget extends StatelessWidget {
                                     id: doctor.id,
                                     nationalID: doctor.nationalID,
                                     phoneNumber: doctor.phoneNumber);
-                                Future.wait([
-                                  DatabaseUtilsDoctorPatient.addPatientDoctorToFirestore(yourdoctor),
-                                  DatabaseUtilspatient.readPateintFromFiresore(FirebaseAuth.instance.currentUser!.uid).then((value) {
-                                    print(">>>>>>>>>>>>>>>>>>> Doctor ID : ${yourdoctor.id}");
-                                    DatabaseUtilsDoctorPatient.addPetientToDoctorFirestore(yourdoctor, value!);
-                                    print("Success!!!");
-                                  }
-                                  ),
-                                ],);
+                                Future.wait(
+                                  [
+                                    DatabaseUtilsDoctorPatient
+                                        .addPatientDoctorToFirestore(
+                                            yourdoctor),
+                                    DatabaseUtilspatient
+                                            .readPateintFromFiresore(
+                                                FirebaseAuth
+                                                    .instance.currentUser!.uid)
+                                        .then((value) {
+                                      print(
+                                          ">>>>>>>>>>>>>>>>>>> Doctor ID : ${yourdoctor.id}");
+                                      DatabaseUtilsDoctorPatient
+                                          .addPetientToDoctorFirestore(
+                                              yourdoctor, value!);
+                                      print("Success!!!");
+                                    }),
+                                  ],
+                                );
                                 Navigator.pop(context);
                               },
-                              // color: Color(0xFF22C698D),
-                              //icon: Icon(Icons.done)
-                              child: Text("Confirm",style: TextStyle( color: Color(0xFF2C698D),),)
-                          ),
-
-
+                              child: Text(
+                                "Confirm",
+                                style: TextStyle(
+                                  color: Color(0xFF2C698D),
+                                ),
+                              )),
                         ],
                       );
                     });

@@ -51,14 +51,6 @@ class _hometaskState extends State<home> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 180,
-            // leading: IconButton(
-            //   onPressed: () {
-            //     FirebaseAuth.instance.signOut();
-            //     Navigator.pushNamed(context, PatientLogin.routeName);
-            //   },
-            //   icon: Icon(Icons.arrow_back_outlined),
-            //   color: Colors.black,
-            // ),
             flexibleSpace: ClipRRect(
               child: Container(
                 width: 200,
@@ -515,72 +507,6 @@ class _hometaskState extends State<home> {
               SizedBox(
                 height: 20,
               ),
-              // Row(
-              //   children: [
-              // SizedBox(
-              //   width: 40,
-              // ),
-              // Column(
-              //   children: [
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.grey.withOpacity(0.5),
-              //               spreadRadius: 3,
-              //               blurRadius: 7,
-              //               offset:
-              //                   Offset(4, 4), // changes position of shadow
-              //             ),
-              //           ],
-              //           borderRadius: BorderRadius.all(Radius.circular(70)),
-              //           color: Colors.white),
-              //       width: 142,
-              //       height: 142,
-              //       child: InkWell(
-              //         onTap: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) => Measurments(),
-              //             ),
-              //           );
-              //         },
-              //         child: Container(
-              //           decoration: new BoxDecoration(
-              //             image: new DecorationImage(
-              //               image: new AssetImage(
-              //                   "assets/images/medical info.png"),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       height: 10,
-              //     ),
-              //     TextButton(
-              //       onPressed: (() {
-              //         setState(() {
-              //           Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                   builder: (context) =>
-              //                       Measurments())); // navigator byn2l l page tanya
-              //         });
-              //       }),
-              //       child: Text(
-              //         'Measurements',
-              //         style: TextStyle(
-              //             fontSize: 16,
-              //             fontWeight: FontWeight.bold,
-              //             color: Color(0xFF2C698D)),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              //   ],
-              // ),
             ],
           ),
         ),

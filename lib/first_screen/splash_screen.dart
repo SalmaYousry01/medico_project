@@ -10,17 +10,26 @@ class SplashScreen extends StatelessWidget {
     return AnimatedSplashScreen(
       splash: Column(
         children: [
-          Image.asset('assets/images/logo3.jpg',),
-          SizedBox(height:20 ,),
-          Text('Medico',style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold,color: Color(0xFF2C698D),))],
+          Image.asset(
+            'assets/images/logo3.jpg',
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Text('Medico',
+              style: TextStyle(
+                fontSize: 50,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF2C698D),
+              ))
+        ],
       ),
       backgroundColor: Colors.white,
-      nextScreen:Firstpage(),
+      nextScreen: Firstpage(),
       splashIconSize: 400,
       duration: 4000,
       splashTransition: SplashTransition.fadeTransition,
       animationDuration: const Duration(seconds: 1),
-
     );
   }
 }

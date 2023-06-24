@@ -7,11 +7,8 @@ import '../../../DatabaseUtils/prescription_form_database.dart';
 
 class PrescriptionFormViewModel
     extends BaseViewModel<PrescriptionFormNavigator> {
-  // var auth = FirebaseAuth.instance;
-
   Future<void> AddOrUpdatePrescriptionFormToDB(String medicine, String dosage,
       String time, String test, String prescription) async {
-    // final credential = await auth.getRedirectResult();
     try {
       var col =
           await DatabaseUtilsPrescriptionForm.getPrescriptionFormCollection()

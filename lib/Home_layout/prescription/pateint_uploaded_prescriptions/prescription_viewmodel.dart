@@ -34,43 +34,20 @@ class PrescriptionViewModel extends BaseViewModel<PrescriptionNavigator> {
     url = await snapshot.ref.getDownloadURL();
 
     //upload url to cloud firebase
-    final prescription = Myprescription(fileUrl: url, num: "Prescription $number");
+    final prescription =
+        Myprescription(fileUrl: url, num: "Prescription $number");
     DatabaseUtilsMyPrescription.AddPrescriptionToFirestore(prescription);
   }
 
-  // Future<void> AddOrUpdateClinicToDB(
-  //     String image, String fileUrl, String num) async {
-  //   // final credential = await auth.getRedirectResult();
-  //   var col =
-  //       await DatabaseUtilsMyPrescription.getPrescriptionCollection().get();
-  //   if (col.docs.isEmpty) {
-  //     var docId = DatabaseUtilsMyPrescription.getPrescriptionCollection().doc();
-  //     Myprescription prescription = Myprescription(
-  //       id: docId.id,
-  //       fileUrl: fileUrl,
-  //       num: num,
-  //     );
-  //     await DatabaseUtilsMyPrescription.AddPrescriptionToFirestore(
-  //         prescription);
-  //   } else {
-  //     Myprescription? prescription = col.docs[0].data();
-  //     await DatabaseUtilsMyPrescription.UpdatePrescriptionToFirestore(
-  //         prescription);
-  //   }
-  // }
-
   void UpdatePrescriptionToDB(String image, String fileUrl, String num) {
-    // final credential = await auth.getRedirectResult();
     Myprescription prescription = Myprescription(
       fileUrl: fileUrl,
       num: num,
     );
-    // id: credential.user?.uid ?? ""
 
     DatabaseUtilsMyPrescription.AddPrescriptionToFirestore(prescription)
         .then((value) {
       print("Prescription updated");
     }).catchError((error) {});
   }
-
 }

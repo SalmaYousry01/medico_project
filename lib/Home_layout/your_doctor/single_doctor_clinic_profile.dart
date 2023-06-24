@@ -57,8 +57,6 @@ class SingleDoctorClinicProfileState
     image = widget.doctorClinicModel!.doctor.image;
   }
 
-  // TimeOfDay startTime = TimeOfDay.now();
-  // TimeOfDay endTime = TimeOfDay.now();
   String? name = '';
   String? field = '';
   final imagepicker = ImagePicker();
@@ -90,10 +88,7 @@ class SingleDoctorClinicProfileState
       updateimageinfirestore();
     });
 
-    // XFile?pickedimage =await imagepicker.pickImage(source: ImageSource.camera);
-    // imageXFile=File(pickedimage!.path);
     Navigator.pop(this.context);
-    // cropimage(pickedimage!.path);
   }
 
   void getfromgallery() async {
@@ -190,18 +185,6 @@ class SingleDoctorClinicProfileState
                 elevation: 0.0,
                 bottomOpacity: 0.0,
                 backgroundColor: Color(0xFF2C698D),
-                // backgroundColor: Colors.white,
-                // leading: Padding(
-                //   padding: const EdgeInsets.all(8.0),
-                //   child: IconButton(
-                //     onPressed: () {
-                //       FirebaseAuth.instance.signOut();
-                //       Navigator.pushNamed(context, DoctortLogin.routeName);
-                //     },
-                //     icon: const Icon(Icons.arrow_back_outlined),
-                //     color: Colors.black,
-                //   ),
-                // )
               )),
           body: Container(
             color: Colors.white,

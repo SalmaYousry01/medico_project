@@ -38,7 +38,6 @@ class PrescListPage extends StatelessWidget {
                                 builder: (context) => view(
                                       url: x['fileUrl'],
                                     )));
-                        // NetworkImage(image!);
                       },
                       child: Container(
                         margin:

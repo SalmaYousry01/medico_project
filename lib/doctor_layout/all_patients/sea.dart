@@ -73,43 +73,6 @@ class sea extends SearchDelegate {
                 ],
               );
             }
-
-            // if (snapshot.data!.docs
-            //     .where((QueryDocumentSnapshot<Object?> element) =>
-            //     element['fullName']
-            //         .toString()
-            //         .toLowerCase()
-            //         .contains(query.toLowerCase()))
-            //     .isEmpty) {
-            //   return Center(
-            //     child: Text("No search query found"),
-            //   );
-            // }
-            // // print(snapshot.data);
-            // else {
-            //   return ListView(children: [
-            //     ...snapshot.data!.docs
-            //         .where((QueryDocumentSnapshot<Object?> element) =>
-            //         element['fullName']
-            //             .toString()
-            //             .toLowerCase()
-            //             .contains(query.toLowerCase()))
-            //         .map((QueryDocumentSnapshot<Object?> data) {
-            //       final String name = data.get('fullName');
-            //       final String field = data['Field'];
-            //       final image = data['image'];
-            //
-            //       return ListTile(
-            //         onTap: () {},
-            //         title: Text(name),
-            //         leading: CircleAvatar(
-            //           backgroundImage:   NetworkImage(image),
-            //         ),
-            //         subtitle: Text(field),
-            //       );
-            //     }).toList().cast()
-            //   ]);
-            // }
           }
         });
   }

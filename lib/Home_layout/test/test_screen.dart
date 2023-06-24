@@ -5,9 +5,7 @@ import 'package:grad_project/Home_layout/test/test_navigator.dart';
 import 'package:grad_project/Home_layout/test/test_viewmodel.dart';
 import 'package:grad_project/models/my_test.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
 import '../../basenavigator.dart';
-import '../home.dart';
 
 class TestScreen extends StatefulWidget {
   static const String routeName = 'TestScreen';
@@ -17,8 +15,7 @@ class TestScreen extends StatefulWidget {
 }
 
 class _TestScreenState extends BaseView<TestScreen, TestViewModel>
-implements TestNavigator {
-
+    implements TestNavigator {
   Stream<QuerySnapshot<MyTest>>? myTestStream;
 
   @override
@@ -40,17 +37,6 @@ implements TestNavigator {
         ),
         title: Text('Tests'),
         centerTitle: true,
-        // leading: GestureDetector(
-        //   onTap: () {
-        //     Navigator.pushReplacement(
-        //         context, MaterialPageRoute(builder: (_) => home()));
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back,
-        //     size: 30,
-        //     color: Colors.black,
-        //   ),
-        // ),
       ),
       body: StreamBuilder(
         stream: myTestStream,
@@ -66,17 +52,16 @@ implements TestNavigator {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => view(
-                                  url: x['fileUrl'],
-                                  // image: x["image"],
-                                )));
+                                      url: x['fileUrl'],
+                                    )));
 
                         // NetworkImage(image!);
                       },
                       child: Container(
                         margin:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         padding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
@@ -119,11 +104,11 @@ implements TestNavigator {
                                     },
                                     child: Container(
                                       padding:
-                                      EdgeInsets.symmetric(horizontal: 5),
+                                          EdgeInsets.symmetric(horizontal: 5),
                                       decoration: BoxDecoration(
                                           color: Colors.white,
                                           borderRadius:
-                                          BorderRadius.circular(12)),
+                                              BorderRadius.circular(12)),
                                       child: Icon(
                                         Icons.delete,
                                         size: 25,
@@ -158,7 +143,6 @@ implements TestNavigator {
     );
   }
 
-
   @override
   TestViewModel initViewModel() {
     return TestViewModel();
@@ -177,6 +161,7 @@ class view extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF2C698D),
         title: Text("PDF view"),
       ),
       body: SfPdfViewer.network(

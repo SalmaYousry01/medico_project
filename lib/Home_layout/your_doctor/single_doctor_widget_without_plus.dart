@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:grad_project/Home_layout/your_doctor/All_Doctor.dart';
-import 'package:grad_project/Home_layout/your_doctor/doctorlist.dart';
-import 'package:grad_project/Home_layout/your_doctor/single_doctor_clinic_profile.dart';
 import '../../DatabaseUtils/yourDoctor_database.dart';
 import '../../models/my_clinic.dart';
 import '../../models/my_doctor.dart';
-import 'package:grad_project/DatabaseUtils/clinic_database.dart';
 import 'doctor_controller.dart';
 
 class SingleDoctorWithoutPlus extends StatefulWidget {
@@ -28,13 +24,7 @@ class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
-        onTap: () {
-          // DatabaseUtilsClinic.getDoctorClinicsCollectionFromId(widget.doctor.id)
-          //     .then((clinic) => Navigator.pushNamed(
-          //         context, SingleDoctorClinicProfile.routeName,
-          //         arguments: DoctorClinicModel(
-          //             doctor: widget.doctor, clinic: clinic!)));
-        },
+        onTap: () {},
         leading:
             CircleAvatar(backgroundImage: NetworkImage(widget.doctor.image)),
         title: Text(widget.doctor.fullName),
@@ -44,8 +34,6 @@ class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
           splashColor: Color.fromARGB(0, 63, 36, 36),
           padding: EdgeInsets.zero,
           onPressed: () async {
-            // controller.addOrRemoveDoctor(doctor);
-            // controller.addDoctor(doctor);
             DoctorDataBase yourdoctor = DoctorDataBase(
                 Field: widget.doctor.Field,
                 email: widget.doctor.email,
@@ -57,9 +45,6 @@ class _SingleDoctorWithoutPlusState extends State<SingleDoctorWithoutPlus> {
             await DatabaseUtilsDoctorPatient.deleteDoctorFirestore(yourdoctor);
 
             setState(() {});
-            // controller.addDoctor();
-            // widget.doctorController.addDoctor(widget.doctor);
-            // Get.to(() => YourDoctors());
           },
           icon: CircleAvatar(
             backgroundColor: Color(0xFF2C698D),

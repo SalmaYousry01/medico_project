@@ -39,16 +39,12 @@ class _navdocState extends State<navdoc> {
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon:
-              Icon(Icons.people_outline_sharp,color: Color(0xFF2C698D),),
+            icon: Icon(
+              Icons.people_outline_sharp,
+              color: Color(0xFF2C698D),
+            ),
             label: 'All Patients',
           ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(
-          //     AssetImage('assets/images/profile.png'),
-          //   ),
-          //   label: 'Profile',
-          // ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Color(0xFF2C698D),

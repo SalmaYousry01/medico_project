@@ -40,17 +40,6 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
         ),
         title: Text('Tests'),
         centerTitle: true,
-        // leading: GestureDetector(
-        //   onTap: () {
-        //     Navigator.pushReplacement(context,
-        //         MaterialPageRoute(builder: (_) => ViewOnlyPatientView()));
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back,
-        //     size: 30,
-        //     color: Colors.black,
-        //   ),
-        // ),
       ),
       body: StreamBuilder(
         stream: myTestStream,
@@ -69,8 +58,6 @@ class _TestViewState extends BaseView<TestView, TestViewModel>
                                       url: x['fileUrl'],
                                       // image: x["image"],
                                     )));
-
-                        // NetworkImage(image!);
                       },
                       child: Container(
                         margin:

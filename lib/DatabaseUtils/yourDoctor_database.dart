@@ -9,17 +9,15 @@ import '../models/my_patient.dart';
 import 'Patient_Database.dart';
 
 class DatabaseUtilsDoctorPatient {
-
   static CollectionReference<DoctorDataBase> getTheDoctorCollection() {
     return DatabaseUtilspatient.getPatientsCollection()
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection(DoctorDataBase.COLLECTION_NAME)
         .withConverter<DoctorDataBase>(
-        fromFirestore: (snapshot, s) =>
-            DoctorDataBase.fromJson(snapshot.data()!),
-        toFirestore: (yourdoctor, sp) => yourdoctor.tojson());
+            fromFirestore: (snapshot, s) =>
+                DoctorDataBase.fromJson(snapshot.data()!),
+            toFirestore: (yourdoctor, sp) => yourdoctor.tojson());
   }
-
 
   static Future<QuerySnapshot<DoctorDataBase>> getDoctorToFirestore() {
     return getTheDoctorCollection().get();
@@ -30,8 +28,6 @@ class DatabaseUtilsDoctorPatient {
         "you have added doctor ${yourDoctor.fullName} to your doctors",
         snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 1));
     var collection = getTheDoctorCollection();
-    // var docRef = collection.doc();
-    // yourDoctor.id = docRef.id;
     return collection.doc(yourDoctor.id).set(yourDoctor);
   }
 
@@ -44,19 +40,12 @@ class DatabaseUtilsDoctorPatient {
 
   static Future<void> addPetientToDoctorFirestore(
       DoctorDataBase yourDoctor, MyPatient patient) async {
-    final doctorDoc = await DatabaseUtilsdoctor.readUserDocumentFromFiresore(
-        yourDoctor.id);
-    doctorDoc.reference.collection(doctorPatientsCollection).add(patient.tojson());
+    final doctorDoc =
+        await DatabaseUtilsdoctor.readUserDocumentFromFiresore(yourDoctor.id);
+    doctorDoc.reference
+        .collection(doctorPatientsCollection)
+        .add(patient.tojson());
   }
 
-
   static const String doctorPatientsCollection = "Patients";
-
 }
-
-
-
-
-
-
-

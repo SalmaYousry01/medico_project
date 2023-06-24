@@ -128,7 +128,6 @@ class MyApp extends StatelessWidget {
         WidgetBuilder? builder = routes[settings.name];
         return MaterialPageRoute(builder: (ctx) => builder!(ctx));
       },
-      // home: AllDoctor(),
       debugShowCheckedModeBanner: false,
     );
   }

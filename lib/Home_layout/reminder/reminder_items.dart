@@ -46,8 +46,7 @@ class ReminderItem extends StatelessWidget {
                   SizedBox(
                     height: 15,
                   ),
-                  Text(Reminder.date,
-                      style: Theme.of(context).textTheme.subtitle1),
+                  Text(Reminder.date),
                   SizedBox(
                     height: 15,
                   ),

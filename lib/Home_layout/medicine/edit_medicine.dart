@@ -8,7 +8,8 @@ class EditMedicineBottomsheet extends StatefulWidget {
   const EditMedicineBottomsheet({this.medicineid});
 
   @override
-  State<EditMedicineBottomsheet> createState() => _EditMedicineBottomsheetState();
+  State<EditMedicineBottomsheet> createState() =>
+      _EditMedicineBottomsheetState();
 }
 
 class _EditMedicineBottomsheetState extends State<EditMedicineBottomsheet> {
@@ -50,7 +51,7 @@ class _EditMedicineBottomsheetState extends State<EditMedicineBottomsheet> {
                           label: Text('Task Title'),
                           enabledBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Color(0xFF2C698D))))),
+                                  BorderSide(color: Color(0xFF2C698D))))),
                   SizedBox(
                     height: 20,
                   ),
@@ -67,23 +68,13 @@ class _EditMedicineBottomsheetState extends State<EditMedicineBottomsheet> {
                           label: Text('Note Content'),
                           enabledBorder: OutlineInputBorder(
                               borderSide:
-                              BorderSide(color: Color(0xFF2C698D))))),
+                                  BorderSide(color: Color(0xFF2C698D))))),
                 ],
               ),
             ),
-
-            //Form(
-            //key: formkey,
-            //child: Column(
-            //children: [
-
-            // ],
-            // )
-            //),
             SizedBox(
               height: 15,
             ),
-
             Container(
               width: double.infinity,
               height: 46.13,

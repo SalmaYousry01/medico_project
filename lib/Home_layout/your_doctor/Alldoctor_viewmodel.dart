@@ -13,11 +13,4 @@ class AllDoctorViewModel extends BaseViewModel {
       notifyListeners();
     });
   }
-
-// void readDoctorClinic(){
-//   DatabaseUtilsClinic.readClinicFromFiresore().then((value) {
-//     clinic = value;
-//     notifyListeners();
-//   });
-// }
 }

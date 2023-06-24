@@ -13,8 +13,8 @@ class PatientController extends GetxController {
       _patients[patient] = 1;
     }
 
-    Get.snackbar(
-        "Patient Added", "you have added Patient ${patient.fullname} to your Patients",
+    Get.snackbar("Patient Added",
+        "you have added Patient ${patient.fullname} to your Patients",
         snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
   }
 
@@ -22,8 +22,8 @@ class PatientController extends GetxController {
     if (_patients.containsKey(patient)) {
       _patients.removeWhere((key, value) => key == patient);
     }
-    Get.snackbar(
-        "Patient Removed", "you have Removed patient ${patient.fullname} from your Patients",
+    Get.snackbar("Patient Removed",
+        "you have Removed patient ${patient.fullname} from your Patients",
         snackPosition: SnackPosition.BOTTOM, duration: Duration(seconds: 2));
   }
 

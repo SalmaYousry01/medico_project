@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:grad_project/basenavigator.dart';
 import 'package:grad_project/models/my_measurments.dart';
 import '../../DatabaseUtils/measurments_database.dart';
-import 'package:firebase_storage/firebase_storage.dart' as fstorage;
 import 'measurments_navigator.dart';
 
 class MeasurmentsViewModel extends BaseViewModel<MeasurmentsNavigator> {
@@ -45,14 +44,11 @@ class MeasurmentsViewModel extends BaseViewModel<MeasurmentsNavigator> {
     String blood_pressure,
     String blood_sugar,
   ) {
-    // final credential = await auth.getRedirectResult();
     Mymeasurments measurments = Mymeasurments(
         height: height,
         weight: weight,
         blood_pressure: blood_pressure,
-        blood_sugar: blood_sugar
-        // id: credential.user?.uid ?? ""
-        );
+        blood_sugar: blood_sugar);
     DatabaseUtilsMeasurments.UpdateMeasurmentsToFirestore(measurments)
         .then((value) {
       print("Measurements updated");

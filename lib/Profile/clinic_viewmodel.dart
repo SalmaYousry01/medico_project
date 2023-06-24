@@ -16,7 +16,6 @@ class ClinicViewModel extends BaseViewModel<clinicProfileNavigator> {
       String fees,
       String about,
       String image) async {
-    // final credential = await auth.getRedirectResult();
     try {
       var col = await DatabaseUtilsClinic.getClinicsCollection().get();
       if (col.docs.isEmpty) {
@@ -44,7 +43,6 @@ class ClinicViewModel extends BaseViewModel<clinicProfileNavigator> {
 
   void UpdateClinicToDB(String address, String phoneNumber, String startTime,
       String endTime, String fees, String about, String image) {
-    // final credential = await auth.getRedirectResult();
     MyClinic clinic = MyClinic(
         address: address,
         phoneNumber: phoneNumber,
@@ -53,7 +51,6 @@ class ClinicViewModel extends BaseViewModel<clinicProfileNavigator> {
         fees: fees,
         about: about,
         image: image
-        // id: credential.user?.uid ?? ""
         );
     DatabaseUtilsClinic.UpdateClinicToFirestore(clinic).then((value) {
       print("Clinic updated");

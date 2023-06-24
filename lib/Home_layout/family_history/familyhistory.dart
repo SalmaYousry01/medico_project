@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../DatabaseUtils/familyhistory_database.dart';
-import '../Allergies/chooose.dart';
 import '../home.dart';
 import 'familyhistory.items.dart';
 import '../../models/my_family.dart';
@@ -22,14 +21,12 @@ class _FamilyHistoryState extends State<FamilyHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Padding(
-        padding: const EdgeInsets.only(top:35),
+        padding: const EdgeInsets.only(top: 35),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Row(
               children: [
                 Padding(
@@ -45,7 +42,10 @@ class _FamilyHistoryState extends State<FamilyHistory> {
                               ),
                             );
                           },
-                          icon: Icon(Icons.arrow_back,size: 30,)),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                          )),
                       Text(
                         " Family history",
                         style: TextStyle(
@@ -87,8 +87,8 @@ class _FamilyHistoryState extends State<FamilyHistory> {
                       return Center(child: Text('Something went wrong'));
                     }
                     var familyhistory = snapshot.data?.docs
-                        .map((docs) => docs.data())
-                        .toList() ??
+                            .map((docs) => docs.data())
+                            .toList() ??
                         [];
                     return Expanded(
                       child: ListView.builder(
@@ -100,62 +100,6 @@ class _FamilyHistoryState extends State<FamilyHistory> {
                   }),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget medicineList(int index) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(50),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-        ),
-        height: 75,
-        child: Center(
-          child: Row(
-            children: [
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: new Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Flexible(
-                        child: ListTile(
-                          title: Text(
-                            degree[index],
-                            style: TextStyle(
-                              fontSize: 20.00,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          subtitle: Text(
-                            details[index],
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          // trailing: IconButton(
-                          //     onPressed: () {},
-                          //     icon: Image.asset(
-                          //       'icons/medicine.time2.png',
-                          //       color: Color(
-                          //         0xFF2C698D,
-                          //       ),
-                          //     )),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -212,7 +156,7 @@ class _FamilyHistoryState extends State<FamilyHistory> {
                                   if (_formKey.currentState!.validate()) {
                                     setState(() {
                                       MyFamilyhistory familyhistory =
-                                      MyFamilyhistory(
+                                          MyFamilyhistory(
                                         details: detailsController.text,
                                         degree: degreeController.text,
                                       );

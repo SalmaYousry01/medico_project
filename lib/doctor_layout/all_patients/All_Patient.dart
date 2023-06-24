@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:grad_project/doctor_layout/all_patients/Allpatient_viewmodel.dart';
 import 'package:grad_project/doctor_layout/all_patients/all_navP.dart';
-import 'package:grad_project/doctor_layout/all_patients/sea.dart';
 import 'package:grad_project/models/my_patient.dart';
 import 'package:grad_project/view_only_patient/view_only_patient_view.dart';
 import '../../DatabaseUtils/doctor_database.dart';
@@ -39,13 +38,6 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
           ),
           title: Text('Patients'),
           centerTitle: true,
-          // actions: <Widget>[
-          //   IconButton(
-          //       onPressed: () {
-          //         showSearch<Object?>(context: context, delegate: sea());
-          //       },
-          //       icon: Icon(Icons.search))
-          // ],
         ),
         body: StreamBuilder<QuerySnapshot>(
             stream: patientsStream,
@@ -90,8 +82,6 @@ class _AllPatientState extends BaseView<AllPatient, AllPatientViewModel>
 
   @override
   void goToHomePage(MyPatient patient) {
-    // Provider.of<MyProvider>(context, listen: false);
-    // Navigator.pushReplacementNamed(context, home.routeName, arguments: true);
   }
 
   @override

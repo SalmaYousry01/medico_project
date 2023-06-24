@@ -35,7 +35,6 @@ class DoctorSignupViewModel extends BaseViewModel<DoctorAccountNavigator> {
         return;
       });
       //Read User from Database
-      // DoctorDataBase? doctorDataBase=await DatabaseUtils.readUserFromFiresore(credential.user?.uid??"");
     } on FirebaseAuthException catch (e) {
       if (e.code == FirebaseError.weakPassword) {
         print('The password provided is too weak.');

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:grad_project/DatabaseUtils/Patient_Database.dart';
 import 'package:grad_project/basenavigator.dart';
 import 'package:grad_project/login/patientlogin_navigator.dart';

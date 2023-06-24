@@ -1,17 +1,15 @@
 import 'dart:developer';
-
 import 'package:flutter/cupertino.dart';
-
 import '../../DatabaseUtils/medicine_database.dart';
 import '../../basenavigator.dart';
 import '../../models/my_medicine.dart';
 import 'medicine_navigator.dart';
 
 class MedicineViewModel extends BaseViewModel<MedicineNavigator> {
-  // var auth = FirebaseAuth.instance;
-
-  Future<void> AddOrUpdateMedicineToDB(String dosage, String name,) async {
-    // final credential = await auth.getRedirectResult();
+  Future<void> AddOrUpdateMedicineToDB(
+    String dosage,
+    String name,
+  ) async {
     try {
       var col = await DatabaseUtilsmedicine.getmedicineCollection().get();
       if (col.docs.isEmpty) {
@@ -21,7 +19,6 @@ class MedicineViewModel extends BaseViewModel<MedicineNavigator> {
           id: docId.id,
           name: name,
           dosage: dosage,
-
         );
         await DatabaseUtilsmedicine.AddmedicineToFirestore(medicine);
       } else {
@@ -34,16 +31,16 @@ class MedicineViewModel extends BaseViewModel<MedicineNavigator> {
     }
   }
 
-  void UpdateMedicineToDB(String id, String name,String dosage,) {
-    // final credential = await auth.getRedirectResult();
+  void UpdateMedicineToDB(
+    String id,
+    String name,
+    String dosage,
+  ) {
     Mymedicine medicine = Mymedicine(
       id: id,
       name: name,
       dosage: dosage,
-
-
     );
-    // id: credential.user?.uid ?? ""
 
     DatabaseUtilsmedicine.AddmedicineToFirestore(medicine).then((value) {
       print("Clinic updated");

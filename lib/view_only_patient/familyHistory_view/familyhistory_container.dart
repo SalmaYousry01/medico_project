@@ -8,8 +8,8 @@ class FamilyhistoryContainer extends StatelessWidget {
   MyFamilyhistory familyhistory;
 
   FamilyhistoryContainer(
-      this.familyhistory,
-      );
+    this.familyhistory,
+  );
 
   var detailsController = TextEditingController();
   var degreeController = TextEditingController();
@@ -67,22 +67,8 @@ class FamilyhistoryContainer extends StatelessWidget {
               ],
             ),
             SizedBox(
-              width: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Text(
-                //  familyhistory.name,
-                //   style: Theme.of(context).textTheme.subtitle1,
-                // ),
-
-                // Text(familyhistory.dosage,
-                //     style: Theme.of(context).textTheme.subtitle1)
-              ],
-            ),
-            SizedBox(
               height: 150,
+              width: 15,
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -93,7 +79,6 @@ class FamilyhistoryContainer extends StatelessWidget {
             Spacer(),
             Row(
               children: [
-
                 SizedBox(
                   width: 5,
                 ),

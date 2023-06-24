@@ -54,18 +54,6 @@ class _AllergyViewState extends BaseView<AllergyView, AllergiesViewModel>
   String? skin = '';
   String? food = '';
 
-  // Future GetDataFromDatabase() async {
-  //   DoctorDataBase? doctor = await DatabaseUtilsdoctor.readUserFromFiresore(
-  //       FirebaseAuth.instance.currentUser!.uid);
-  //   if (doctor != null) {
-  //     setState(() {
-  //       name = doctor.fullName;
-  //       field = doctor.Field;
-  //       image = doctor.image;
-  //     });
-  //   }
-  // }
-
   Future _getDataFromDatabase() async {
     await FirebaseFirestore.instance
         .collection(MyPatient.COLLECTION_NAME)

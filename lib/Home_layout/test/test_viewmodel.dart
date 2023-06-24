@@ -32,20 +32,17 @@ class TestViewModel extends BaseViewModel<TestNavigator> {
     url = await snapshot.ref.getDownloadURL();
 
     //upload url to cloud firebase
-    final test =
-        MyTest(fileUrl: url, num: "Test $number");
+    final test = MyTest(fileUrl: url, num: "Test $number");
     DatabaseUtilsTest.AddTestToFirestore(test);
   }
 
   void UpdateTestToDB(String image, String fileUrl, String num) {
-    // final credential = await auth.getRedirectResult();
     MyTest test = MyTest(
       fileUrl: fileUrl,
       num: num,
     );
 
-    DatabaseUtilsTest.AddTestToFirestore(test)
-        .then((value) {
+    DatabaseUtilsTest.AddTestToFirestore(test).then((value) {
       print("Test updated");
     }).catchError((error) {});
   }

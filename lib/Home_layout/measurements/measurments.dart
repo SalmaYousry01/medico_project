@@ -33,9 +33,6 @@ class _MeasurmentsState extends BaseView<Measurments, MeasurmentsViewModel>
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection(Mymeasurments.MEASURMENTS);
 
-  //create variable
-
-  //double currentheight = 100;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   int currentweight = 0;
   int currentheight = 100;
@@ -47,40 +44,6 @@ class _MeasurmentsState extends BaseView<Measurments, MeasurmentsViewModel>
   String? newblood_pressure = "";
   TextEditingController bloodpressurecontroller = TextEditingController();
   TextEditingController bloodsugarcontroller = TextEditingController();
-
-  void _addData() {
-    subcollectionRef.add({
-      'blood_pressure': bloodpressurecontroller.text,
-      "blood_sugar": bloodsugarcontroller.text,
-      'weight': currentweight,
-      "height": currentheight
-    });
-  }
-
-//   String? height="";
-// String? weight="";
-
-  Future _updateheight() async {
-    await FirebaseFirestore.instance
-        .collection(Mymeasurments.MEASURMENTS)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"height": currentheight});
-  }
-
-  Future _updateweight() async {
-    await FirebaseFirestore.instance
-        .collection(Mymeasurments.MEASURMENTS)
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"weight": currentweight});
-  }
-
-  // Future _updatebloodpressure () async
-  // {
-  //   await FirebaseFirestore.instance.collection(Mymeasurments.MEASURMENTS).
-  //   doc(FirebaseAuth.instance.currentUser!.uid)
-  //       .update({
-  //     "blood_pressure": newblood_pressure
-  //   });}
 
   @override
   void initState() {
@@ -161,10 +124,7 @@ class _MeasurmentsState extends BaseView<Measurments, MeasurmentsViewModel>
                             (states) => Color(0xFF22C698D))),
                     onPressed: () {
                       setState(() {
-                        // _addData();
                         ValidateForm();
-                        // _updateheight();
-                        //_updatebloodpressure();
                       });
                     },
                     child: Icon(
@@ -215,11 +175,6 @@ class _MeasurmentsState extends BaseView<Measurments, MeasurmentsViewModel>
                             thumbColor: Color(0xFF53A8CC),
                             activeColor: Color(0xFF2C698D),
                             inactiveColor: Colors.grey,
-                            // onChanged: ((value) {
-                            //   setState(() {
-                            //    currentheight = value;
-                            //   });
-                            // }
                             onChanged: (val) =>
                                 setState(() => currentheight = val.round())),
                         Image.asset(

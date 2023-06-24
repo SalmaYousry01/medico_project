@@ -5,6 +5,7 @@ class NoteMini extends StatefulWidget {
       : super(key: key);
   final String title;
   final String content;
+
   @override
   State<NoteMini> createState() => _NoteMiniState();
 }
@@ -42,8 +43,6 @@ class _NoteMiniState extends State<NoteMini> {
               widget.content,
               overflow: TextOverflow.ellipsis,
               maxLines: 5,
-              /* style: GoogleFonts.aBeeZee(
-                    color: Colors.black, fontSize: 15, height: 1),*/
             ),
           ),
         )

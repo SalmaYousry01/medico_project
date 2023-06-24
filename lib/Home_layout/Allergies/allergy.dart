@@ -4,7 +4,6 @@ import 'package:grad_project/DatabaseUtils/allergy_database.dart';
 import 'package:grad_project/Home_layout/allergies/allergy.items.dart';
 import 'package:grad_project/Home_layout/allergies/allergy_viewmodel.dart';
 import 'package:grad_project/models/my_allergies.dart';
-
 import '../home.dart';
 
 class allergy1 extends StatefulWidget {
@@ -40,7 +39,10 @@ class _allergy1State extends State<allergy1> {
                               ),
                             );
                           },
-                          icon: Icon(Icons.arrow_back,size: 30,)),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            size: 30,
+                          )),
                       Text(
                         " Allergies",
                         style: TextStyle(

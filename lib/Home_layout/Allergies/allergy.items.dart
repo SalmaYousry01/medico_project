@@ -2,12 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/models/my_allergies.dart';
 import 'package:grad_project/DatabaseUtils/allergy_database.dart';
-
 import 'allergy.dart';
 
 class AllergyItem extends StatelessWidget {
   MyAllergy allergy;
-  int _selectedItem = -1;
 
   AllergyItem(
     this.allergy,
@@ -109,15 +107,7 @@ class AllergyItem extends StatelessWidget {
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Text(
-                //  allergy.name,
-                //   style: Theme.of(context).textTheme.subtitle1,
-                // ),
-
-                // Text(allergy.dosage,
-                //     style: Theme.of(context).textTheme.subtitle1)
-              ],
+              children: [],
             ),
             SizedBox(
               height: 150,

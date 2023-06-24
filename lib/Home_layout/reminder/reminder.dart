@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'notification_service.dart';
 
 class reminder1 extends StatefulWidget {
-  // NotesPage({Key key}) : super(key: key);
   static const String routeName = 'reminder1';
 
   @override
@@ -27,16 +26,6 @@ class _reminder1State extends State<reminder1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => home(),
-        //         ),
-        //       );
-        //     },
-        //     icon: Icon(Icons.arrow_back)),
         title: Text('Reminder'),
         centerTitle: true,
         backgroundColor: Color(0xFF2C698D),

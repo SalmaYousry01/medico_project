@@ -8,8 +8,8 @@ class FamilyhistoryItem extends StatelessWidget {
   MyFamilyhistory familyhistory;
 
   FamilyhistoryItem(
-      this.familyhistory,
-      );
+    this.familyhistory,
+  );
 
   var detailsController = TextEditingController();
   var degreeController = TextEditingController();
@@ -68,20 +68,6 @@ class FamilyhistoryItem extends StatelessWidget {
             ),
             SizedBox(
               width: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Text(
-                //  familyhistory.name,
-                //   style: Theme.of(context).textTheme.subtitle1,
-                // ),
-
-                // Text(familyhistory.dosage,
-                //     style: Theme.of(context).textTheme.subtitle1)
-              ],
-            ),
-            SizedBox(
               height: 150,
             ),
             Container(
@@ -95,12 +81,13 @@ class FamilyhistoryItem extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-
-
                     deleteFamilyhistorytofirestore(familyhistory);
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyHistory(),));
-
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FamilyHistory(),
+                        ));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(horizontal: 5),

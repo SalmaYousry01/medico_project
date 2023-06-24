@@ -7,11 +7,8 @@ import 'package:grad_project/basenavigator.dart';
 import '../../models/my_reminder.dart';
 
 class ReminderViewModel extends BaseViewModel<ReminderNavigator> {
-  // var auth = FirebaseAuth.instance;
-
   Future<void> AddOrUpdateReminderToDB(
       String descriptions, String title, String date, String time) async {
-    // final credential = await auth.getRedirectResult();
     try {
       var col = await DatabaseUtilsReminder.getReminderCollection().get();
       if (col.docs.isEmpty) {
@@ -37,7 +34,6 @@ class ReminderViewModel extends BaseViewModel<ReminderNavigator> {
 
   void UpdateReminderToDB(
       String id, String descriptions, String title, String date, String time) {
-    // final credential = await auth.getRedirectResult();
     MyReminder reminder = MyReminder(
       id: id,
       descriptions: descriptions,
@@ -45,7 +41,6 @@ class ReminderViewModel extends BaseViewModel<ReminderNavigator> {
       date: date,
       time: time,
     );
-    // id: credential.user?.uid ?? ""
 
     DatabaseUtilsReminder.AddReminderToFirestore(reminder).then((value) {
       print("reminder updated");

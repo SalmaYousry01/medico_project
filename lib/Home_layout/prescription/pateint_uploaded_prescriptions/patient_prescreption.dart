@@ -39,17 +39,6 @@ class _PatientPrescriptionState
         ),
         title: Text('prescription'),
         centerTitle: true,
-        // leading: GestureDetector(
-        //   onTap: () {
-        //     Navigator.pushReplacement(
-        //         context, MaterialPageRoute(builder: (_) => home()));
-        //   },
-        //   child: Icon(
-        //     Icons.arrow_back,
-        //     size: 30,
-        //     color: Colors.black,
-        //   ),
-        // ),
       ),
       body: StreamBuilder(
         stream: myPrescriptionStream,
@@ -68,8 +57,6 @@ class _PatientPrescriptionState
                                       url: x['fileUrl'],
                                       // image: x["image"],
                                     )));
-
-                        // NetworkImage(image!);
                       },
                       child: Container(
                         margin:

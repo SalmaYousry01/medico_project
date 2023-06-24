@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/DatabaseUtils/doctor_database.dart';
-import '../../Home_layout/medicine/medicine_items.dart';
 import '../../models/my_medicine.dart';
 import 'medicine_container.dart';
 
@@ -26,16 +25,6 @@ class MedicineViewState extends State<MedicineView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(
-        //           builder: (context) => ViewOnlyPatientView(),
-        //         ),
-        //       );
-        //     },
-        //     icon: Icon(Icons.arrow_back)),
         title: Text('Medicine'),
         centerTitle: true,
         backgroundColor: Color(0xFF2C698D),
@@ -72,10 +61,4 @@ class MedicineViewState extends State<MedicineView> {
       ),
     );
   }
-
-
-// @override
-// MedicineViewOnlyViewModel initViewModel() {
-//   return MedicineViewOnlyViewModel();
-// }
 }

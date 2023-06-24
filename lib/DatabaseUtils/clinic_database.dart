@@ -17,10 +17,6 @@ class DatabaseUtilsClinic {
   }
 
   static Future<void> AddClinicToFirestore(MyClinic clinic) {
-    // var collection=getClinicsCollection();
-    // var docRef=collection.doc();
-    // clinic.catId=docRef.id;
-    // return docRef.set(clinic);
     return getClinicsCollection().doc(clinic.id).set(clinic);
   }
 

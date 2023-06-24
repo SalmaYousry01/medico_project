@@ -7,13 +7,14 @@ import 'package:page_transition/page_transition.dart';
 class EditorPage extends StatefulWidget {
   const EditorPage(
       {Key? key,
-        required this.title,
-        required this.content,
-        required this.noteKey})
+      required this.title,
+      required this.content,
+      required this.noteKey})
       : super(key: key);
   final int noteKey;
   final String title;
   final String content;
+
   @override
   State<EditorPage> createState() => _EditorPageState();
 }
@@ -23,7 +24,6 @@ class _EditorPageState extends State<EditorPage> {
 
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
-
 
   @override
   void initState() {
@@ -68,7 +68,7 @@ class _EditorPageState extends State<EditorPage> {
         onHorizontalDragEnd: (details) {
           if (details.velocity.pixelsPerSecond.dx > 1500.0) {
             if ((_contentController.text != '' ||
-                _titleController.text != '') &&
+                    _titleController.text != '') &&
                 widget.noteKey == 0) {
               showDialog(
                 context: context,
@@ -80,10 +80,6 @@ class _EditorPageState extends State<EditorPage> {
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
-                        /*shadows: [
-                            Shadow(color: Colors.amber, offset: Offset(2, 2),
-                            )
-                          ]*/
                       ),
                     ),
                     actions: <Widget>[
@@ -113,9 +109,9 @@ class _EditorPageState extends State<EditorPage> {
                                       curve: Curves.easeInOut,
                                       duration: Duration(milliseconds: 600),
                                       reverseDuration:
-                                      Duration(milliseconds: 600),
+                                          Duration(milliseconds: 600),
                                       type:
-                                      PageTransitionType.leftToRightJoined,
+                                          PageTransitionType.leftToRightJoined,
                                       child: NotesPage(),
                                       childCurrent: this.widget));
                             },
@@ -186,9 +182,8 @@ class _EditorPageState extends State<EditorPage> {
             floatingActionButton: FloatingActionButton(
               backgroundColor: Color(0xFF2C698D),
               onPressed: () {
-                if(!_titleController.text.isEmpty &&
-                    !_contentController.text.isEmpty ){
-
+                if (!_titleController.text.isEmpty &&
+                    !_contentController.text.isEmpty) {
                   writeNote();
                   Navigator.push(
                       context,
@@ -235,9 +230,9 @@ class _EditorPageState extends State<EditorPage> {
                                   ElevatedButton(
                                     style: ButtonStyle(
                                         backgroundColor:
-                                        MaterialStateProperty.all(
-                                          Color(0xFF2C698D),
-                                        )),
+                                            MaterialStateProperty.all(
+                                      Color(0xFF2C698D),
+                                    )),
                                     child: Icon(
                                       Icons.check,
                                       color: Colors.white,
@@ -255,9 +250,9 @@ class _EditorPageState extends State<EditorPage> {
                                               alignment: Alignment.bottomCenter,
                                               curve: Curves.easeInOut,
                                               duration:
-                                              Duration(milliseconds: 600),
+                                                  Duration(milliseconds: 600),
                                               reverseDuration:
-                                              Duration(milliseconds: 600),
+                                                  Duration(milliseconds: 600),
                                               type: PageTransitionType
                                                   .leftToRightJoined,
                                               child: NotesPage(),
@@ -268,7 +263,7 @@ class _EditorPageState extends State<EditorPage> {
                                   ElevatedButton(
                                     style: ButtonStyle(
                                       backgroundColor:
-                                      MaterialStateProperty.all(
+                                          MaterialStateProperty.all(
                                         Color(0xFF2C698D),
                                       ),
                                     ),
@@ -311,9 +306,6 @@ class _EditorPageState extends State<EditorPage> {
                       Icons.delete_outline,
                       size: 30,
                       color: Colors.black,
-                      /*  shadows: [
-                        Shadow(color: Colors.black, offset: Offset(1, 1))
-                      ],*/
                     ),
                   ),
                 ),

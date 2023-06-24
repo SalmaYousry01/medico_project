@@ -17,9 +17,6 @@ class medicine extends StatefulWidget {
 class _medicineState extends State<medicine> {
   var _formKey = GlobalKey<FormState>();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,44 +25,47 @@ class _medicineState extends State<medicine> {
         height: double.infinity,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/welcome page.png"), fit: BoxFit.cover)),
-        child:FutureBuilder<QuerySnapshot<Mymedicine>>(
-            future:getmedicinetofirestore(),
-            builder:(context, snapshot) {
-              if (snapshot.connectionState==ConnectionState.waiting){
+                image: AssetImage("assets/images/welcome page.png"),
+                fit: BoxFit.cover)),
+        child: FutureBuilder<QuerySnapshot<Mymedicine>>(
+            future: getmedicinetofirestore(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: CircularProgressIndicator());
               }
-              if(snapshot.hasError){
+              if (snapshot.hasError) {
                 return Center(child: Text('something went wrong'));
               }
-              var medicine=snapshot.data?.docs.map((docs) => docs.data()).toList()??[];
+              var medicine =
+                  snapshot.data?.docs.map((docs) => docs.data()).toList() ?? [];
               return medicine.length > 0
                   ? Expanded(
-                child: ListView.builder(
-                    itemCount: medicine.length,
-                    itemBuilder: (context,Index){
-                      return MedicineItem(medicine[Index]);
-
-                    }),
-              )
+                      child: ListView.builder(
+                          itemCount: medicine.length,
+                          itemBuilder: (context, Index) {
+                            return MedicineItem(medicine[Index]);
+                          }),
+                    )
                   : Padding(
-                padding: const EdgeInsets.only(left: 95, top: 70),
-                child: Center(
-                  child: Row(
-                    children: [
-                      Text(
-                        "Add New Medicine..",
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      padding: const EdgeInsets.only(left: 95, top: 70),
+                      child: Center(
+                        child: Row(
+                          children: [
+                            Text(
+                              "Add New Medicine..",
+                              style:
+                                  TextStyle(fontSize: 25, color: Colors.white),
+                            ),
+                            Container(
+                                height: 37,
+                                child: Image.asset(
+                                  'assets/icons/medicinehome.png',
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
                       ),
-                      Container( height: 37,
-
-                          child: Image.asset('assets/icons/medicinehome.png',color:  Colors.white,))
-                    ],
-
-
-                  ),
-                ),
-              );
+                    );
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -76,13 +76,10 @@ class _medicineState extends State<medicine> {
           _settingModalBottomSheet(context);
         },
       ),
-
-
     );
   }
+
   Widget buildMedicine() {
-
-
     return Padding(
       padding: const EdgeInsets.only(
         top: 10,
@@ -126,7 +123,6 @@ class _medicineState extends State<medicine> {
                             "Delete",
                             style: TextStyle(color: Colors.white),
                           ),
-
                         ],
                       ),
                     ),
@@ -140,10 +136,8 @@ class _medicineState extends State<medicine> {
       ),
     );
   }
-  Widget medicineList(int index) {
-    // TextEditingController nameController = TextEditingController();
-    // TextEditingController dosageController = TextEditingController();
 
+  Widget medicineList(int index) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(50),
       child: Container(
@@ -179,13 +173,15 @@ class _medicineState extends State<medicine> {
                             ),
                           ),
                           trailing: IconButton(
-                              onPressed: () {
-                              },
-                              icon: Image.asset('icons/medicine.time2.png',color:Color(0xFF2C698D,), )
-                          ),
+                              onPressed: () {},
+                              icon: Image.asset(
+                                'icons/medicine.time2.png',
+                                color: Color(
+                                  0xFF2C698D,
+                                ),
+                              )),
                         ),
                       )
-
                     ],
                   ),
                 ),
@@ -196,6 +192,7 @@ class _medicineState extends State<medicine> {
       ),
     );
   }
+
   void _settingModalBottomSheet(context) {
     TextEditingController nameController = TextEditingController();
     TextEditingController dosageController = TextEditingController();
@@ -227,133 +224,129 @@ class _medicineState extends State<medicine> {
                           bottom: 250,
                           top: 50,
                         ),
-                        child: Column(
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 200),
-                                    child: IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_back,
-                                          size: 27,
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        }),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        setState(() {
-                                          Mymedicine medicine = Mymedicine(
-                                            dosage: dosageController.text,
-                                            name: nameController.text,
-                                          );
-                                          // showLoading(context, 'Saving note');
-                                          AddmedicineToFirestore(medicine);
-                                          // hideLoading(context);
-                                        });
-
-                                        Navigator.pop(context);
-                                      }
-                                      print(dosageController.text);
-                                      print(nameController.text);
-
-                                    },
-                                    child: Container(
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "Done",
-                                            style: TextStyle(
-                                              fontSize: 20.00,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                ],
-                              ),
+                        child: Column(children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 20),
-                                child: TextFormField(
-                                  controller: nameController,
-                                  validator: (text) {
-                                    if (text == '') {
-                                      return 'Please Enter Medicine';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    suffixIcon: Container(height: 1,child: Image.asset('assets/icons/pills.png',)),
-                                    border: OutlineInputBorder(
-                                        borderRadius: (BorderRadius.circular(20))),
-                                    hintText: "Medicine Name",
-                                    labelText: "Medicine Name",
-                                    hintStyle: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.black45,
-                                      fontWeight: FontWeight.w500,
+                                padding: const EdgeInsets.only(right: 200),
+                                child: IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_back,
+                                      size: 27,
                                     ),
-                                  ),
-                                  onFieldSubmitted: (String value) {
-                                    FocusScope.of(context)
-                                        .requestFocus(textSecondFocusNode);
-                                  },
-                                ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    }),
                               ),
-                              SizedBox(height: 17,),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 15),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    setState(() {
+                                      Mymedicine medicine = Mymedicine(
+                                        dosage: dosageController.text,
+                                        name: nameController.text,
+                                      );
+                                      // showLoading(context, 'Saving note');
+                                      AddmedicineToFirestore(medicine);
+                                      // hideLoading(context);
+                                    });
+
+                                    Navigator.pop(context);
+                                  }
+                                  print(dosageController.text);
+                                  print(nameController.text);
+                                },
                                 child: Container(
-                                  color: Colors.transparent,
-                                  margin: EdgeInsets.all(1),
-                                  child: TextFormField(
-                                    controller: dosageController,
-                                    validator: (text) {
-                                      if (text == '') {
-                                        return 'Please Enter Your Dosage';
-                                      }
-                                      return null;
-                                    },
-                                    keyboardType: TextInputType.multiline,
-                                    maxLines: null,
-                                    decoration: InputDecoration(
-                                      suffixIcon: Container(height: 1,child: Image.asset('assets/icons/dosage2.png',)),
-                                      border: OutlineInputBorder(
-                                          borderRadius: (BorderRadius.circular(20))),
-                                      hintText: 'Dosage',
-                                      labelText: 'Dosage',
-                                      hintStyle: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.black45,
-                                        fontWeight: FontWeight.w500,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        "Done",
+                                        style: TextStyle(
+                                          fontSize: 20.00,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ),
                               ),
-
-
-
-
-                            ]
-                        )
-
-
-                    ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: TextFormField(
+                              controller: nameController,
+                              validator: (text) {
+                                if (text == '') {
+                                  return 'Please Enter Medicine';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: Container(
+                                    height: 1,
+                                    child: Image.asset(
+                                      'assets/icons/pills.png',
+                                    )),
+                                border: OutlineInputBorder(
+                                    borderRadius: (BorderRadius.circular(20))),
+                                hintText: "Medicine Name",
+                                labelText: "Medicine Name",
+                                hintStyle: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black45,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              onFieldSubmitted: (String value) {
+                                FocusScope.of(context)
+                                    .requestFocus(textSecondFocusNode);
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 17,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15),
+                            child: Container(
+                              color: Colors.transparent,
+                              margin: EdgeInsets.all(1),
+                              child: TextFormField(
+                                controller: dosageController,
+                                validator: (text) {
+                                  if (text == '') {
+                                    return 'Please Enter Your Dosage';
+                                  }
+                                  return null;
+                                },
+                                keyboardType: TextInputType.multiline,
+                                maxLines: null,
+                                decoration: InputDecoration(
+                                  suffixIcon: Container(
+                                      height: 1,
+                                      child: Image.asset(
+                                        'assets/icons/dosage2.png',
+                                      )),
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          (BorderRadius.circular(20))),
+                                  hintText: 'Dosage',
+                                  labelText: 'Dosage',
+                                  hintStyle: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black45,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ])),
                   ),
-                )
-            )
-
-        );
-
+                )));
       },
     );
   }
@@ -362,6 +355,4 @@ class _medicineState extends State<medicine> {
   MedicineViewModel initViewModel() {
     return MedicineViewModel();
   }
-
-
 }

@@ -22,32 +22,3 @@ class SinglePatientWidget extends StatelessWidget {
     );
   }
 }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       child: ListTile(
-//         onTap: () {
-//           DatabaseUtilspatient.getUsersCollection(patient.id)
-//               .then((MyPatient) => Navigator.pushNamed(context, navv.routeName,
-//                   arguments: PatientModel(
-//                     patient: patient, //patient: patient!
-//                   )));
-//         },
-//         //  leading: CircleAvatar(backgroundImage: NetworkImage(patient.image)),
-//         title: Text(patient.fullname),
-//         subtitle: Text(patient.email),
-//       ),
-//     );
-//   }
-// }
-//
-// class PatientModel {
-//   final MyPatient patient;
-//
-//   // final MyClinic clinic;
-//
-//   PatientModel({required this.patient
-//       //  required this.clinic
-//       });
-// }

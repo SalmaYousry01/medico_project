@@ -5,7 +5,6 @@ import 'medicine_screen.dart';
 
 class MedicineItem extends StatelessWidget {
   Mymedicine medicine;
-  int _selectedItem = -1;
 
   MedicineItem(
     this.medicine,
@@ -23,6 +22,26 @@ class MedicineItem extends StatelessWidget {
       child: Container(
         child: Row(
           children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    medicine.name,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(medicine.dosage)
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                  color: Color(0xFF2C698D),
+                  borderRadius: BorderRadius.circular(12)),
+            ),
             InkWell(
               onTap: () {
                 deletemedicinetofirestore(medicine);
@@ -44,31 +63,6 @@ class MedicineItem extends StatelessWidget {
                   color: Color(0xFF2C698D),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    medicine.name,
-                    style: Theme.of(context).textTheme.subtitle1,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(medicine.dosage,
-                      style: Theme.of(context).textTheme.subtitle1)
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              decoration: BoxDecoration(
-                  color: Color(0xFF2C698D),
-                  borderRadius: BorderRadius.circular(12)),
             ),
           ],
         ),

@@ -146,9 +146,3 @@ class view extends StatelessWidget {
     );
   }
 }
-
-// class PrescriptionModel {
-//   final DoctorDataBase doctor;
-//
-//   PrescriptionModel({required this.doctor});
-// }

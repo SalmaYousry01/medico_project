@@ -1,16 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grad_project/models/my_allergies.dart';
-import 'package:grad_project/DatabaseUtils/allergy_database.dart';
-
 
 class Allergycontainer extends StatelessWidget {
   MyAllergy allergy;
-  int _selectedItem = -1;
 
   Allergycontainer(
-      this.allergy,
-      );
+    this.allergy,
+  );
 
   var chestController = TextEditingController();
   var nasalController = TextEditingController();
@@ -105,20 +102,6 @@ class Allergycontainer extends StatelessWidget {
             ),
             SizedBox(
               width: 15,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Text(
-                //  allergy.name,
-                //   style: Theme.of(context).textTheme.subtitle1,
-                // ),
-
-                // Text(allergy.dosage,
-                //     style: Theme.of(context).textTheme.subtitle1)
-              ],
-            ),
-            SizedBox(
               height: 150,
             ),
             Container(
@@ -126,7 +109,6 @@ class Allergycontainer extends StatelessWidget {
                   color: Color(0xFF2C698D),
                   borderRadius: BorderRadius.circular(12)),
             ),
-
           ],
         ),
       ),
