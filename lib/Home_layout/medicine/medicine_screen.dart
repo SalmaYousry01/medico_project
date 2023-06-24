@@ -78,24 +78,12 @@ class MedicineScreenState extends State<MedicineScreen> {
                           }),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(left: 95, top: 70),
+                      padding: const EdgeInsets.only(left: 20, top: 70),
                       child: Center(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Add New Medicine..",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                                height: 37,
-                                child: Image.asset(
-                                  'assets/images/medicinehome.png',
-                                ))
-                          ],
+                        child: Text(
+                          "Add New Medicine",
+                          style:
+                              TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ),
                     );
