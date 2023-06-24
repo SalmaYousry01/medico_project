@@ -50,14 +50,14 @@ class _NotesPageState extends State<NotesPage> {
                   padding: const EdgeInsets.only(bottom: 50.0),
                   child: Text(
                     'My Notes',
-                    style: TextStyle(color: Colors.black, fontSize: 24),
+                    style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 50.0),
                   child: Icon(
                     Icons.edit,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ],
