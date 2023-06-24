@@ -57,21 +57,12 @@ class _reminder1State extends State<reminder1> {
                           }),
                     )
                   : Padding(
-                      padding: const EdgeInsets.only(left: 95, top: 70),
+                      padding: const EdgeInsets.only(left: 20, top: 70),
                       child: Center(
-                        child: Row(
-                          children: [
-                            Text(
-                              "Add New Reminder...",
-                              style:
-                                  TextStyle(fontSize: 25, color: Colors.white),
-                            ),
-                            Container(
-                                height: 37,
-                                child: Image.asset(
-                                  'assets/images/reminders.png',
-                                ))
-                          ],
+                        child: Text(
+                          "Add New Reminder",
+                          style:
+                              TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ),
                     );
